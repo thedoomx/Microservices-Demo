@@ -8,12 +8,13 @@
 
     public class MessageService : IMessageService
     {
-        private MessageDbContext data;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
+        private readonly MessageDbContext data;
 
         public MessageService(IServiceScopeFactory serviceScopeFactory)
         {
-            this._serviceScopeFactory = serviceScopeFactory;
+            using var scope = serviceScopeFactory.CreateScope();
+
+            this.data = scope.ServiceProvider.GetService<DbContext>() as MessageDbContext;
         }
 
         //public MessageService(DbContext data) 
@@ -26,13 +27,6 @@
             object identifier)
         {
             var messageType = messageData.GetType();
-
-            if (data == null)
-            {
-                using var scope = _serviceScopeFactory.CreateScope();
-
-                this.data = scope.ServiceProvider.GetService<DbContext>() as MessageDbContext;
-            }
 
             return await this.data
                 .Messages
