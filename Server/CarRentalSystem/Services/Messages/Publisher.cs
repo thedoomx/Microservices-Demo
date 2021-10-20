@@ -7,7 +7,7 @@
 
     public class Publisher : IPublisher
     {
-        private const int TimeoutMilliseconds = 10000;
+        private const int TimeoutMilliseconds = 2000;
 
         private readonly IBus bus;
 
