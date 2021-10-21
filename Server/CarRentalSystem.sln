@@ -19,11 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Watchdog", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Survey", "Survey", "{295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Survey.Domain", "Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj", "{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Domain", "Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj", "{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C09FFCA9-48BA-43F7-962A-22505A5ED975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Domain.Common", "Oxygen.Domain.Common\Oxygen.Domain.Common.csproj", "{530881E9-13C7-4D3D-B64A-5ED5A421B12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Domain.Common", "Oxygen.Domain.Common\Oxygen.Domain.Common.csproj", "{530881E9-13C7-4D3D-B64A-5ED5A421B12E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Application.Common", "Oxygen.Application.Common\Oxygen.Application.Common.csproj", "{74EE6AC3-1C7D-4338-9551-9B9579260EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Survey.Application", "Oxygen.Survey.Application\Oxygen.Survey.Application.csproj", "{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Survey.Infrastructure", "Oxygen.Survey.Infrastructure\Oxygen.Survey.Infrastructure.csproj", "{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +73,18 @@ Global
 		{530881E9-13C7-4D3D-B64A-5ED5A421B12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{530881E9-13C7-4D3D-B64A-5ED5A421B12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{530881E9-13C7-4D3D-B64A-5ED5A421B12E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EE6AC3-1C7D-4338-9551-9B9579260EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EE6AC3-1C7D-4338-9551-9B9579260EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EE6AC3-1C7D-4338-9551-9B9579260EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EE6AC3-1C7D-4338-9551-9B9579260EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +92,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50} = {295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}
 		{530881E9-13C7-4D3D-B64A-5ED5A421B12E} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
+		{74EE6AC3-1C7D-4338-9551-9B9579260EE1} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
+		{57E7B2CA-A27C-49AE-AD23-9B3D05C6CB56} = {295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}
+		{207B6B93-E4C3-4E9F-AC4F-226CB866DA33} = {295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58A386E4-E7C7-49B8-8E30-D8DD2154B7D5}
