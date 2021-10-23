@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using Oxygen.Application.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
