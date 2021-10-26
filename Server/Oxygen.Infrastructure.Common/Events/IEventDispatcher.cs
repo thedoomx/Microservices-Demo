@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Oxygen.Domain.Common;
 
-    internal interface IEventDispatcher
+    public interface IEventDispatcher
     {
         Task Dispatch(IDomainEvent domainEvent);
     }

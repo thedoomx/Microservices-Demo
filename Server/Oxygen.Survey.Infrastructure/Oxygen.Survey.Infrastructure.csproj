@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,7 +6,23 @@
 
   <ItemGroup>
     <Folder Include="Configuration\" />
-    <Folder Include="Repositories\" />
+    <Folder Include="Persistence\Models\" />
+    <Folder Include="Persistence\Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Survey.Application\Oxygen.Survey.Application.csproj" />
+    <ProjectReference Include="..\Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj" />
   </ItemGroup>
 
 </Project>

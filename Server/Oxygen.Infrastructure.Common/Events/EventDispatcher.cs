@@ -10,7 +10,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Oxygen.Application.Common;
 
-    internal class EventDispatcher : IEventDispatcher
+    public class EventDispatcher : IEventDispatcher
     {
         private static readonly ConcurrentDictionary<Type, Type> HandlerTypesCache
             = new ConcurrentDictionary<Type, Type>();
