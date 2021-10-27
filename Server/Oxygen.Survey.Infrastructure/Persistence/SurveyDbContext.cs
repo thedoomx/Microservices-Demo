@@ -32,6 +32,17 @@ namespace Oxygen.Survey.Infrastructure.Persistence
 
         public DbSet<Survey> Surveys { get; set; } = default!;
 
+        public DbSet<SurveyType> SurveyTypes { get; set; } = default!;
+        
+        public DbSet<Question> Question { get; set; } = default!;
+
+        public DbSet<QuestionType> QuestionTypes { get; set; } = default!;
+
+        public DbSet<QuestionItem> QuestionItems { get; set; } = default!;
+
+        public DbSet<UserSurvey> UserSurveys { get; set; } = default!;
+
+        public DbSet<UserSurveyItem> UserSurveyItems { get; set; } = default!;
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

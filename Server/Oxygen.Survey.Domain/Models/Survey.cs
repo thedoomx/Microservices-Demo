@@ -24,6 +24,16 @@
             this.questions = new HashSet<Question>();
         }
 
+        private Survey(string name, string summary)
+        {
+            this.Validate(name, summary);
+
+            this.Name = name;
+            this.Summary = summary;
+
+            this.questions = new HashSet<Question>();
+        }
+
         public string Name { get; private set; }
 
         public string Summary { get; private set; }

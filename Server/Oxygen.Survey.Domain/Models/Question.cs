@@ -24,6 +24,16 @@
             this.questionItems = new HashSet<QuestionItem>();
         }
 
+        private Question(string description, bool isRequired)
+        {
+            this.Validate(description);
+
+            this.Description = description;
+            this.IsRequired = isRequired;
+
+            this.questionItems = new HashSet<QuestionItem>();
+        }
+
         public string Description { get; private set; }
 
         public bool IsRequired { get; private set; }

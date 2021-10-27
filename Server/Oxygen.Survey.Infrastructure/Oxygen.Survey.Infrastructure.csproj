@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
+    <Compile Remove="Persistence\Migrations\20211027134800_Init.cs" />
+    <Compile Remove="Persistence\Migrations\20211027134800_Init.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Persistence\Models\" />
     <Folder Include="Persistence\Migrations\" />
   </ItemGroup>

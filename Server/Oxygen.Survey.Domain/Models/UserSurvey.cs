@@ -12,7 +12,7 @@
     {
         private readonly HashSet<UserSurveyItem> userSurveyItems;
 
-        internal UserSurvey(int userId, int surveyId, bool isSubmitted)
+        internal UserSurvey(string userId, int surveyId, bool isSubmitted)
         {
             //this.Validate(description);
 
@@ -23,7 +23,7 @@
             this.userSurveyItems = new HashSet<UserSurveyItem>();
         }
 
-        public int UserId { get; private set; }
+        public string UserId { get; private set; }
 
         public int SurveyId { get; private set; }
 
