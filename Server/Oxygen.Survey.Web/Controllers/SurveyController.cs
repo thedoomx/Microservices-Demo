@@ -12,6 +12,13 @@ namespace Oxygen.Survey.Web.Controllers
     public class SurveyController : ApiController
     {
         [HttpGet]
+        [Route(nameof(Test))]
+        public async Task<ActionResult<int>> Test()
+        {
+            return 5;
+        }
+
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> Search(
             [FromQuery] MineSurveysQuery query)
             => await this.Send(query);
