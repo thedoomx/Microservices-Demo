@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Oxygen.Identity.Application\Oxygen.Identity.Application.csproj" />
     <ProjectReference Include="..\Oxygen.Web.Common\Oxygen.Web.Common.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Application
+﻿namespace Oxygen.Application.Common
 {
     using System.Reflection;
     using AutoMapper;
@@ -27,7 +27,7 @@
                 .Scan(scan => scan
                     .FromCallingAssembly()
                     .AddClasses(classes => classes
-                        .AssignableTo(typeof(IEventHandler<>)))
+                    .AssignableTo(typeof(IEventHandler<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
     }

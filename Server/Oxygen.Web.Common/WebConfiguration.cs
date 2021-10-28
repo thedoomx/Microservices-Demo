@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Web
+﻿namespace Oxygen.Web.Common
 {
     using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
