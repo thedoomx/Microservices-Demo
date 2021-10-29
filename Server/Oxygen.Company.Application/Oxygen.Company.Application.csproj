@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oxygen.Company.Domain\Oxygen.Company.Domain.csproj" />
+    <ProjectReference Include="..\Oxygen.Company.Infrastructure\Oxygen.Company.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Department\Commands\" />
+    <Folder Include="Department\Queries\" />
+    <Folder Include="Employee\Commands\" />
+    <Folder Include="Employee\Queries\" />
+    <Folder Include="JobTitle\Commands\" />
+    <Folder Include="JobTitle\Queries\" />
+    <Folder Include="Office\Commands\" />
+    <Folder Include="Office\Queries\" />
+  </ItemGroup>
+
+</Project>
