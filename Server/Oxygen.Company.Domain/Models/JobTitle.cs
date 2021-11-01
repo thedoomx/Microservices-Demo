@@ -5,7 +5,7 @@
     using Oxygen.Domain.Common.Models;
     using static Oxygen.Company.Domain.Models.ModelConstants.JobTitle;
 
-    public class JobTitle : ValueObject
+    public class JobTitle : Entity<int>
     {
         internal JobTitle(string name)
         {

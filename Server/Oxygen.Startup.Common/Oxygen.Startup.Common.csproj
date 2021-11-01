@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Oxygen.Domain.Common\Oxygen.Domain.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
   </ItemGroup>
 
 </Project>

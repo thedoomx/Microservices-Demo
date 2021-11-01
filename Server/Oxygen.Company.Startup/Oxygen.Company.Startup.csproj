@@ -4,5 +4,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oxygen.Company.Application\Oxygen.Company.Application.csproj" />
+    <ProjectReference Include="..\Oxygen.Company.Domain\Oxygen.Company.Domain.csproj" />
+    <ProjectReference Include="..\Oxygen.Company.Infrastructure\Oxygen.Company.Infrastructure.csproj" />
+    <ProjectReference Include="..\Oxygen.Company.Web\Oxygen.Company.Web.csproj" />
+    <ProjectReference Include="..\Oxygen.Startup.Common\Oxygen.Startup.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Web.Common\Oxygen.Web.Common.csproj" />
+  </ItemGroup>
+
 
 </Project>

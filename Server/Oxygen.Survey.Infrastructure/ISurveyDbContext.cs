@@ -1,20 +1,23 @@
-﻿using Oxygen.Infrastructure.Common.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Oxygen.Survey.Infrastructure
+﻿namespace Oxygen.Survey.Infrastructure
 {
+    using Microsoft.EntityFrameworkCore;
+    using Oxygen.Infrastructure.Common.Persistence;
+    using Oxygen.Survey.Domain.Models;
+
     internal interface ISurveyDbContext : IDbContext
     {
-        //DbSet<CarAd> CarAds { get; }
+        DbSet<Question> Questions { get; }
 
-        //DbSet<Category> Categories { get; }
+        DbSet<QuestionItem> QuestionItems { get; }
 
-        //DbSet<Manufacturer> Manufacturers { get; }
+        DbSet<QuestionType> QuestionTypes { get; }
 
-        //DbSet<Dealer> Dealers { get; }
+        DbSet<Domain.Models.Survey> Surveys { get; }
 
-        //DbSet<User> Users { get; } // TODO: Temporary workaround
+        DbSet<SurveyType> SurveyTypes { get; }
+
+        DbSet<UserSurvey> UserSurveys { get; }
+
+        DbSet<UserSurveyItem> UserSurveyItems { get; }
     }
 }

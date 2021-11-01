@@ -9,6 +9,7 @@ namespace Oxygen.Identity.Startup
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Oxygen.Application.Common;
+    using Oxygen.Startup.Common;
     using Oxygen.Web.Common;
     using Oxygen.Web.Common.Middleware;
     using Web;

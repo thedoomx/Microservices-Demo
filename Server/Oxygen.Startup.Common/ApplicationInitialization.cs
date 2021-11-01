@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Identity.Startup
+﻿namespace Oxygen.Startup.Common
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;

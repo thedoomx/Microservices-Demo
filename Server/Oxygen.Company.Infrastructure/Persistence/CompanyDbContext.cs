@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Infrastructure.Persistence
+﻿namespace Oxygen.Company.Infrastructure.Persistence
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,14 +10,14 @@
     using Domain.Models;
     using Oxygen.Domain.Common.Models;
 
-    internal class SurveyDbContext : DbContext,
-        ISurveyDbContext
+    internal class CompanyDbContext : DbContext,
+        ICompanyDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
         private readonly Stack<object> savesChangesTracker;
 
-        public SurveyDbContext(
-            DbContextOptions<SurveyDbContext> options,
+        public CompanyDbContext(
+            DbContextOptions<CompanyDbContext> options,
             IEventDispatcher eventDispatcher)
             : base(options)
         {
@@ -25,20 +25,14 @@
 
             this.savesChangesTracker = new Stack<object>();
         }
-
-        public DbSet<Survey> Surveys { get; set; } = default!;
-
-        public DbSet<SurveyType> SurveyTypes { get; set; } = default!;
         
-        public DbSet<Question> Questions { get; set; } = default!;
+        public DbSet<Department> Departments { get; set; } = default!;
 
-        public DbSet<QuestionType> QuestionTypes { get; set; } = default!;
+        public DbSet<Employee> Employees { get; set; } = default!;
 
-        public DbSet<QuestionItem> QuestionItems { get; set; } = default!;
+        public DbSet<JobTitle> JobTitles { get; set; } = default!;
 
-        public DbSet<UserSurvey> UserSurveys { get; set; } = default!;
-
-        public DbSet<UserSurveyItem> UserSurveyItems { get; set; } = default!;
+        public DbSet<Office> Offices { get; set; } = default!;
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
