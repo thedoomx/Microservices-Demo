@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Startup.Common", "Oxygen.Startup.Common\Oxygen.Startup.Common.csproj", "{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogyxen.Common", "Ogyxen.Common\Ogyxen.Common.csproj", "{614FD768-79F9-4053-B356-2ABC73E38A6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +207,10 @@ Global
 		{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{614FD768-79F9-4053-B356-2ABC73E38A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{614FD768-79F9-4053-B356-2ABC73E38A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{614FD768-79F9-4053-B356-2ABC73E38A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{614FD768-79F9-4053-B356-2ABC73E38A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,6 +246,7 @@ Global
 		{3E2B3475-4E98-4819-BF4F-F4AD3FF71023} = {23AB87C3-113B-4D81-8A9A-695972090236}
 		{9B1223BE-8F24-4D20-A8D1-6142C498261C} = {23AB87C3-113B-4D81-8A9A-695972090236}
 		{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
+		{614FD768-79F9-4053-B356-2ABC73E38A6A} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58A386E4-E7C7-49B8-8E30-D8DD2154B7D5}
