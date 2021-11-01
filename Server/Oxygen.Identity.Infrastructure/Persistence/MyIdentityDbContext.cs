@@ -10,6 +10,60 @@
     using Microsoft.EntityFrameworkCore;
     using Oxygen.Domain.Common.Models;
     using Oxygen.Infrastructure.Common.Events;
+    using Oxygen.Infrastructure.Common.Persistence;
+    using Oxygen.Infrastructure.Common.Persistence.Models;
+
+    internal class CustomIdentityDbContext : IdentityDbContext<User, Role, string>
+    {
+        public CustomIdentityDbContext(
+           DbContextOptions<CustomIdentityDbContext> options)
+           : base(options)
+        {
+        }
+
+        public DbSet<Message> Messages { get; set; }
+
+        public override int SaveChanges()
+        {
+            OnBeforeSaveChanges();
+
+            return base.SaveChanges();
+        }
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            OnBeforeSaveChanges();
+
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            OnBeforeSaveChanges();
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            OnBeforeSaveChanges();
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void OnBeforeSaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            var changedEntries = ChangeTracker.Entries().ToList();
+            foreach (var entry in changedEntries)
+            {
+                {
+                    var userCreateMessage = new Message(entry);
+                    this.Messages.Add(userCreateMessage);
+                }
+            }
+        }
+    }
 
     internal class MyIdentityDbContext : IdentityDbContext<User, Role, string>
     {
