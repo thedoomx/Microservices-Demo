@@ -25,6 +25,7 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddScoped<DbContext, SurveyDbContext>()
                 .AddDbContext<SurveyDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),

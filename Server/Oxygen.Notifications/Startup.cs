@@ -8,6 +8,7 @@ namespace Oxygen.Notifications
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Oxygen.Startup.Common;
     using Oxygen.Startup.Common.Infrastructure;
 
     public class Startup

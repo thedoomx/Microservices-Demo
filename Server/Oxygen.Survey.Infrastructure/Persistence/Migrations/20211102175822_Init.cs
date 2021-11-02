@@ -7,6 +7,21 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(nullable: false),
+                    Published = table.Column<bool>(nullable: false),
+                    serializedData = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuestionTypes",
                 columns: table => new
                 {
@@ -90,7 +105,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Question",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -102,15 +117,15 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Question_QuestionTypes_QuestionTypeId",
+                        name: "FK_Questions_QuestionTypes_QuestionTypeId",
                         column: x => x.QuestionTypeId,
                         principalTable: "QuestionTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Question_Surveys_SurveyId",
+                        name: "FK_Questions_Surveys_SurveyId",
                         column: x => x.SurveyId,
                         principalTable: "Surveys",
                         principalColumn: "Id",
@@ -130,27 +145,27 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_QuestionItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuestionItems_Question_QuestionId",
+                        name: "FK_QuestionItems_Questions_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "Question",
+                        principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Question_QuestionTypeId",
-                table: "Question",
-                column: "QuestionTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Question_SurveyId",
-                table: "Question",
-                column: "SurveyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_QuestionItems_QuestionId",
                 table: "QuestionItems",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_QuestionTypeId",
+                table: "Questions",
+                column: "QuestionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_SurveyId",
+                table: "Questions",
+                column: "SurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Surveys_SurveyTypeId",
@@ -166,13 +181,16 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "QuestionItems");
 
             migrationBuilder.DropTable(
                 name: "UserSurveyItems");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "UserSurveys");

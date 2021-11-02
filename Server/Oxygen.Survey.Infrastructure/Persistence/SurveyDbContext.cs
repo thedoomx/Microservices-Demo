@@ -9,8 +9,9 @@
     using Oxygen.Infrastructure.Common.Events;
     using Domain.Models;
     using Oxygen.Domain.Common.Models;
+    using Oxygen.Infrastructure.Common.Persistence;
 
-    internal class SurveyDbContext : DbContext,
+    internal class SurveyDbContext : MessageDbContext,
         ISurveyDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
@@ -39,6 +40,8 @@
         public DbSet<UserSurvey> UserSurveys { get; set; } = default!;
 
         public DbSet<UserSurveyItem> UserSurveyItems { get; set; } = default!;
+
+        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

@@ -127,6 +127,29 @@ namespace Oxygen.Company.Infrastructure.Persistence.Migrations
                     b.ToTable("Offices");
                 });
 
+            modelBuilder.Entity("Oxygen.Infrastructure.Common.Persistence.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Published")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("serializedData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Oxygen.Company.Domain.Models.Employee", b =>
                 {
                     b.HasOne("Oxygen.Company.Domain.Models.Department", "Department")

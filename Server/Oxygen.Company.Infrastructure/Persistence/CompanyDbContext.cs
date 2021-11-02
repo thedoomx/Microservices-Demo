@@ -9,8 +9,9 @@
     using Oxygen.Infrastructure.Common.Events;
     using Domain.Models;
     using Oxygen.Domain.Common.Models;
+    using Oxygen.Infrastructure.Common.Persistence;
 
-    internal class CompanyDbContext : DbContext,
+    internal class CompanyDbContext : MessageDbContext,
         ICompanyDbContext
     {
         private readonly IEventDispatcher eventDispatcher;
@@ -33,6 +34,8 @@
         public DbSet<JobTitle> JobTitles { get; set; } = default!;
 
         public DbSet<Office> Offices { get; set; } = default!;
+
+        protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

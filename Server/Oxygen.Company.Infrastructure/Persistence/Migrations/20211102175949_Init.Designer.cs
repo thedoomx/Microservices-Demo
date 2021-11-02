@@ -10,7 +10,7 @@ using Oxygen.Company.Infrastructure.Persistence;
 namespace Oxygen.Company.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    [Migration("20211101131015_Init")]
+    [Migration("20211102175949_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,6 +127,29 @@ namespace Oxygen.Company.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Offices");
+                });
+
+            modelBuilder.Entity("Oxygen.Infrastructure.Common.Persistence.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Published")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("serializedData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Oxygen.Company.Domain.Models.Employee", b =>
