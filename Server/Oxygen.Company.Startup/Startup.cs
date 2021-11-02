@@ -1,19 +1,14 @@
 namespace Oxygen.Company.Startup
 {
-    using Application;
-    using Domain;
     using Infrastructure;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Oxygen.Application.Common;
     using Oxygen.Domain.Common;
     using Oxygen.Startup.Common;
-    using Oxygen.Web.Common;
-    using Oxygen.Web.Common.Middleware;
-    using Web;
+    using Oxygen.Startup.Common.Infrastructure;
 
     public class Startup
     {
@@ -26,28 +21,12 @@ namespace Oxygen.Company.Startup
                 .AddDomain()
                 .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddWebComponents();
+                .AddWebComponents(this.Configuration)
+                .AddMessaging(this.Configuration);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app
-                .UseValidationExceptionHandler()
-                .UseHttpsRedirection()
-                .UseRouting()
-                .UseCors(options => options
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod())
-                .UseAuthentication()
-                .UseAuthorization()
-                .UseEndpoints(endpoints => endpoints
-                    .MapControllers())
-                .Initialize();
-        }
+           => app
+               .UseWebService(env)
+               .Initialize();
     }
 }

@@ -1,68 +1,61 @@
-﻿namespace Oxygen.Startup.Common.Infrastructure
+﻿namespace Oxygen.Startup.Common
 {
+    using FluentValidation.AspNetCore;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Oxygen.Application.Common;
+    using Oxygen.Application.Common.Services.Identity;
+    using System.Text;
     using System;
     using System.Reflection;
-    using System.Text;
     using AutoMapper;
     using GreenPipes;
     using Hangfire;
     using Hangfire.SqlServer;
     using MassTransit;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Data.SqlClient;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Ogyxen.Common.Extensions;
-    using Oxygen.Application.Common;
     using Oxygen.Application.Common.Mapping;
-    using Oxygen.Application.Common.Services.Identity;
     using Oxygen.Infrastructure.Common.Messages;
     using Oxygen.Infrastructure.Common.Services;
+    using Oxygen.Startup.Common.Infrastructure;
 
-    public static class ServiceCollectionExtensions
+    public static class WebConfiguration
     {
-        public static IServiceCollection AddWebService<TDbContext>(
-            this IServiceCollection services,
+        public static IServiceCollection AddWebComponents(
+            this IServiceCollection services, 
             IConfiguration configuration,
             bool databaseHealthChecks = true,
             bool messagingHealthChecks = true)
-            where TDbContext : DbContext
         {
             services
-                .AddDatabase<TDbContext>(configuration)
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
-                .AddControllers();
+                .AddControllers()
+                .AddFluentValidation(validation => validation
+                    .RegisterValidatorsFromAssemblyContaining<Result>())
+                .AddNewtonsoftJson();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             return services;
         }
 
-        public static IServiceCollection AddDatabase<TDbContext>(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            where TDbContext : DbContext
-            => services
-                .AddScoped<DbContext, TDbContext>()
-                .AddDbContext<TDbContext>(options => options
-                    .UseSqlServer(
-                        configuration.GetDefaultConnectionString(),
-                        sqlOptions => sqlOptions
-                            .EnableRetryOnFailure(
-                                maxRetryCount: 10,
-                                maxRetryDelay: TimeSpan.FromSeconds(30),
-                                errorNumbersToAdd: null)));
-
         public static IServiceCollection AddApplicationSettings(
-            this IServiceCollection services,
-            IConfiguration configuration)
-            => services
-                .Configure<ApplicationSettings>(
-                    configuration.GetSection(nameof(ApplicationSettings)),
-                    config => config.BindNonPublicProperties = true);
+           this IServiceCollection services,
+           IConfiguration configuration)
+           => services
+               .Configure<ApplicationSettings>(
+                   configuration.GetSection(nameof(ApplicationSettings)),
+                   config => config.BindNonPublicProperties = true);
 
         public static IServiceCollection AddTokenAuthentication(
             this IServiceCollection services,
@@ -107,13 +100,13 @@
         }
 
         public static IServiceCollection AddAutoMapperProfile(
-            this IServiceCollection services,
-            Assembly assembly)
-            => services
-                .AddAutoMapper(
-                    (_, config) => config
-                        .AddProfile(new MappingProfile(assembly)),
-                    Array.Empty<Assembly>());
+           this IServiceCollection services,
+           Assembly assembly)
+           => services
+               .AddAutoMapper(
+                   (_, config) => config
+                       .AddProfile(new MappingProfile(assembly)),
+                   Array.Empty<Assembly>());
 
         public static IServiceCollection AddHealth(
             this IServiceCollection services,
@@ -154,7 +147,6 @@
             services.AddTransient<IMessageService, MessageService>();
 
             var messageQueueSettings = GetMessageQueueSettings(configuration);
-            //messageQueueSettings = new MessageQueueSettings("rabbitmq", "rabbitmq", "rabbitmq");
             messageQueueSettings = new MessageQueueSettings("localhost", "", "");
 
             services
