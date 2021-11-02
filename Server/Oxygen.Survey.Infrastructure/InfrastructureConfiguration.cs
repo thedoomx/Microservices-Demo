@@ -1,5 +1,6 @@
 ﻿namespace Oxygen.Survey.Infrastructure
 {
+    using System;
     using System.Text;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -28,7 +29,11 @@
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer
-                            .MigrationsAssembly(typeof(SurveyDbContext).Assembly.FullName)))
+                            .MigrationsAssembly(typeof(SurveyDbContext).Assembly.FullName)
+                            .EnableRetryOnFailure(
+                                maxRetryCount: 10,
+                                maxRetryDelay: TimeSpan.FromSeconds(30),
+                                errorNumbersToAdd: null)))
                 .AddScoped<ISurveyDbContext>(provider => provider.GetService<SurveyDbContext>())
                 .AddTransient<IInitializer, DatabaseInitializer>();
 

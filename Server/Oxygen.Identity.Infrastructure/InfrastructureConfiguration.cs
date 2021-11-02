@@ -1,5 +1,6 @@
 ﻿namespace Oxygen.Identity.Infrastructure
 {
+    using System;
     using System.Text;
     using Identity;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,7 +33,11 @@
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer
-                            .MigrationsAssembly(typeof(MyIdentityDbContext).Assembly.FullName)))
+                            .MigrationsAssembly(typeof(MyIdentityDbContext).Assembly.FullName)
+                            .EnableRetryOnFailure(
+                                maxRetryCount: 10,
+                                maxRetryDelay: TimeSpan.FromSeconds(30),
+                                errorNumbersToAdd: null)))
                 .AddTransient<IInitializer, DatabaseInitializer>();
 
         private static IServiceCollection AddIdentity(

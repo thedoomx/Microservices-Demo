@@ -9,6 +9,7 @@
     using Oxygen.Infrastructure.Common.Events;
     using Oxygen.Infrastructure.Common.Persistence;
     using Oxygen.Company.Infrastructure.Persistence;
+    using System;
 
     public static class InfrastructureConfiguration
     {
@@ -24,11 +25,16 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddScoped<DbContext, CompanyDbContext>()
                 .AddDbContext<CompanyDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
                         sqlServer => sqlServer
-                            .MigrationsAssembly(typeof(CompanyDbContext).Assembly.FullName)))
+                            .MigrationsAssembly(typeof(CompanyDbContext).Assembly.FullName)
+                            .EnableRetryOnFailure(
+                                maxRetryCount: 10,
+                                maxRetryDelay: TimeSpan.FromSeconds(30),
+                                errorNumbersToAdd: null)))
                 .AddScoped<ICompanyDbContext>(provider => provider.GetService<CompanyDbContext>())
                 .AddTransient<IInitializer, DatabaseInitializer>();
 
