@@ -1,34 +1,37 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Oxygen.Notifications
 {
+    using Hub;
+    using Infrastructure;
+    using Messages;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Oxygen.Startup.Common.Infrastructure;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+            => this.Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-        }
+            => services
+                .AddCors()
+                .AddTokenAuthentication(
+                    this.Configuration,
+                    JwtConfiguration.BearerEvents)
+                .AddHealth(
+                    this.Configuration,
+                    databaseHealthChecks: false)
+                //.AddMessaging(
+                //    this.Configuration,
+                //    usePolling: false,
+                //    consumers: typeof(CarAdCreatedConsumer))
+                .AddSignalR();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,16 +39,22 @@ namespace Oxygen.Notifications
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            var allowedOrigins = this.Configuration
+                .GetSection(nameof(NotificationSettings))
+                .GetValue<string>(nameof(NotificationSettings.AllowedOrigins));
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseRouting()
+                .UseCors(options => options
+                    .WithOrigins(allowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials())
+                .UseAuthentication()
+                .UseAuthorization()
+                .UseEndpoints(endpoints => endpoints
+                    .MapHealthChecks()
+                    .MapHub<NotificationsHub>("/notifications"));
         }
     }
 }
