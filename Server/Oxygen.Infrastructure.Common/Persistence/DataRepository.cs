@@ -21,14 +21,15 @@
 
         public async Task Save(
             TEntity entity,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default,
+            params object[] messages)
         {
             this.Data.Update(entity);
 
-            await this.Data.SaveChangesAsync(cancellationToken);
+            await this.Save(cancellationToken, messages);
         }
 
-        public async Task Save(params object[] messages)
+        private async Task Save(CancellationToken cancellationToken = default, params object[] messages)
         {
             var dataMessages = messages
                 .ToDictionary(data => data, data => new Message(data));
@@ -41,7 +42,7 @@
                 }
             }
 
-            await this.Data.SaveChangesAsync();
+            await this.Data.SaveChangesAsync(cancellationToken);
 
             if (this.Data is MessageDbContext)
             {

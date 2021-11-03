@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Oxygen.Survey.Domain.Factories
+﻿namespace Oxygen.Survey.Domain.Factories
 {
-    public interface ISurveyFactory
+    using Oxygen.Domain.Common;
+    using Oxygen.Survey.Domain.Models;
+
+    public interface ISurveyFactory : IFactory<Survey>
     {
     }
 }

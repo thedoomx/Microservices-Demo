@@ -12,6 +12,7 @@
     using Oxygen.Survey.Domain.Repositories;
     using Domain.Models;
     using Oxygen.Survey.Application.Queries.Common;
+    using Oxygen.Application.Common.Exceptions;
 
     internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
         ISurveyDomainRepository,
@@ -22,6 +23,28 @@
         public SurveyRepository(ISurveyDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
+
+        public async Task<Survey> GetById(int id,
+            CancellationToken cancellationToken = default)
+        {
+            return await this.All().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public async Task AssignUsersToSurveyAsync(int surveyId, IEnumerable<string> userIds,
+            CancellationToken cancellationToken = default)
+        {
+            var survey = await this.All().FirstOrDefaultAsync(x => x.Id == surveyId, cancellationToken);
+
+            if (survey == null)
+            {
+                throw new NotFoundException("Survey", surveyId);
+            }
+
+            foreach (var userId in userIds)
+            {
+
+            }
+        }
 
         //public async Task<CarAd> Find(int id, CancellationToken cancellationToken = default)
         //    => await this

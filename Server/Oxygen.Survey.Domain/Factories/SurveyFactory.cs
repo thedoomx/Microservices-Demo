@@ -2,6 +2,8 @@
 {
     using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
+    using System;
+    using System.Collections.Generic;
 
     internal class SurveyFactory : ISurveyFactory
     {
@@ -10,6 +12,13 @@
 
         private SurveyType surveyType = default!;
         private bool surveyTypeSet = false;
+
+        private readonly List<Question> questions;
+
+        internal SurveyFactory()
+        {
+            this.questions = new List<Question>();
+        }
 
         public ISurveyFactory WithName(string name)
         {
@@ -33,6 +42,17 @@
             return this;
         }
 
+        public ISurveyFactory WithQuestion(Action<QuestionFactory> question)
+        {
+            var questionFactory = new QuestionFactory();
+
+            question(questionFactory);
+
+            this.questions.Add(questionFactory.Build());
+
+            return this;
+        }
+
         public Survey Build()
         {
             if (!this.surveyTypeSet)
@@ -40,10 +60,14 @@
                 throw new InvalidSurveyException("Survey type must have a value.");
             }
 
-            return new Survey(
+            var survey = new Survey(
                 this.surveyName,
                 this.surveySummary,
                 this.surveyType);
+
+            this.questions.ForEach(x => survey.AddQuestion(x));
+
+            return survey;
         }
     }
 }

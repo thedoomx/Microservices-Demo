@@ -58,7 +58,7 @@
 
         public IReadOnlyCollection<Question> Questions => this.questions.ToList().AsReadOnly();
 
-        public void AddQuestionItem(Question question)
+        public void AddQuestion(Question question)
         {
             this.questions.Add(question);
 

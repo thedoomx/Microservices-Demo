@@ -3,7 +3,7 @@
     using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
 
-    internal class QuestionFactory : IQuestionFactory
+    internal class QuestionFactory
     {
         private QuestionType questionType = default!;
         private bool questionTypeSet = false;
@@ -11,22 +11,22 @@
         private string questionDescription = default!;
         private bool questionIsRequired = default!;
 
-        public IQuestionFactory WithDescription(string description)
+        public QuestionFactory WithDescription(string description)
         {
             this.questionDescription = description;
             return this;
         }
 
-        public IQuestionFactory WithRequired(bool isRequired)
+        public QuestionFactory WithRequired(bool isRequired)
         {
             this.questionIsRequired = isRequired;
             return this;
         }
 
-        public IQuestionFactory WithQuestionType(string type)
+        public QuestionFactory WithQuestionType(string type)
             => this.WithQuestionType(new QuestionType(type));
 
-        public IQuestionFactory WithQuestionType(QuestionType questionType)
+        public QuestionFactory WithQuestionType(QuestionType questionType)
         {
             this.questionType = questionType;
             this.questionTypeSet = true;
