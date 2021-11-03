@@ -11,17 +11,27 @@
     using Oxygen.Domain.Common.Models;
     using Oxygen.Infrastructure.Common.Events;
     using Oxygen.Infrastructure.Common.Persistence;
+    using Oxygen.Infrastructure.Common.Persistence.Configuration;
     using Oxygen.Infrastructure.Common.Persistence.Models;
 
-    internal class CustomIdentityDbContext : IdentityDbContext<User, Role, string>
+    internal class MyIdentityDbContext : IdentityDbContext<User, Role, string>
     {
-        public CustomIdentityDbContext(
-           DbContextOptions<CustomIdentityDbContext> options)
+        public MyIdentityDbContext(
+           DbContextOptions<MyIdentityDbContext> options)
            : base(options)
         {
         }
 
         public DbSet<Message> Messages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new MessageConfiguration());
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(builder);
+        }
 
         public override int SaveChanges()
         {
@@ -65,59 +75,59 @@
         }
     }
 
-    internal class MyIdentityDbContext : IdentityDbContext<User, Role, string>
-    {
-        private readonly IEventDispatcher eventDispatcher;
-        private readonly Stack<object> savesChangesTracker;
+    //internal class MyIdentityDbContext : IdentityDbContext<User, Role, string>
+    //{
+    //    private readonly IEventDispatcher eventDispatcher;
+    //    private readonly Stack<object> savesChangesTracker;
 
-        public MyIdentityDbContext(
-            DbContextOptions<MyIdentityDbContext> options,
-            IEventDispatcher eventDispatcher)
-            : base(options)
-        {
-            this.eventDispatcher = eventDispatcher;
+    //    public MyIdentityDbContext(
+    //        DbContextOptions<MyIdentityDbContext> options,
+    //        IEventDispatcher eventDispatcher)
+    //        : base(options)
+    //    {
+    //        this.eventDispatcher = eventDispatcher;
 
-            this.savesChangesTracker = new Stack<object>();
-        }
+    //        this.savesChangesTracker = new Stack<object>();
+    //    }
 
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            this.savesChangesTracker.Push(new object());
+    //    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    //    {
+    //        this.savesChangesTracker.Push(new object());
 
-            var entities = this.ChangeTracker
-                .Entries<IEntity>()
-                .Select(e => e.Entity)
-                .Where(e => e.Events.Any())
-                .ToArray();
+    //        var entities = this.ChangeTracker
+    //            .Entries<IEntity>()
+    //            .Select(e => e.Entity)
+    //            .Where(e => e.Events.Any())
+    //            .ToArray();
 
-            foreach (var entity in entities)
-            {
-                var events = entity.Events.ToArray();
+    //        foreach (var entity in entities)
+    //        {
+    //            var events = entity.Events.ToArray();
 
-                entity.ClearEvents();
+    //            entity.ClearEvents();
 
-                foreach (var domainEvent in events)
-                {
-                    await this.eventDispatcher.Dispatch(domainEvent);
-                }
-            }
+    //            foreach (var domainEvent in events)
+    //            {
+    //                await this.eventDispatcher.Dispatch(domainEvent);
+    //            }
+    //        }
 
-            this.savesChangesTracker.Pop();
+    //        this.savesChangesTracker.Pop();
 
-            if (!this.savesChangesTracker.Any())
-            {
-                return await base.SaveChangesAsync(cancellationToken);
-            }
+    //        if (!this.savesChangesTracker.Any())
+    //        {
+    //            return await base.SaveChangesAsync(cancellationToken);
+    //        }
 
-            return 0;
-        }
+    //        return 0;
+    //    }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    //    protected override void OnModelCreating(ModelBuilder builder)
+    //    {
+    //        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            base.OnModelCreating(builder);
-        }
-    }
+    //        base.OnModelCreating(builder);
+    //    }
+    //}
 }
