@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Startup.Common.Infrastructure
+﻿namespace Ogyxen.Common.Extensions
 {
     using Microsoft.Extensions.Configuration;
 

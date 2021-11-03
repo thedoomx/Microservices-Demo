@@ -19,8 +19,7 @@ namespace Oxygen.Identity.Startup
             => services
                 .AddApplication(this.Configuration)
                 .AddInfrastructure(this.Configuration)
-                .AddWebComponents(this.Configuration)
-                .AddMessaging(this.Configuration);
+                .AddWebComponents(this.Configuration);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
            => app
