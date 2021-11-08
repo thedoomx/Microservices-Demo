@@ -10,10 +10,15 @@
     using Oxygen.Infrastructure.Common.Persistence;
     using Oxygen.Company.Domain.Repositories;
     using Domain.Models;
+    using Oxygen.Company.Application;
+    using Oxygen.Company.Application.Department.Queries.Common;
+    using Oxygen.Company.Application.Employee.Queries.Common;
+    using Oxygen.Company.Application.JobTitle.Queries.Common;
+    using Oxygen.Company.Application.Office.Queries.Common;
 
     internal class EmployeeRepository : DataRepository<ICompanyDbContext, Employee>,
-        IEmployeeDomainRepository
-        //IEmployeeQueryRepository
+        IEmployeeDomainRepository,
+        IEmployeeQueryRepository
     {
         private readonly IMapper mapper;
 
@@ -21,113 +26,69 @@
             : base(db)
             => this.mapper = mapper;
 
-        //public async Task<CarAd> Find(int id, CancellationToken cancellationToken = default)
-        //    => await this
-        //        .All()
-        //        .Include(c => c.Manufacturer)
-        //        .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+        public async Task<EmployeeOutputModel> GetEmployeeDetails(int id, CancellationToken cancellationToken = default)
+           => await this.mapper
+               .ProjectTo<EmployeeOutputModel>(this
+                   .All()
+                   .Where(c => c.Id == id))
+               .FirstOrDefaultAsync(cancellationToken);
 
-        //public async Task<bool> Delete(int id, CancellationToken cancellationToken = default)
-        //{
-        //    var carAd = await this.Data.CarAds.FindAsync(id);
+        public async Task<DepartmentOutputModel> GetDepartmentDetails(int id, CancellationToken cancellationToken = default)
+           => await this.mapper
+               .ProjectTo<DepartmentOutputModel>(this
+                    .Data
+                    .Departments
+                    .Where(c => c.Id == id))
+               .FirstOrDefaultAsync(cancellationToken);
 
-        //    if (carAd == null)
-        //    {
-        //        return false;
-        //    }
+        public async Task<OfficeOutputModel> GetOfficeDetails(int id, CancellationToken cancellationToken = default)
+           => await this.mapper
+               .ProjectTo<OfficeOutputModel>(this
+                    .Data
+                    .Offices
+                    .Where(c => c.Id == id))
+               .FirstOrDefaultAsync(cancellationToken);
 
-        //    this.Data.CarAds.Remove(carAd);
+        public async Task<JobTitleOutputModel> GetJobTitleDetails(int id, CancellationToken cancellationToken = default)
+           => await this.mapper
+               .ProjectTo<JobTitleOutputModel>(this
+                    .Data
+                    .JobTitles
+                    .Where(c => c.Id == id))
+               .FirstOrDefaultAsync(cancellationToken);
 
-        //    await this.Data.SaveChangesAsync(cancellationToken);
+        public async Task<IEnumerable<EmployeeOutputModel>> GetEmployees(
+           CancellationToken cancellationToken = default)
+           => (await this.mapper
+               .ProjectTo<EmployeeOutputModel>(this
+                   .All())
+               .ToListAsync(cancellationToken));
 
-        //    return true;
-        //}
+        public async Task<IEnumerable<DepartmentOutputModel>> GetDepartments(
+           CancellationToken cancellationToken = default)
+           => (await this.mapper
+               .ProjectTo<DepartmentOutputModel>(this
+                    .Data
+                    .Departments
+                    .AsQueryable())
+               .ToListAsync(cancellationToken));
 
-        //public async Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification,
-        //    CarAdsSortOrder carAdsSortOrder,
-        //    int skip = 0,
-        //    int take = int.MaxValue,
-        //    CancellationToken cancellationToken = default)
-        //    => (await this.mapper
-        //        .ProjectTo<TOutputModel>(this
-        //            .GetCarAdsQuery(carAdSpecification, dealerSpecification)
-        //            .Sort(carAdsSortOrder))
-        //        .ToListAsync(cancellationToken))
-        //        .Skip(skip)
-        //        .Take(take); // EF Core bug forces me to execute paging on the client.
+        public async Task<IEnumerable<JobTitleOutputModel>> GetJobTitles(
+           CancellationToken cancellationToken = default)
+           => (await this.mapper
+               .ProjectTo<JobTitleOutputModel>(this
+                    .Data
+                    .JobTitles
+                    .AsQueryable())
+               .ToListAsync(cancellationToken));
 
-        //public async Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
-        //    => await this.mapper
-        //        .ProjectTo<CarAdDetailsOutputModel>(this
-        //            .AllAvailable()
-        //            .Where(c => c.Id == id))
-        //        .FirstOrDefaultAsync(cancellationToken);
-
-        //public async Task<Category> GetCategory(
-        //    int categoryId,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .Data
-        //        .Categories
-        //        .FirstOrDefaultAsync(c => c.Id == categoryId, cancellationToken);
-
-        //public async Task<Manufacturer> GetManufacturer(
-        //    string manufacturer,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .Data
-        //        .Manufacturers
-        //        .FirstOrDefaultAsync(m => m.Name == manufacturer, cancellationToken);
-
-        //public async Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(
-        //    CancellationToken cancellationToken = default)
-        //{
-        //    var categories = await this.mapper
-        //        .ProjectTo<GetCarAdCategoryOutputModel>(this.Data.Categories)
-        //        .ToDictionaryAsync(k => k.Id, cancellationToken);
-
-        //    var carAdsPerCategory = await this.AllAvailable()
-        //        .GroupBy(c => c.Category.Id)
-        //        .Select(gr => new
-        //        {
-        //            CategoryId = gr.Key,
-        //            TotalCarAds = gr.Count()
-        //        })
-        //        .ToListAsync(cancellationToken);
-
-        //    carAdsPerCategory.ForEach(c => categories[c.CategoryId].TotalCarAds = c.TotalCarAds);
-
-        //    return categories.Values;
-        //}
-
-        //public async Task<int> Total(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .GetCarAdsQuery(carAdSpecification, dealerSpecification)
-        //        .CountAsync(cancellationToken);
-
-        //private IQueryable<CarAd> AllAvailable()
-        //    => this
-        //        .All()
-        //        .Where(car => car.IsAvailable);
-
-        //private IQueryable<CarAd> GetCarAdsQuery(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification)
-        //    => this
-        //        .Data
-        //        .Dealers
-        //        .Where(dealerSpecification)
-        //        .SelectMany(d => d.CarAds)
-        //        .Where(carAdSpecification);
-
-        //public Task<IEnumerable<SurveyOutputModel>> Get(int? userId, CancellationToken cancellationToken = default)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<IEnumerable<OfficeOutputModel>> GetOffices(
+           CancellationToken cancellationToken = default)
+           => (await this.mapper
+               .ProjectTo<OfficeOutputModel>(this
+                    .Data
+                    .Offices
+                    .AsQueryable())
+               .ToListAsync(cancellationToken));
     }
 }

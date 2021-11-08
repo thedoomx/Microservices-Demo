@@ -5,19 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Oxygen.Application.Common\Oxygen.Application.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Company.Domain\Oxygen.Company.Domain.csproj" />
-    <ProjectReference Include="..\Oxygen.Company.Infrastructure\Oxygen.Company.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Department\Commands\" />
-    <Folder Include="Department\Queries\" />
+    <Folder Include="Department\Queries\Search\" />
     <Folder Include="Employee\Commands\" />
-    <Folder Include="Employee\Queries\" />
+    <Folder Include="Employee\Queries\Search\" />
     <Folder Include="JobTitle\Commands\" />
-    <Folder Include="JobTitle\Queries\" />
+    <Folder Include="JobTitle\Queries\Search\" />
     <Folder Include="Office\Commands\" />
-    <Folder Include="Office\Queries\" />
+    <Folder Include="Office\Queries\Search\" />
   </ItemGroup>
 
 </Project>
