@@ -39,6 +39,13 @@
             return this;
         }
 
+        public Department ChangeIsActive(bool isActive)
+        {
+            this.IsActive = isActive;
+
+            return this;
+        }
+
         public Department ChangeDescription(string description)
         {
             this.ValidateDescription(description);

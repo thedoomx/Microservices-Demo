@@ -10,9 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Department\Commands\" />
     <Folder Include="Department\Queries\Search\" />
-    <Folder Include="Employee\Commands\" />
     <Folder Include="Employee\Queries\Search\" />
     <Folder Include="JobTitle\Commands\" />
     <Folder Include="JobTitle\Queries\Search\" />

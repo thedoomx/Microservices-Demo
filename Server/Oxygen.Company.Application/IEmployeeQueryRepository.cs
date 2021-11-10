@@ -10,9 +10,22 @@
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using Domain.Models;
 
     public interface IEmployeeQueryRepository : IQueryRepository<Domain.Models.Employee>
     {
+        Task<Domain.Models.Employee> FindEmployee(
+            int id, CancellationToken cancellationToken = default);
+
+        Task<Domain.Models.Department> FindDepartment(
+            int id, CancellationToken cancellationToken = default);
+
+        Task<Domain.Models.JobTitle> FindJobTitle(
+            int id, CancellationToken cancellationToken = default);
+
+        Task<Domain.Models.Office> FindOffice(
+            int id, CancellationToken cancellationToken = default);
+
         Task<IEnumerable<EmployeeOutputModel>> GetEmployees(
             CancellationToken cancellationToken = default);
 

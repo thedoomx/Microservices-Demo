@@ -26,6 +26,35 @@
             : base(db)
             => this.mapper = mapper;
 
+        public async Task<Employee> FindEmployee(int id, CancellationToken cancellationToken = default)
+           => await this
+                .All()
+                .Include(x => x.Department)
+                .Include(x => x.JobTitle)
+                .Include(x => x.Office)
+                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
+        public async Task<Department> FindDepartment(int id, CancellationToken cancellationToken = default)
+           => await this
+                .Data
+                .Departments
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task<JobTitle> FindJobTitle(int id, CancellationToken cancellationToken = default)
+           => await this
+                .Data
+                .JobTitles
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task<Office> FindOffice(int id, CancellationToken cancellationToken = default)
+           => await this
+                .Data
+                .Offices
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
         public async Task<EmployeeOutputModel> GetEmployeeDetails(int id, CancellationToken cancellationToken = default)
            => await this.mapper
                .ProjectTo<EmployeeOutputModel>(this
@@ -90,5 +119,26 @@
                     .Offices
                     .AsQueryable())
                .ToListAsync(cancellationToken));
+
+        public async Task SaveDepartment(Department department, CancellationToken cancellationToken = default)
+        {
+            this.Data.Update(department);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task SaveJobTitle(JobTitle jobTitle, CancellationToken cancellationToken = default)
+        {
+            this.Data.Update(jobTitle);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task SaveOffice(Office office, CancellationToken cancellationToken = default)
+        {
+            this.Data.Update(office);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+        }
     }
 }
