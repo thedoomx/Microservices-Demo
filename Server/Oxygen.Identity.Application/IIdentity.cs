@@ -5,10 +5,11 @@
     using Commands.ChangePassword;
     using Commands.LoginUser;
     using Oxygen.Application.Common;
+    using Oxygen.Identity.Application.Commands.CreateUser;
 
     public interface IIdentity
     {
-        Task<Result<IUser>> Register(UserInputModel userInput);
+        Task<Result<IUser>> Register(CreateUserInputModel userInput);
 
         Task<Result<LoginSuccessModel>> Login(UserInputModel userInput);
 

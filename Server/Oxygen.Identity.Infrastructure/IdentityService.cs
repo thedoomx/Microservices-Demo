@@ -7,6 +7,7 @@
     using Oxygen.Identity.Application;
     using Oxygen.Identity.Application.Commands;
     using Oxygen.Identity.Application.Commands.ChangePassword;
+    using Oxygen.Identity.Application.Commands.CreateUser;
     using Oxygen.Identity.Application.Commands.LoginUser;
 
     internal class IdentityService : IIdentity
@@ -22,9 +23,16 @@
             this.jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<Result<IUser>> Register(UserInputModel userInput)
+        public async Task<Result<IUser>> Register(CreateUserInputModel userInput)
         {
-            var user = new User(userInput.Email);
+            var user = new User(
+                userInput.Email,
+                userInput.FirstName,
+                userInput.SurName,
+                userInput.LastName,
+                userInput.Department,
+                userInput.JobTitle,
+                userInput.Office);
 
             var identityResult = await this.userManager.CreateAsync(user, userInput.Password);
 

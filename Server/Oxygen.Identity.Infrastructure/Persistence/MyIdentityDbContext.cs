@@ -67,6 +67,8 @@
             var changedEntries = ChangeTracker.Entries().ToList();
             foreach (var entry in changedEntries)
             {
+                if (entry.Entity is User &&
+                    entry.State == EntityState.Added)
                 {
                     var userCreateMessage = new Message(entry);
                     this.Messages.Add(userCreateMessage);

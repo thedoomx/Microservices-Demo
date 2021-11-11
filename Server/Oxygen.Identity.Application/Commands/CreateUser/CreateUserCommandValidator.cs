@@ -22,6 +22,30 @@
                 .MinimumLength(MinNameLength)
                 .MaximumLength(MaxNameLength)
                 .NotEmpty();
+
+            this.RuleFor(u => u.FirstName)
+                .MinimumLength(MinNameLength)
+                .MaximumLength(MaxNameLength)
+                .NotEmpty();
+
+            this.RuleFor(u => u.SurName)
+                .MinimumLength(MinNameLength)
+                .MaximumLength(MaxNameLength)
+                .NotEmpty();
+
+            this.RuleFor(u => u.LastName)
+                .MinimumLength(MinNameLength)
+                .MaximumLength(MaxNameLength)
+                .NotEmpty();
+
+            this.RuleFor(u => u.Department)
+                .NotEmpty();
+
+            this.RuleFor(u => u.JobTitle)
+                .NotEmpty();
+
+            this.RuleFor(u => u.Office)
+                .NotEmpty();
         }
     }
 }

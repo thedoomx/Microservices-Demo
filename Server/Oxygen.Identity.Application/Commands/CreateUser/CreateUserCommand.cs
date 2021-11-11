@@ -5,11 +5,9 @@
     using MediatR;
     using Oxygen.Application.Common;
 
-    public class CreateUserCommand : UserInputModel, IRequest<Result>
+    public class CreateUserCommand : CreateUserInputModel, IRequest<Result>
     {
         public string Name { get; set; } = default!;
-
-        public string PhoneNumber { get; set; } = default!;
 
         public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result>
         {
