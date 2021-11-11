@@ -29,6 +29,7 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddScoped<DbContext, MyIdentityDbContext>()
                 .AddDbContext<MyIdentityDbContext>(options => options
                     .UseSqlServer(
                         configuration.GetConnectionString("DefaultConnection"),
@@ -55,30 +56,30 @@
                 })
                 .AddEntityFrameworkStores<MyIdentityDbContext>();
 
-            var secret = configuration
-                .GetSection(nameof(ApplicationSettings))
-                .GetValue<string>(nameof(ApplicationSettings.Secret));
+            //var secret = configuration
+            //    .GetSection(nameof(ApplicationSettings))
+            //    .GetValue<string>(nameof(ApplicationSettings.Secret));
 
-            var key = Encoding.ASCII.GetBytes(secret);
+            //var key = Encoding.ASCII.GetBytes(secret);
 
-            services
-                .AddAuthentication(authentication =>
-                {
-                    authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(bearer =>
-                {
-                    bearer.RequireHttpsMetadata = false;
-                    bearer.SaveToken = true;
-                    bearer.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+            //services
+            //    .AddAuthentication(authentication =>
+            //    {
+            //        authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    })
+            //    .AddJwtBearer(bearer =>
+            //    {
+            //        bearer.RequireHttpsMetadata = false;
+            //        bearer.SaveToken = true;
+            //        bearer.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuerSigningKey = true,
+            //            IssuerSigningKey = new SymmetricSecurityKey(key),
+            //            ValidateIssuer = false,
+            //            ValidateAudience = false
+            //        };
+            //    });
 
             services.AddTransient<IIdentity, IdentityService>();
             services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
