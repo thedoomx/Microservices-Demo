@@ -3,6 +3,8 @@
     using System.Threading.Tasks;
     using MassTransit;
     using Microsoft.EntityFrameworkCore;
+    using Oxygen.Company.Application;
+    using Oxygen.Company.Domain.Factories;
     using Oxygen.Company.Infrastructure.Persistence;
     using Oxygen.Infrastructure.Common.Messages.Users;
     using Oxygen.Infrastructure.Common.Persistence.Models;
@@ -10,22 +12,28 @@
 
     internal class UserCreatedConsumer : IConsumer<UserCreatedMessage>
     {
-        private readonly CompanyDbContext data;
-        private readonly IMessageService messages;
+        private readonly CompanyDbContext _data;
+        private readonly IMessageService _messages;
+        private readonly IEmployeeFactory _employeeFactory;
+        private readonly IEmployeeQueryRepository _employeeQueryRepository;
 
         public UserCreatedConsumer(
             CompanyDbContext data,
-            IMessageService messages)
+            IMessageService messages,
+            IEmployeeFactory employeeFactory,
+            IEmployeeQueryRepository employeeQueryRepository)
         {
-            this.data = data;
-            this.messages = messages;
+            this._data = data;
+            this._messages = messages;
+            this._employeeFactory = employeeFactory;
+            this._employeeQueryRepository = employeeQueryRepository;
         }
 
         public async Task Consume(ConsumeContext<UserCreatedMessage> context)
         {
             var message = context.Message;
 
-            var isDuplicated = await this.messages.IsDuplicated(
+            var isDuplicated = await this._messages.IsDuplicated(
                 message,
                 nameof(UserCreatedMessage.UserId),
                 message.UserId);
@@ -35,16 +43,28 @@
                 return;
             }
 
-            //var statistics = await this.data.Statistics.SingleOrDefaultAsync();
-            //statistics.TotalCarAds++;
+            var department = await this._employeeQueryRepository.FindDepartment(message.Department);
+            var jobTitle = await this._employeeQueryRepository.FindJobTitle(message.JobTitle);
+            var office = await this._employeeQueryRepository.FindOffice(message.Office);
+
+            var employee = this._employeeFactory
+                .WithFirstName(message.FirstName)
+                .WithSurName(message.SurName)
+                .WithLastName(message.LastName)
+                .WithDepartment(department)
+                .WithJobTitle(jobTitle)
+                .WithOffice(office)
+                .Build();
+
+            this._data.Employees.Add(employee);
 
             var dataMessage = new Message(message);
 
             dataMessage.MarkAsPublished();
 
-            this.data.Messages.Add(dataMessage);
+            this._data.Messages.Add(dataMessage);
 
-            await this.data.SaveChangesAsync();
+            await this._data.SaveChangesAsync();
         }
     }
 }
