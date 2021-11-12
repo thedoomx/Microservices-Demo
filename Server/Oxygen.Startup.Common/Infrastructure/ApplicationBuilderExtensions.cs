@@ -10,11 +10,13 @@
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseWebService(
-            this IApplicationBuilder app, 
+            this IApplicationBuilder app,
             IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
 

@@ -5,6 +5,7 @@
     using MediatR;
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Contracts;
+    using Oxygen.Application.Common.Services.Identity;
 
     public class ChangePasswordCommand : IRequest<Result>
     {
@@ -14,11 +15,11 @@
 
         public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordCommand, Result>
         {
-            private readonly ICurrentUser currentUser;
+            private readonly ICurrentUserService currentUser;
             private readonly IIdentity identity;
 
             public ChangePasswordCommandHandler(
-                ICurrentUser currentUser,
+                ICurrentUserService currentUser,
                 IIdentity identity)
             {
                 this.currentUser = currentUser;

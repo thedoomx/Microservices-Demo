@@ -8,18 +8,19 @@
     using Oxygen.Domain.Common.Models;
     using MediatR;
     using Oxygen.Company.Domain.Repositories;
+    using Oxygen.Application.Common.Services.Identity;
 
     public class CreateDepartmentCommand : DepartmentCommand<CreateDepartmentCommand>, IRequest<Result>
     {
         public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, Result>
         {
-            private readonly ICurrentUser currentUser;
+            private readonly ICurrentUserService currentUser;
             private readonly IEmployeeDomainRepository _employeeRepository;
             private readonly IEmployeeQueryRepository _employeeQueryRepository;
             //private readonly IDepartmentFactory
 
             public CreateDepartmentCommandHandler(
-                ICurrentUser currentUser,
+                ICurrentUserService currentUser,
                 IEmployeeDomainRepository employeeRepository,
                 IEmployeeQueryRepository employeeQueryRepository)
             {

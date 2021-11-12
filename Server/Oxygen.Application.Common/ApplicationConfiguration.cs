@@ -1,5 +1,6 @@
 ﻿namespace Oxygen.Application.Common
 {
+    using System;
     using System.Reflection;
     using AutoMapper;
     using MediatR;
@@ -17,8 +18,8 @@
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
-                .AddAutoMapper(Assembly.GetExecutingAssembly())
-                .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddAutoMapper(AppDomain.CurrentDomain.Load("Oxygen.Identity.Application"))
+                .AddMediatR(AppDomain.CurrentDomain.Load("Oxygen.Identity.Application"))
                 .AddEventHandlers()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 

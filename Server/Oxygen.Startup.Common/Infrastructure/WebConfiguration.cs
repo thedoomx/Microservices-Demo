@@ -33,6 +33,7 @@
             bool messagingHealthChecks = true)
         {
             services
+                .AddSwagger()
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
@@ -138,6 +139,9 @@
             return services;
         }
 
-        
+        public static IServiceCollection AddSwagger(
+            this IServiceCollection services)
+            => services
+                .AddSwaggerGen();
     }
 }

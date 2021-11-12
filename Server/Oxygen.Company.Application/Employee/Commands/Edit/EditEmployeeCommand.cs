@@ -9,17 +9,18 @@ namespace Oxygen.Company.Application.Employee.Commands.Edit
     using Oxygen.Domain.Common.Models;
     using MediatR;
     using Oxygen.Company.Domain.Repositories;
+    using Oxygen.Application.Common.Services.Identity;
 
     public class EditEmployeeCommand : EmployeeCommand<EditEmployeeCommand>, IRequest<Result>
     {
         public class EditEmployeeCommandHandler : IRequestHandler<EditEmployeeCommand, Result>
         {
-            private readonly ICurrentUser currentUser;
+            private readonly ICurrentUserService currentUser;
             private readonly IEmployeeDomainRepository _employeeRepository;
             private readonly IEmployeeQueryRepository _employeeQueryRepository;
 
             public EditEmployeeCommandHandler(
-                ICurrentUser currentUser,
+                ICurrentUserService currentUser,
                 IEmployeeDomainRepository employeeRepository,
                 IEmployeeQueryRepository employeeQueryRepository)
             {
