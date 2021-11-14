@@ -2,9 +2,6 @@
 {
     using Oxygen.Company.Domain.Exceptions;
     using Oxygen.Domain.Common.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using static Oxygen.Company.Domain.Models.ModelConstants.Department;
 
     public class Department : Entity<int>

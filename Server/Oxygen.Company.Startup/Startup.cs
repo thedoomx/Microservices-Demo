@@ -19,7 +19,7 @@ namespace Oxygen.Company.Startup
 
         public void ConfigureServices(IServiceCollection services)
             => services
-                .AddDomain()
+                .AddDomain(GlobalConstants.Assembly.Company_Domain)
                 .AddApplication(this.Configuration, GlobalConstants.Assembly.Company_Application)
                 .AddInfrastructure(this.Configuration)
                 .AddWebComponents(this.Configuration);

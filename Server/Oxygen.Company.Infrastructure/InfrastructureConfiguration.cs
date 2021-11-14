@@ -28,9 +28,9 @@
            this IServiceCollection services,
            IConfiguration configuration)
            => services
-               .AddDatabase(configuration)
-               .AddRepositories()
-               .AddTransient<IEventDispatcher, EventDispatcher>()
+                .AddDatabase(configuration)
+                .AddRepositories()
+                .AddTransient<IEventDispatcher, EventDispatcher>()
                 .AddMessaging(
                     configuration,
                     consumers: typeof(UserCreatedConsumer));

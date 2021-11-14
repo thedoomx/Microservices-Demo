@@ -1,15 +1,10 @@
 ﻿namespace Oxygen.Identity.Infrastructure
 {
     using System;
-    using System.Text;
-    using Identity;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.IdentityModel.Tokens;
-    using Oxygen.Application.Common;
     using Oxygen.Identity.Application;
     using Oxygen.Identity.Infrastructure.Persistence;
     using Oxygen.Infrastructure.Common.Events;

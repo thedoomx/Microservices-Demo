@@ -9,6 +9,9 @@
         internal Office(string name, string address)
         {
             this.Validate(name, address);
+
+            this.Name = name;
+            this.Address = address;
         }
 
         public string Name { get; private set; }

@@ -1,8 +1,5 @@
 ﻿using Oxygen.Company.Domain.Exceptions;
 using Oxygen.Company.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Oxygen.Company.Domain.Factories
 {

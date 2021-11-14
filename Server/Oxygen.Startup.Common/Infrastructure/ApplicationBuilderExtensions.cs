@@ -45,11 +45,11 @@
 
             db.Database.Migrate();
 
-            var seeders = serviceProvider.GetServices<IDataSeeder>();
+            var seeders = serviceProvider.GetServices<IInitializer>();
 
             foreach (var seeder in seeders)
             {
-                seeder.SeedData();
+                seeder.Initialize();
             }
 
             return app;

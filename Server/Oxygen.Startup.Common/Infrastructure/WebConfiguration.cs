@@ -11,29 +11,22 @@
     using System;
     using System.Reflection;
     using AutoMapper;
-    using GreenPipes;
-    using Hangfire;
-    using Hangfire.SqlServer;
-    using MassTransit;
-    using Microsoft.Data.SqlClient;
-    using Microsoft.IdentityModel.Tokens;
     using Ogyxen.Common.Extensions;
     using Oxygen.Application.Common.Mapping;
-    using Oxygen.Infrastructure.Common.Messages;
-    using Oxygen.Infrastructure.Common.Services;
-    using Oxygen.Startup.Common.Infrastructure;
     using Ogyxen.Application.Common;
+    using Microsoft.IdentityModel.Tokens;
 
     public static class WebConfiguration
     {
         public static IServiceCollection AddWebComponents(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             IConfiguration configuration,
             bool databaseHealthChecks = true,
-            bool messagingHealthChecks = true)
+            bool messagingHealthChecks = true,
+            bool swagger = true)
         {
             services
-                .AddSwagger()
+                .AddSwagger(swagger)
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
@@ -140,8 +133,8 @@
         }
 
         public static IServiceCollection AddSwagger(
-            this IServiceCollection services)
-            => services
-                .AddSwaggerGen();
+            this IServiceCollection services, bool swagger)
+            => swagger ? services
+                .AddSwaggerGen() : services;
     }
 }

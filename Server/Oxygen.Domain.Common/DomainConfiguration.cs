@@ -1,29 +1,29 @@
 ﻿namespace Oxygen.Domain.Common
 {
-    using Oxygen.Domain.Common;
     using Microsoft.Extensions.DependencyInjection;
+    using System;
 
     public static class DomainConfiguration
     {
-        public static IServiceCollection AddDomain(this IServiceCollection services)
+        public static IServiceCollection AddDomain(this IServiceCollection services, string domainAssembly)
             => services
-                .AddFactories()
-                .AddInitialData();
+                .AddFactories(domainAssembly)
+                .AddInitialData(domainAssembly);
         //.AddTransient<IRentingScheduleService, RentingScheduleService>();
 
-        private static IServiceCollection AddFactories(this IServiceCollection services)
+        private static IServiceCollection AddFactories(this IServiceCollection services, string domainAssembly)
             => services
                 .Scan(scan => scan
-                    .FromCallingAssembly()
+                    .FromAssemblies(AppDomain.CurrentDomain.Load(domainAssembly))
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IFactory<>)))
                     .AsMatchingInterface()
                     .WithTransientLifetime());
 
-        private static IServiceCollection AddInitialData(this IServiceCollection services)
+        private static IServiceCollection AddInitialData(this IServiceCollection services, string domainAssembly)
             => services
                 .Scan(scan => scan
-                    .FromCallingAssembly()
+                    .FromAssemblies(AppDomain.CurrentDomain.Load(domainAssembly))
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IInitialData)))
                     .AsImplementedInterfaces()

@@ -19,7 +19,7 @@ namespace Oxygen.Survey.Startup
 
         public void ConfigureServices(IServiceCollection services)
             => services
-                .AddDomain()
+                .AddDomain(GlobalConstants.Assembly.Survey_Domain)
                 .AddApplication(this.Configuration, GlobalConstants.Assembly.Survey_Application)
                 .AddInfrastructure(this.Configuration)
                 .AddWebComponents(this.Configuration);
