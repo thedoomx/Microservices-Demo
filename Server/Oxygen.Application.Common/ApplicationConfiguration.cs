@@ -13,13 +13,14 @@
     {
         public static IServiceCollection AddApplication(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            string applicationAssembly)
             => services
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
-                .AddAutoMapper(AppDomain.CurrentDomain.Load("Oxygen.Identity.Application"))
-                .AddMediatR(AppDomain.CurrentDomain.Load("Oxygen.Identity.Application"))
+                .AddAutoMapper(AppDomain.CurrentDomain.Load(applicationAssembly))
+                .AddMediatR(AppDomain.CurrentDomain.Load(applicationAssembly))
                 .AddEventHandlers()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 

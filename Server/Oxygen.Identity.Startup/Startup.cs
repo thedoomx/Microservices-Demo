@@ -5,6 +5,7 @@ namespace Oxygen.Identity.Startup
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Ogyxen.Common.Constants;
     using Oxygen.Application.Common;
     using Oxygen.Startup.Common;
     using Oxygen.Startup.Common.Infrastructure;
@@ -17,7 +18,7 @@ namespace Oxygen.Identity.Startup
 
         public void ConfigureServices(IServiceCollection services)
             => services
-                .AddApplication(this.Configuration)
+                .AddApplication(this.Configuration, GlobalConstants.Assembly.Identity_Application)
                 .AddInfrastructure(this.Configuration)
                 .AddWebComponents(this.Configuration);
 

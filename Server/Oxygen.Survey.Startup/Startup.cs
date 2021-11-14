@@ -5,6 +5,7 @@ namespace Oxygen.Survey.Startup
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Ogyxen.Common.Constants;
     using Oxygen.Application.Common;
     using Oxygen.Domain.Common;
     using Oxygen.Startup.Common;
@@ -19,7 +20,7 @@ namespace Oxygen.Survey.Startup
         public void ConfigureServices(IServiceCollection services)
             => services
                 .AddDomain()
-                .AddApplication(this.Configuration)
+                .AddApplication(this.Configuration, GlobalConstants.Assembly.Survey_Application)
                 .AddInfrastructure(this.Configuration)
                 .AddWebComponents(this.Configuration);
 

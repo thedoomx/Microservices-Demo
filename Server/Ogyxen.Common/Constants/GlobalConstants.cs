@@ -1,6 +1,6 @@
 ﻿namespace Oxygen.Common.Constants
 {
-    public class GlobalConstants
+    public partial class GlobalConstants
     {
         public const string AdministratorRoleName = "Administrator";
 
