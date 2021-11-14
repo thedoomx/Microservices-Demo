@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using MassTransit;
-    using Microsoft.EntityFrameworkCore;
     using Oxygen.Company.Application;
     using Oxygen.Company.Domain.Factories;
     using Oxygen.Company.Infrastructure.Persistence;

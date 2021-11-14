@@ -10,16 +10,16 @@
     {
         private readonly MessageDbContext data;
 
-        public MessageService(IServiceScopeFactory serviceScopeFactory)
-        {
-            using var scope = serviceScopeFactory.CreateScope();
+        //public MessageService(IServiceScopeFactory serviceScopeFactory)
+        //{
+        //    using var scope = serviceScopeFactory.CreateScope();
 
-            this.data = scope.ServiceProvider.GetService<DbContext>() as MessageDbContext;
-        }
+        //    this.data = scope.ServiceProvider.GetService<DbContext>() as MessageDbContext;
+        //}
 
-        //public MessageService(DbContext data) 
-        //    => this.data = data as MessageDbContext 
-        //        ?? throw new InvalidOperationException($"Messages can only be used with a {nameof(MessageDbContext)}.");
+        public MessageService(DbContext data)
+            => this.data = data as MessageDbContext
+                ?? throw new InvalidOperationException($"Messages can only be used with a {nameof(MessageDbContext)}.");
 
         public async Task<bool> IsDuplicated(
             object messageData,
@@ -29,9 +29,9 @@
             var messageType = messageData.GetType();
 
             return await this.data
-                .Messages
-                .FromSqlRaw($"SELECT * FROM Messages WHERE Type = '{messageType.AssemblyQualifiedName}' AND JSON_VALUE(serializedData, '$.{propertyFilter}') = {identifier}")
-                .AnyAsync();
+                    .Messages
+                    .FromSqlRaw($"SELECT * FROM Messages WHERE Type = '{messageType.AssemblyQualifiedName}' AND JSON_VALUE(serializedData, '$.{propertyFilter}') = '{identifier}'")
+                    .AnyAsync();
         }
     }
 }
