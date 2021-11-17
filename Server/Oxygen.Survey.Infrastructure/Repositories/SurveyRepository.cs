@@ -30,6 +30,21 @@
             return await this.All().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
+        public async Task<SurveyType> GetSurveyTypeById(int id,
+            CancellationToken cancellationToken = default)
+            => await this
+                .Data
+                .SurveyTypes
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task<IEnumerable<QuestionType>> GetQuestionTypes(
+            CancellationToken cancellationToken = default)
+            => await this
+                .Data
+                .QuestionTypes
+                .ToListAsync(cancellationToken);
+
         public async Task AssignUsersToSurveyAsync(int surveyId, IEnumerable<string> userIds,
             CancellationToken cancellationToken = default)
         {

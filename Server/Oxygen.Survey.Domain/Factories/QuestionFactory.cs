@@ -3,7 +3,7 @@
     using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
 
-    internal class QuestionFactory
+    public class QuestionFactory
     {
         private QuestionType questionType = default!;
         private bool questionTypeSet = false;
