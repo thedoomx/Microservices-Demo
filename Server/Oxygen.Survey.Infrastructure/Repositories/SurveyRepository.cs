@@ -61,6 +61,14 @@
             }
         }
 
+        public async Task<Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default)
+        => await this
+                .All()
+                .Where(x => x.Id == id)
+                .Include(x => x.Questions)
+                .ThenInclude(x => x.QuestionItems)
+                .FirstOrDefaultAsync(cancellationToken);
+
         //public async Task<CarAd> Find(int id, CancellationToken cancellationToken = default)
         //    => await this
         //        .All()
@@ -105,21 +113,6 @@
         //            .Where(c => c.Id == id))
         //        .FirstOrDefaultAsync(cancellationToken);
 
-        //public async Task<Category> GetCategory(
-        //    int categoryId,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .Data
-        //        .Categories
-        //        .FirstOrDefaultAsync(c => c.Id == categoryId, cancellationToken);
-
-        //public async Task<Manufacturer> GetManufacturer(
-        //    string manufacturer,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .Data
-        //        .Manufacturers
-        //        .FirstOrDefaultAsync(m => m.Name == manufacturer, cancellationToken);
 
         //public async Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(
         //    CancellationToken cancellationToken = default)

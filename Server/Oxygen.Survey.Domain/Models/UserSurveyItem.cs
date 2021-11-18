@@ -1,21 +1,35 @@
 ﻿namespace Oxygen.Survey.Domain.Models
 {
-    using Oxygen.Domain.Common;
     using Oxygen.Domain.Common.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     public class UserSurveyItem : Entity<int>
     {
-        internal UserSurveyItem(int questionId, int questionItemId)
+        internal UserSurveyItem(Question question, QuestionItem questionItem)
         {
-            this.QuestionId = questionId;
-            this.QuestionItemId = questionItemId;
+            this.Question = question;
+            this.QuestionItem = questionItem;
         }
 
-        public int QuestionId { get; private set; }
+        private UserSurveyItem()
+        {
+        }
 
-        public int QuestionItemId { get; private set; }
+        public Question Question { get; private set; }
+
+        public QuestionItem QuestionItem { get; private set; }
+
+        public UserSurveyItem ChangeQuestion(Question question)
+        {
+            this.Question = question;
+
+            return this;
+        }
+
+        public UserSurveyItem ChangeQuestionItem(QuestionItem questionItem)
+        {
+            this.QuestionItem = questionItem;
+
+            return this;
+        }
     }
 }

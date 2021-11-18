@@ -27,6 +27,7 @@
                 .HasOne(c => c.QuestionType)
                 .WithMany()
                 .HasForeignKey("QuestionTypeId")
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

@@ -16,6 +16,8 @@
 
         Task<IEnumerable<QuestionType>> GetQuestionTypes(CancellationToken cancellationToken = default);
 
+        Task<Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default);
+
         //Task<Survey> FindByUser(string userId, CancellationToken cancellationToken = default);
 
         //Task<int> GetDealerId(string userId, CancellationToken cancellationToken = default);

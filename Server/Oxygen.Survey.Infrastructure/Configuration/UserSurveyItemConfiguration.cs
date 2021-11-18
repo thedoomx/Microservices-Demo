@@ -14,12 +14,18 @@
                 .HasKey(c => c.Id);
 
             builder
-                .Property(c => c.QuestionId)
-                .IsRequired();
+                .HasOne(c => c.Question)
+                .WithMany()
+                .HasForeignKey("QuestionId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .Property(c => c.QuestionItemId)
-                .IsRequired();
+                .HasOne(c => c.QuestionItem)
+                .WithMany()
+                .HasForeignKey("QuestionItemId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
