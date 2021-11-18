@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Application.Commands.Common
+﻿namespace Oxygen.Survey.Application.Survey.Commands.Common
 {
     public class QuestionItemInputModel
     {

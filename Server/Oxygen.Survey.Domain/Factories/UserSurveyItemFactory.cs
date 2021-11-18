@@ -3,7 +3,7 @@
     using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
 
-    public class UserSurveyItemFactory
+    public class UserSurveyItemFactory : IUserSurveyItemFactory
     {
         private Question question = default!;
         private bool questionSet = false;

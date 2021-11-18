@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Edit\" />
-    <Folder Include="Survey\" />
-    <Folder Include="Queries\Search\" />
+    <Folder Include="Survey\Commands\Edit\" />
+    <Folder Include="Survey\Queries\Search\" />
     <Folder Include="UserSurvey\Queries\" />
   </ItemGroup>
 

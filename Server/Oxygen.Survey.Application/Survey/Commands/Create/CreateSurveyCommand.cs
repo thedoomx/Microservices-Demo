@@ -1,9 +1,8 @@
-﻿
-namespace Oxygen.Survey.Application.Commands.Create
+﻿namespace Oxygen.Survey.Application.Survey.Commands.Create
 {
     using MediatR;
     using Oxygen.Application.Common;
-    using Oxygen.Survey.Application.Commands.Common;
+    using Oxygen.Survey.Application.Survey.Commands.Common;
     using Oxygen.Survey.Domain.Factories;
     using Oxygen.Survey.Domain.Repositories;
     using System;

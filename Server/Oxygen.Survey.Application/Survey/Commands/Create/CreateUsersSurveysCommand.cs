@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Application.Commands.Create
+﻿namespace Oxygen.Survey.Application.Survey.Commands.Create
 {
     using System.Collections.Generic;
     using System.Threading;
