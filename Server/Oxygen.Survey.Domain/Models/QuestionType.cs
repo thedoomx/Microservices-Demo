@@ -9,6 +9,8 @@
         internal QuestionType(string type)
         {
             this.Validate(type);
+
+            this.Type = type;
         }
 
         public string Type { get; private set; }

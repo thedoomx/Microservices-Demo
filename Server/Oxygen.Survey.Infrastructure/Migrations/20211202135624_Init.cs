@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
+namespace Oxygen.Survey.Infrastructure.Migrations
 {
     public partial class Init : Migration
     {
@@ -48,7 +48,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSurveys",
+                name: "UserSurvey",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -59,7 +59,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSurveys", x => x.Id);
+                    table.PrimaryKey("PK_UserSurvey", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,27 +84,6 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSurveyItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionId = table.Column<int>(nullable: false),
-                    QuestionItemId = table.Column<int>(nullable: false),
-                    UserSurveyId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserSurveyItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserSurveyItems_UserSurveys_UserSurveyId",
-                        column: x => x.UserSurveyId,
-                        principalTable: "UserSurveys",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
@@ -112,7 +91,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(maxLength: 300, nullable: false),
                     IsRequired = table.Column<bool>(nullable: false, defaultValue: false),
-                    QuestionTypeId = table.Column<int>(nullable: true),
+                    QuestionTypeId = table.Column<int>(nullable: false),
                     SurveyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -133,6 +112,27 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserSurveys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false),
+                    IsSubmitted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSurveys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserSurveys_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuestionItems",
                 columns: table => new
                 {
@@ -148,6 +148,39 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                         name: "FK_QuestionItems_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSurveyItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionId = table.Column<int>(nullable: false),
+                    QuestionItemId = table.Column<int>(nullable: false),
+                    UserSurveyId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSurveyItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserSurveyItems_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserSurveyItems_QuestionItems_QuestionItemId",
+                        column: x => x.QuestionItemId,
+                        principalTable: "QuestionItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserSurveyItems_UserSurvey_UserSurveyId",
+                        column: x => x.UserSurveyId,
+                        principalTable: "UserSurvey",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -173,9 +206,24 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 column: "SurveyTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserSurveyItems_QuestionId",
+                table: "UserSurveyItems",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSurveyItems_QuestionItemId",
+                table: "UserSurveyItems",
+                column: "QuestionItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserSurveyItems_UserSurveyId",
                 table: "UserSurveyItems",
                 column: "UserSurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSurveys_SurveyId",
+                table: "UserSurveys",
+                column: "SurveyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -184,16 +232,19 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "QuestionItems");
-
-            migrationBuilder.DropTable(
                 name: "UserSurveyItems");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "UserSurveys");
 
             migrationBuilder.DropTable(
-                name: "UserSurveys");
+                name: "QuestionItems");
+
+            migrationBuilder.DropTable(
+                name: "UserSurvey");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "QuestionTypes");

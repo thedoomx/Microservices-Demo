@@ -8,6 +8,7 @@
         public static IServiceCollection AddDomain(this IServiceCollection services, string domainAssembly)
             => services
                 .AddFactories(domainAssembly)
+                .AddBuilds(domainAssembly)
                 .AddInitialData(domainAssembly);
         //.AddTransient<IRentingScheduleService, RentingScheduleService>();
 
@@ -17,6 +18,15 @@
                     .FromAssemblies(AppDomain.CurrentDomain.Load(domainAssembly))
                     .AddClasses(classes => classes
                         .AssignableTo(typeof(IFactory<>)))
+                    .AsMatchingInterface()
+                    .WithTransientLifetime());
+
+        private static IServiceCollection AddBuilds(this IServiceCollection services, string domainAssembly)
+            => services
+                .Scan(scan => scan
+                    .FromAssemblies(AppDomain.CurrentDomain.Load(domainAssembly))
+                    .AddClasses(classes => classes
+                        .AssignableTo(typeof(IBuild<>)))
                     .AsMatchingInterface()
                     .WithTransientLifetime());
 

@@ -5,8 +5,8 @@
 
     public interface IUserSurveyItemFactory : IBuild<UserSurveyItem>
     {
-        UserSurveyItemFactory WithQuestion(Question question);
+        IUserSurveyItemFactory WithQuestion(Question question);
 
-        UserSurveyItemFactory WithQuestionItem(QuestionItem questionItem);
+        IUserSurveyItemFactory WithQuestionItem(QuestionItem questionItem);
     }
 }

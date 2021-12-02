@@ -13,12 +13,7 @@
         private SurveyType surveyType = default!;
         private bool surveyTypeSet = false;
 
-        private readonly List<Question> questions;
-
-        internal SurveyFactory()
-        {
-            this.questions = new List<Question>();
-        }
+        private List<Question> questions = new List<Question>();
 
         public ISurveyFactory WithName(string name)
         {

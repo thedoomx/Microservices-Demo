@@ -10,6 +10,6 @@
 
         IUserSurveyFactory WithSurveyId(int surveyId);
 
-        IUserSurveyFactory WithQuestionAnswer(Action<UserSurveyItemFactory> userSurveyItem);
+        IUserSurveyFactory WithQuestionAnswer(Action<IUserSurveyItemFactory> userSurveyItem);
     }
 }

@@ -10,12 +10,7 @@
         private int surveyId = default!;
         private bool isSubmitted = default!;
 
-        private readonly List<UserSurveyItem> userSurveyItems;
-
-        internal UserSurveyFactory()
-        {
-            this.userSurveyItems = new List<UserSurveyItem>();
-        }
+        private List<UserSurveyItem> userSurveyItems = new List<UserSurveyItem>();
 
         public IUserSurveyFactory WithUserId(string userId)
         {
@@ -29,7 +24,7 @@
             return this;
         }
 
-        public IUserSurveyFactory WithQuestionAnswer(Action<UserSurveyItemFactory> userSurveyItem)
+        public IUserSurveyFactory WithQuestionAnswer(Action<IUserSurveyItemFactory> userSurveyItem)
         {
             var questionFactory = new UserSurveyItemFactory();
 

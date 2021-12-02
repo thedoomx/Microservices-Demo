@@ -15,7 +15,8 @@
     using Oxygen.Application.Common.Exceptions;
 
     internal class UserSurveyRepository : DataRepository<ISurveyDbContext, UserSurvey>,
-        IUserSurveyDomainRepository
+        IUserSurveyDomainRepository,
+        IUserSurveyQueryRepository
     {
         private readonly IMapper mapper;
 

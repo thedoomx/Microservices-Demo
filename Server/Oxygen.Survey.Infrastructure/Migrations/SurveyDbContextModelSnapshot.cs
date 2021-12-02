@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oxygen.Survey.Infrastructure.Persistence;
 
-namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
+namespace Oxygen.Survey.Infrastructure.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20211102175822_Init")]
-    partial class Init
+    partial class SurveyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +59,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int?>("QuestionTypeId")
+                    b.Property<int>("QuestionTypeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SurveyId")
@@ -180,7 +178,7 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSurveys");
+                    b.ToTable("UserSurvey");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
@@ -201,9 +199,36 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("QuestionItemId");
+
                     b.HasIndex("UserSurveyId");
 
                     b.ToTable("UserSurveyItems");
+                });
+
+            modelBuilder.Entity("Oxygen.Survey.Infrastructure.Persistence.Models.UserSurveyData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsSubmitted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("UserSurveys");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
@@ -211,7 +236,8 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
                     b.HasOne("Oxygen.Survey.Domain.Models.QuestionType", "QuestionType")
                         .WithMany()
                         .HasForeignKey("QuestionTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Oxygen.Survey.Domain.Models.Survey", null)
                         .WithMany("Questions")
@@ -235,9 +261,30 @@ namespace Oxygen.Survey.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
                 {
+                    b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Oxygen.Survey.Domain.Models.QuestionItem", "QuestionItem")
+                        .WithMany()
+                        .HasForeignKey("QuestionItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Oxygen.Survey.Domain.Models.UserSurvey", null)
                         .WithMany("UserSurveyItems")
                         .HasForeignKey("UserSurveyId");
+                });
+
+            modelBuilder.Entity("Oxygen.Survey.Infrastructure.Persistence.Models.UserSurveyData", b =>
+                {
+                    b.HasOne("Oxygen.Survey.Domain.Models.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

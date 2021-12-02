@@ -8,7 +8,7 @@
 
     public class MineSurveysQuery : IRequest<IEnumerable<SurveyOutputModel>>
     {
-        public int? UserId { get; set; }
+        public string? UserId { get; set; }
 
         public class MineSurveysQueryHandler : IRequestHandler<MineSurveysQuery, IEnumerable<SurveyOutputModel>>
         {

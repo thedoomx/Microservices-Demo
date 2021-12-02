@@ -3,6 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Oxygen.Infrastructure.Common.Persistence;
     using Oxygen.Survey.Domain.Models;
+    using Oxygen.Survey.Infrastructure.Persistence.Models;
 
     internal interface ISurveyDbContext : IDbContext
     {
@@ -16,7 +17,7 @@
 
         DbSet<SurveyType> SurveyTypes { get; }
 
-        DbSet<UserSurvey> UserSurveys { get; }
+        DbSet<UserSurveyData> UserSurveys { get; }
 
         DbSet<UserSurveyItem> UserSurveyItems { get; }
     }

@@ -10,11 +10,10 @@
     using Oxygen.Infrastructure.Common.Persistence;
     using Oxygen.Survey.Application;
     using Oxygen.Survey.Domain.Repositories;
-    using Domain.Models;
     using Oxygen.Survey.Application.Queries.Common;
     using Oxygen.Application.Common.Exceptions;
 
-    internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
+    internal class SurveyRepository : DataRepository<ISurveyDbContext, Domain.Models.Survey>,
         ISurveyDomainRepository,
         ISurveyQueryRepository
     {
@@ -24,13 +23,13 @@
             : base(db)
             => this.mapper = mapper;
 
-        public async Task<Survey> GetById(int id,
+        public async Task<Domain.Models.Survey> GetById(int id,
             CancellationToken cancellationToken = default)
         {
             return await this.All().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public async Task<SurveyType> GetSurveyTypeById(int id,
+        public async Task<Domain.Models.SurveyType> GetSurveyTypeById(int id,
             CancellationToken cancellationToken = default)
             => await this
                 .Data
@@ -38,7 +37,7 @@
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        public async Task<IEnumerable<QuestionType>> GetQuestionTypes(
+        public async Task<IEnumerable<Domain.Models.QuestionType>> GetQuestionTypes(
             CancellationToken cancellationToken = default)
             => await this
                 .Data
@@ -61,7 +60,7 @@
             }
         }
 
-        public async Task<Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default)
+        public async Task<Domain.Models.Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default)
         => await this
                 .All()
                 .Where(x => x.Id == id)
@@ -69,98 +68,14 @@
                 .ThenInclude(x => x.QuestionItems)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        //public async Task<CarAd> Find(int id, CancellationToken cancellationToken = default)
-        //    => await this
-        //        .All()
-        //        .Include(c => c.Manufacturer)
-        //        .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
-
-        //public async Task<bool> Delete(int id, CancellationToken cancellationToken = default)
-        //{
-        //    var carAd = await this.Data.CarAds.FindAsync(id);
-
-        //    if (carAd == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    this.Data.CarAds.Remove(carAd);
-
-        //    await this.Data.SaveChangesAsync(cancellationToken);
-
-        //    return true;
-        //}
-
-        //public async Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification,
-        //    CarAdsSortOrder carAdsSortOrder,
-        //    int skip = 0,
-        //    int take = int.MaxValue,
-        //    CancellationToken cancellationToken = default)
-        //    => (await this.mapper
-        //        .ProjectTo<TOutputModel>(this
-        //            .GetCarAdsQuery(carAdSpecification, dealerSpecification)
-        //            .Sort(carAdsSortOrder))
-        //        .ToListAsync(cancellationToken))
-        //        .Skip(skip)
-        //        .Take(take); // EF Core bug forces me to execute paging on the client.
-
-        //public async Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken = default)
-        //    => await this.mapper
-        //        .ProjectTo<CarAdDetailsOutputModel>(this
-        //            .AllAvailable()
-        //            .Where(c => c.Id == id))
-        //        .FirstOrDefaultAsync(cancellationToken);
-
-
-        //public async Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(
-        //    CancellationToken cancellationToken = default)
-        //{
-        //    var categories = await this.mapper
-        //        .ProjectTo<GetCarAdCategoryOutputModel>(this.Data.Categories)
-        //        .ToDictionaryAsync(k => k.Id, cancellationToken);
-
-        //    var carAdsPerCategory = await this.AllAvailable()
-        //        .GroupBy(c => c.Category.Id)
-        //        .Select(gr => new
-        //        {
-        //            CategoryId = gr.Key,
-        //            TotalCarAds = gr.Count()
-        //        })
-        //        .ToListAsync(cancellationToken);
-
-        //    carAdsPerCategory.ForEach(c => categories[c.CategoryId].TotalCarAds = c.TotalCarAds);
-
-        //    return categories.Values;
-        //}
-
-        //public async Task<int> Total(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification,
-        //    CancellationToken cancellationToken = default)
-        //    => await this
-        //        .GetCarAdsQuery(carAdSpecification, dealerSpecification)
-        //        .CountAsync(cancellationToken);
-
-        //private IQueryable<CarAd> AllAvailable()
-        //    => this
-        //        .All()
-        //        .Where(car => car.IsAvailable);
-
-        //private IQueryable<CarAd> GetCarAdsQuery(
-        //    Specification<CarAd> carAdSpecification,
-        //    Specification<Dealer> dealerSpecification)
-        //    => this
-        //        .Data
-        //        .Dealers
-        //        .Where(dealerSpecification)
-        //        .SelectMany(d => d.CarAds)
-        //        .Where(carAdSpecification);
-
-        public Task<IEnumerable<SurveyOutputModel>> Get(int? userId, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<SurveyOutputModel>> Get(string userId, CancellationToken cancellationToken = default)
+            => await this.mapper
+               .ProjectTo<SurveyOutputModel>(this
+                    .Data
+                .UserSurveys
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Survey)
+                    .AsQueryable())
+               .ToListAsync(cancellationToken);
     }
 }

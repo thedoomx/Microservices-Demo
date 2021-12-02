@@ -28,7 +28,7 @@
 
         public class QuestionType
         {
-            public const int MinTypeLength = 10;
+            public const int MinTypeLength = 4;
             public const int MaxTypeLength = 50;
         }
 

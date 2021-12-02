@@ -3,7 +3,7 @@
     using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
 
-    public class UserSurveyItemFactory : IUserSurveyItemFactory
+    internal class UserSurveyItemFactory : IUserSurveyItemFactory
     {
         private Question question = default!;
         private bool questionSet = false;
@@ -11,7 +11,7 @@
         private QuestionItem questionItem = default!;
         private bool questionItemSet = default!;
 
-        public UserSurveyItemFactory WithQuestion(Question question)
+        public IUserSurveyItemFactory WithQuestion(Question question)
         {
             this.question = question;
             this.questionSet = true;
@@ -19,7 +19,7 @@
             return this;
         }
 
-        public UserSurveyItemFactory WithQuestionItem(QuestionItem questionItem)
+        public IUserSurveyItemFactory WithQuestionItem(QuestionItem questionItem)
         {
             this.questionItem = questionItem;
             this.questionItemSet = true;
