@@ -11,7 +11,11 @@
         where TDbContext : IDbContext
         where TEntity : class, IAggregateRoot
     {
-        protected DataRepository(TDbContext db) => this.Data = db;
+        protected DataRepository(TDbContext db, IPublisher publisher) 
+        {
+            this.Data = db;
+            this.Publisher = publisher;
+        } 
 
         protected TDbContext Data { get; }
 

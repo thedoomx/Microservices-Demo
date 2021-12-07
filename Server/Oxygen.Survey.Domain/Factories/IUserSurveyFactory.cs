@@ -8,7 +8,7 @@
     {
         IUserSurveyFactory WithUserId(string userId);
 
-        IUserSurveyFactory WithSurveyId(int surveyId);
+        IUserSurveyFactory WithSurvey(Survey survey);
 
         IUserSurveyFactory WithQuestionAnswer(Action<IUserSurveyItemFactory> userSurveyItem);
     }

@@ -17,7 +17,7 @@
 
         DbSet<SurveyType> SurveyTypes { get; }
 
-        DbSet<UserSurveyData> UserSurveys { get; }
+        DbSet<UserSurvey> UserSurveys { get; }
 
         DbSet<UserSurveyItem> UserSurveyItems { get; }
     }

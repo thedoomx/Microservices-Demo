@@ -18,8 +18,10 @@
                 .IsRequired();
 
             builder
-                .Property(c => c.SurveyId)
-                .IsRequired();
+               .HasOne(c => c.Survey)
+               .WithMany()
+               .HasForeignKey("SurveyId")
+               .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Property(c => c.IsSubmitted)

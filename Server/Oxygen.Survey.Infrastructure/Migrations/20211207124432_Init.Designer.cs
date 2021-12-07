@@ -10,7 +10,7 @@ using Oxygen.Survey.Infrastructure.Persistence;
 namespace Oxygen.Survey.Infrastructure.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20211202135624_Init")]
+    [Migration("20211207124432_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,7 +171,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("SurveyId")
+                    b.Property<int?>("SurveyId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -180,7 +180,9 @@ namespace Oxygen.Survey.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSurvey");
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("UserSurveys");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
@@ -208,29 +210,6 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.HasIndex("UserSurveyId");
 
                     b.ToTable("UserSurveyItems");
-                });
-
-            modelBuilder.Entity("Oxygen.Survey.Infrastructure.Persistence.Models.UserSurveyData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsSubmitted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SurveyId");
-
-                    b.ToTable("UserSurveys");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
@@ -261,6 +240,14 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurvey", b =>
+                {
+                    b.HasOne("Oxygen.Survey.Domain.Models.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
                 {
                     b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
@@ -278,15 +265,6 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.HasOne("Oxygen.Survey.Domain.Models.UserSurvey", null)
                         .WithMany("UserSurveyItems")
                         .HasForeignKey("UserSurveyId");
-                });
-
-            modelBuilder.Entity("Oxygen.Survey.Infrastructure.Persistence.Models.UserSurveyData", b =>
-                {
-                    b.HasOne("Oxygen.Survey.Domain.Models.Survey", "Survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

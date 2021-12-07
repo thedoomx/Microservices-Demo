@@ -13,6 +13,7 @@
     using Domain.Models;
     using Oxygen.Survey.Application.Queries.Common;
     using Oxygen.Application.Common.Exceptions;
+    using Oxygen.Infrastructure.Common.Services;
 
     internal class UserSurveyRepository : DataRepository<ISurveyDbContext, UserSurvey>,
         IUserSurveyDomainRepository,
@@ -20,8 +21,8 @@
     {
         private readonly IMapper mapper;
 
-        public UserSurveyRepository(ISurveyDbContext db, IMapper mapper)
-            : base(db)
+        public UserSurveyRepository(ISurveyDbContext db, IPublisher publisher, IMapper mapper)
+            : base(db, publisher)
             => this.mapper = mapper;
 
         public async Task<UserSurvey> GetById(int id,

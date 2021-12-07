@@ -38,7 +38,7 @@
 
         public DbSet<QuestionItem> QuestionItems { get; set; } = default!;
 
-        public DbSet<UserSurveyData> UserSurveys { get; set; } = default!;
+        public DbSet<UserSurvey> UserSurveys { get; set; } = default!;
 
         public DbSet<UserSurveyItem> UserSurveyItems { get; set; } = default!;
 

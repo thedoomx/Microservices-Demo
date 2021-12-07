@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Application.Survey.Commands.Create
+﻿namespace Oxygen.Survey.Application.UserSurveys.Commands.Create
 {
     using System.Collections.Generic;
     using System.Threading;
@@ -7,27 +7,25 @@
     using MediatR;
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Services.Identity;
+    using Oxygen.Infrastructure.Common.Messages.Survey;
     using Oxygen.Survey.Domain.Factories;
     using Oxygen.Survey.Domain.Repositories;
 
     public class CreateUsersSurveysCommand : EntityCommand<int>, IRequest<Result>
     {
-        IEnumerable<string> UserIds { get; set; } = default!;
+        public IEnumerable<string> UserIds { get; set; } = default!;
 
         public class CreateUsersSurveysCommandHandler : IRequestHandler<CreateUsersSurveysCommand, Result>
         {
-            private readonly ICurrentUserService _currentUserService;
             private readonly ISurveyDomainRepository _surveyRepository;
             private readonly IUserSurveyDomainRepository _userSurveyRepository;
             private readonly IUserSurveyFactory _userSurveyFactory;
 
             public CreateUsersSurveysCommandHandler(
-                ICurrentUserService currentUserService,
                 ISurveyDomainRepository surveyRepository,
                 IUserSurveyDomainRepository userSurveyRepository,
                 IUserSurveyFactory userSurveyFactory)
             {
-                this._currentUserService = currentUserService;
                 this._surveyRepository = surveyRepository;
                 this._userSurveyRepository = userSurveyRepository;
                 this._userSurveyFactory = userSurveyFactory;
@@ -49,10 +47,16 @@
                 {
                     var userSurvey = this._userSurveyFactory
                     .WithUserId(userId)
-                    .WithSurveyId(request.Id)
+                    .WithSurvey(survey)
                     .Build();
 
-                    await this._userSurveyRepository.Save(userSurvey, cancellationToken);
+                    var message = new UserSurveyCreatedMessage
+                    (
+                       userId,
+                       survey.Name
+                    );
+
+                    await this._userSurveyRepository.Save(userSurvey, cancellationToken, message);
                 }
 
                 return Result.Success;

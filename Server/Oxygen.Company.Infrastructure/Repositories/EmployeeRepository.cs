@@ -15,6 +15,7 @@
     using Oxygen.Company.Application.Employee.Queries.Common;
     using Oxygen.Company.Application.JobTitle.Queries.Common;
     using Oxygen.Company.Application.Office.Queries.Common;
+    using Oxygen.Infrastructure.Common.Services;
 
     internal class EmployeeRepository : DataRepository<ICompanyDbContext, Employee>,
         IEmployeeDomainRepository,
@@ -22,8 +23,8 @@
     {
         private readonly IMapper mapper;
 
-        public EmployeeRepository(ICompanyDbContext db, IMapper mapper)
-            : base(db)
+        public EmployeeRepository(ICompanyDbContext db, IPublisher publisher, IMapper mapper)
+            : base(db, publisher)
             => this.mapper = mapper;
 
         public async Task<Employee> FindEmployee(int id, CancellationToken cancellationToken = default)

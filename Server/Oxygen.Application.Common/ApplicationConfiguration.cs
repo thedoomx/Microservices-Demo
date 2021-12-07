@@ -8,6 +8,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Behaviours;
+    using Oxygen.Application.Common.Mapping;
 
     public static class ApplicationConfiguration
     {
@@ -19,7 +20,7 @@
                 .Configure<ApplicationSettings>(
                     configuration.GetSection(nameof(ApplicationSettings)),
                     options => options.BindNonPublicProperties = true)
-                .AddAutoMapper(AppDomain.CurrentDomain.Load(applicationAssembly))
+                .AddAutoMapperProfile(AppDomain.CurrentDomain.Load(applicationAssembly))
                 .AddMediatR(AppDomain.CurrentDomain.Load(applicationAssembly))
                 .AddEventHandlers()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
@@ -32,5 +33,16 @@
                     .AssignableTo(typeof(IEventHandler<>)))
                     .AsImplementedInterfaces()
                     .WithTransientLifetime());
+
+        public static IServiceCollection AddAutoMapperProfile(
+           this IServiceCollection services,
+           Assembly assembly)
+           => services
+               .AddAutoMapper(
+                   (_, config) =>
+                    config
+                        .AddProfile(new MappingProfile(assembly)),
+                        Array.Empty<Assembly>()
+                   );
     }
 }

@@ -8,11 +8,7 @@
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Services.Identity;
     using System.Text;
-    using System;
-    using System.Reflection;
-    using AutoMapper;
     using Ogyxen.Common.Extensions;
-    using Oxygen.Application.Common.Mapping;
     using Ogyxen.Application.Common;
     using Microsoft.IdentityModel.Tokens;
 
@@ -30,7 +26,6 @@
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
-                .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers()
                 .AddFluentValidation(validation => validation
                     .RegisterValidatorsFromAssemblyContaining<Result>())
@@ -94,15 +89,6 @@
             return services;
         }
 
-        public static IServiceCollection AddAutoMapperProfile(
-           this IServiceCollection services,
-           Assembly assembly)
-           => services
-               .AddAutoMapper(
-                   (_, config) => config
-                       .AddProfile(new MappingProfile(assembly)),
-                   Array.Empty<Assembly>());
-
         public static IServiceCollection AddHealth(
             this IServiceCollection services,
             IConfiguration configuration,
@@ -134,7 +120,7 @@
 
         public static IServiceCollection AddSwagger(
             this IServiceCollection services, bool swagger)
-            => swagger ? services
+            => swagger == true ? services
                 .AddSwaggerGen() : services;
     }
 }

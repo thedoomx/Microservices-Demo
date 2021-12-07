@@ -12,6 +12,7 @@
     using Oxygen.Survey.Domain.Repositories;
     using Oxygen.Survey.Application.Queries.Common;
     using Oxygen.Application.Common.Exceptions;
+    using Oxygen.Infrastructure.Common.Services;
 
     internal class SurveyRepository : DataRepository<ISurveyDbContext, Domain.Models.Survey>,
         ISurveyDomainRepository,
@@ -19,8 +20,8 @@
     {
         private readonly IMapper mapper;
 
-        public SurveyRepository(ISurveyDbContext db, IMapper mapper)
-            : base(db)
+        public SurveyRepository(ISurveyDbContext db, IPublisher publisher, IMapper mapper)
+            : base(db, publisher)
             => this.mapper = mapper;
 
         public async Task<Domain.Models.Survey> GetById(int id,
@@ -73,6 +74,7 @@
                .ProjectTo<SurveyOutputModel>(this
                     .Data
                 .UserSurveys
+                .Include(x => x.Survey)
                 .Where(x => x.UserId == userId)
                 .Select(x => x.Survey)
                     .AsQueryable())

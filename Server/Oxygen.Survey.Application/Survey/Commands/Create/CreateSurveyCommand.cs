@@ -40,7 +40,6 @@
                     .WithSummary(request.Summary)
                     .WithSurveyType(surveyType);
 
-
                 foreach (var question in request.Questions)
                 {
                     var questionType = questionTypes.FirstOrDefault(x => x.Id == question.QuestionType);

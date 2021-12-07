@@ -22,7 +22,7 @@ namespace Oxygen.Survey.Startup
                 .AddDomain(GlobalConstants.Assembly.Survey_Domain)
                 .AddApplication(this.Configuration, GlobalConstants.Assembly.Survey_Application)
                 .AddInfrastructure(this.Configuration)
-                .AddWebComponents(this.Configuration);
+                .AddWebComponents(this.Configuration, swagger: true);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
            => app
