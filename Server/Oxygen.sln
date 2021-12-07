@@ -3,20 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Identity", "CarRentalSystem.Identity\CarRentalSystem.Identity.csproj", "{1DF5F181-6E4D-452C-821B-0A65B29B04DF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Dealers", "CarRentalSystem.Dealers\CarRentalSystem.Dealers.csproj", "{8A3038D9-4BE3-4575-8795-8A084D8C9993}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem", "CarRentalSystem\CarRentalSystem.csproj", "{4C9E2BD3-6299-40C1-99B7-6CA1A6746481}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Statistics", "CarRentalSystem.Statistics\CarRentalSystem.Statistics.csproj", "{15EC2D91-675A-4294-AB7A-751ED2AC34BB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Admin", "CarRentalSystem.Admin\CarRentalSystem.Admin.csproj", "{79784DBE-4B2B-436C-AEB9-FB02607FF985}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Notifications", "CarRentalSystem.Notifications\CarRentalSystem.Notifications.csproj", "{9736CF21-3A7D-40C6-A463-DA49B633F55A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalSystem.Watchdog", "CarRentalSystem.Watchdog\CarRentalSystem.Watchdog.csproj", "{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Survey", "Survey", "{295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Domain", "Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj", "{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}"
@@ -31,25 +17,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Infrastructure", "Oxygen.Survey.Infrastructure\Oxygen.Survey.Infrastructure.csproj", "{207B6B93-E4C3-4E9F-AC4F-226CB866DA33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Survey.Startup", "Oxygen.Survey.Startup\Oxygen.Survey.Startup.csproj", "{FC578519-7564-41A6-9CBF-30D46683D2C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Startup", "Oxygen.Survey.Startup\Oxygen.Survey.Startup.csproj", "{FC578519-7564-41A6-9CBF-30D46683D2C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Survey.Web", "Oxygen.Survey.Web\Oxygen.Survey.Web.csproj", "{FC882BEF-09EF-4B24-8C95-A18B73EBD6D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Survey.Web", "Oxygen.Survey.Web\Oxygen.Survey.Web.csproj", "{FC882BEF-09EF-4B24-8C95-A18B73EBD6D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Web.Common", "Oxygen.Web.Common\Oxygen.Web.Common.csproj", "{A9A8D830-6B3C-4ADB-8FB1-04A08C01EBA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Web.Common", "Oxygen.Web.Common\Oxygen.Web.Common.csproj", "{A9A8D830-6B3C-4ADB-8FB1-04A08C01EBA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Infrastructure.Common", "Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj", "{2859D754-48DB-475D-9B7F-55FEE01714B3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarRentalSystemMs", "CarRentalSystemMs", "{B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Infrastructure.Common", "Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj", "{2859D754-48DB-475D-9B7F-55FEE01714B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{263E8C3D-55E6-48FE-82B6-FC497B7571F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Identity.Web", "Oxygen.Identity.Web\Oxygen.Identity.Web.csproj", "{798A9991-6116-492E-B5A6-54282799F988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Identity.Web", "Oxygen.Identity.Web\Oxygen.Identity.Web.csproj", "{798A9991-6116-492E-B5A6-54282799F988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Identity.Startup", "Oxygen.Identity.Startup\Oxygen.Identity.Startup.csproj", "{FECBA0EB-ED2C-4427-B519-4771DB934F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Identity.Startup", "Oxygen.Identity.Startup\Oxygen.Identity.Startup.csproj", "{FECBA0EB-ED2C-4427-B519-4771DB934F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Identity.Application", "Oxygen.Identity.Application\Oxygen.Identity.Application.csproj", "{CD2F09A3-E320-463C-970C-A6B664F7B236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Identity.Application", "Oxygen.Identity.Application\Oxygen.Identity.Application.csproj", "{CD2F09A3-E320-463C-970C-A6B664F7B236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Identity.Infrastructure", "Oxygen.Identity.Infrastructure\Oxygen.Identity.Infrastructure.csproj", "{2E31957F-489D-4D53-90B0-7E485142576F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Identity.Infrastructure", "Oxygen.Identity.Infrastructure\Oxygen.Identity.Infrastructure.csproj", "{2E31957F-489D-4D53-90B0-7E485142576F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Identity.Domain", "Oxygen.Identity.Domain\Oxygen.Identity.Domain.csproj", "{5E4D4A90-2793-407E-BADE-21F4B1D91C27}"
 EndProject
@@ -57,29 +41,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Watchdog", "Watchdog", "{66
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{07D9043A-C23F-40B9-8F06-C4CEF18395E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Notifications", "Oxygen.Notifications\Oxygen.Notifications.csproj", "{89C14467-5E62-4B0E-9EE4-C7D6D391DF00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Notifications", "Oxygen.Notifications\Oxygen.Notifications.csproj", "{89C14467-5E62-4B0E-9EE4-C7D6D391DF00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Watchdog", "Oxygen.Watchdog\Oxygen.Watchdog.csproj", "{D915E398-4588-4EF4-9789-5E53ACC4C2E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Watchdog", "Oxygen.Watchdog\Oxygen.Watchdog.csproj", "{D915E398-4588-4EF4-9789-5E53ACC4C2E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{B1FE0DED-195B-439F-B488-4C90936CF288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Admin", "Oxygen.Admin\Oxygen.Admin.csproj", "{1276A82E-4EB2-488D-B68A-FB9ECF2289CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Admin", "Oxygen.Admin\Oxygen.Admin.csproj", "{1276A82E-4EB2-488D-B68A-FB9ECF2289CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Company", "Company", "{23AB87C3-113B-4D81-8A9A-695972090236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Startup", "Oxygen.Company.Startup\Oxygen.Company.Startup.csproj", "{B734DC2F-0A75-4937-8268-37F306E037E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Startup", "Oxygen.Company.Startup\Oxygen.Company.Startup.csproj", "{B734DC2F-0A75-4937-8268-37F306E037E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Web", "Oxygen.Company.Web\Oxygen.Company.Web.csproj", "{4793A5C9-2E30-4058-9703-0B36250792EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Web", "Oxygen.Company.Web\Oxygen.Company.Web.csproj", "{4793A5C9-2E30-4058-9703-0B36250792EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Application", "Oxygen.Company.Application\Oxygen.Company.Application.csproj", "{269598EE-8C77-4475-A4E4-67EB5E10420E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Application", "Oxygen.Company.Application\Oxygen.Company.Application.csproj", "{269598EE-8C77-4475-A4E4-67EB5E10420E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Domain", "Oxygen.Company.Domain\Oxygen.Company.Domain.csproj", "{3E2B3475-4E98-4819-BF4F-F4AD3FF71023}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Domain", "Oxygen.Company.Domain\Oxygen.Company.Domain.csproj", "{3E2B3475-4E98-4819-BF4F-F4AD3FF71023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Company.Infrastructure", "Oxygen.Company.Infrastructure\Oxygen.Company.Infrastructure.csproj", "{9B1223BE-8F24-4D20-A8D1-6142C498261C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Infrastructure", "Oxygen.Company.Infrastructure\Oxygen.Company.Infrastructure.csproj", "{9B1223BE-8F24-4D20-A8D1-6142C498261C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oxygen.Startup.Common", "Oxygen.Startup.Common\Oxygen.Startup.Common.csproj", "{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Startup.Common", "Oxygen.Startup.Common\Oxygen.Startup.Common.csproj", "{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ogyxen.Common", "Ogyxen.Common\Ogyxen.Common.csproj", "{614FD768-79F9-4053-B356-2ABC73E38A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogyxen.Common", "Ogyxen.Common\Ogyxen.Common.csproj", "{614FD768-79F9-4053-B356-2ABC73E38A6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,34 +71,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DF5F181-6E4D-452C-821B-0A65B29B04DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DF5F181-6E4D-452C-821B-0A65B29B04DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DF5F181-6E4D-452C-821B-0A65B29B04DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DF5F181-6E4D-452C-821B-0A65B29B04DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A3038D9-4BE3-4575-8795-8A084D8C9993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A3038D9-4BE3-4575-8795-8A084D8C9993}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A3038D9-4BE3-4575-8795-8A084D8C9993}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A3038D9-4BE3-4575-8795-8A084D8C9993}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C9E2BD3-6299-40C1-99B7-6CA1A6746481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C9E2BD3-6299-40C1-99B7-6CA1A6746481}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C9E2BD3-6299-40C1-99B7-6CA1A6746481}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C9E2BD3-6299-40C1-99B7-6CA1A6746481}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15EC2D91-675A-4294-AB7A-751ED2AC34BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15EC2D91-675A-4294-AB7A-751ED2AC34BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15EC2D91-675A-4294-AB7A-751ED2AC34BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15EC2D91-675A-4294-AB7A-751ED2AC34BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79784DBE-4B2B-436C-AEB9-FB02607FF985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79784DBE-4B2B-436C-AEB9-FB02607FF985}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79784DBE-4B2B-436C-AEB9-FB02607FF985}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79784DBE-4B2B-436C-AEB9-FB02607FF985}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9736CF21-3A7D-40C6-A463-DA49B633F55A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9736CF21-3A7D-40C6-A463-DA49B633F55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9736CF21-3A7D-40C6-A463-DA49B633F55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9736CF21-3A7D-40C6-A463-DA49B633F55A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -216,13 +172,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1DF5F181-6E4D-452C-821B-0A65B29B04DF} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{8A3038D9-4BE3-4575-8795-8A084D8C9993} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{4C9E2BD3-6299-40C1-99B7-6CA1A6746481} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{15EC2D91-675A-4294-AB7A-751ED2AC34BB} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{79784DBE-4B2B-436C-AEB9-FB02607FF985} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{9736CF21-3A7D-40C6-A463-DA49B633F55A} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
-		{ED8D5E75-655A-4E22-92A6-CCBB2E82EAFD} = {B2ADBA7E-AC73-45F2-AC6E-B7A8657D413F}
 		{EAEDBE38-C91D-4FEC-BAC9-6BF476DC2B50} = {295119C3-9BF4-4741-A9C8-4A20DEF8C3BB}
 		{530881E9-13C7-4D3D-B64A-5ED5A421B12E} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
 		{74EE6AC3-1C7D-4338-9551-9B9579260EE1} = {C09FFCA9-48BA-43F7-962A-22505A5ED975}
