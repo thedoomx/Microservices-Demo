@@ -106,7 +106,7 @@
             if (messagingHealthChecks)
             {
                 var messageQueueSettings = MessageQueueSettingsHelper.GetMessageQueueSettings(configuration);
-                messageQueueSettings = new MessageQueueSettings("rabbitmq", "rabbitmq", "rabbitmq");
+                messageQueueSettings = new MessageQueueSettings("localhost", "", "");
 
                 var messageQueueConnectionString =
                     $"amqp://{messageQueueSettings.UserName}:{messageQueueSettings.Password}@{messageQueueSettings.Host}/";
