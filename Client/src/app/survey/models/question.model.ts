@@ -3,5 +3,5 @@ export interface Question {
     description: string;
     isRequired: boolean;
     questionType: number;
-    survey: number;
+    survey?: number;
 }
