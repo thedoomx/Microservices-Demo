@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Oxygen.Survey.Startup": {
+    "Oxygen.Company.Startup": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

@@ -7,8 +7,6 @@
 
     public class CreateUserCommand : CreateUserInputModel, IRequest<Result>
     {
-        public string Name { get; set; } = default!;
-
         public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result>
         {
             private readonly IIdentity identity;
