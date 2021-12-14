@@ -18,6 +18,8 @@ export class QuestionComponent implements OnInit {
   questionTypes: Array<QuestionType>;
   questionItems: Array<QuestionItem> = [];
 
+  canAddQuestionItem: boolean;
+
   @Output() addQuestionEventEmitter = new EventEmitter<Question>();
 
   constructor(
@@ -42,20 +44,35 @@ export class QuestionComponent implements OnInit {
     })
   }
 
-  addQuestion() {
+  submit() {
     var result = this.questionForm.value;
     this.addQuestionEventEmitter.emit(result);
   }
 
   addOption() {
-    debugger;
     const valueInput = this.newQuestionItem.nativeElement.value;
+    
     this.questionItems.push(valueInput);
+    this.questionForm.patchValue({
+      questionItems: this.questionItems,
+    });
+
+    this.canAddQuestionItem = false;
+
     this.newQuestionItem.nativeElement.value = '';
   }
 
   removeOption(index: number) {
      this.questionItems.splice(index,1);
+  }
+
+  onNewQuestionItemChange(searchValue: string): void {  
+    if(searchValue.length > 0) {
+      this.canAddQuestionItem = true;
+    }
+    else {
+      this.canAddQuestionItem = false;
+    }
   }
 
 }
