@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Survey } from './models/survey.model';
 import { QuestionType } from './models/questionType.model';
+import { SurveyType } from './models/surveyType.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,12 @@ export class SurveyService {
     return this.http.put<Survey>(this.surveyPath, survey);
   }
 
+  getSurveyTypes(): Observable<Array<SurveyType>> {
+    return this.http.get<Array<SurveyType>>(this.surveyPath + 'getSurveyTypes')
+  }
+
   getQuestionTypes(): Observable<Array<QuestionType>> {
-    return this.http.get<Array<QuestionType>>(this.surveyPath + 'getquestionTypes')
+    return this.http.get<Array<QuestionType>>(this.surveyPath + 'getQuestionTypes')
   }
   
 }

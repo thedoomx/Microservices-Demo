@@ -5,10 +5,12 @@ import { SurveyRoutingModule } from './survey-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SurveyService } from './survey.service';
 import { QuestionComponent } from './question/question.component';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   declarations: [
     QuestionComponent,
+    SurveyComponent
   ],
   providers: [
     SurveyService

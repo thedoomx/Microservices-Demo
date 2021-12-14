@@ -11,6 +11,7 @@
     using Ogyxen.Common.Extensions;
     using Ogyxen.Application.Common;
     using Microsoft.IdentityModel.Tokens;
+    using Microsoft.AspNetCore.Mvc.Controllers;
 
     public static class WebConfiguration
     {
@@ -28,7 +29,7 @@
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
                 .AddControllers()
                 .AddFluentValidation(validation => validation
-                    .RegisterValidatorsFromAssemblyContaining<Result>())
+                .RegisterValidatorsFromAssemblyContaining<Result>())
                 .AddNewtonsoftJson();
 
             services.Configure<ApiBehaviorOptions>(options =>

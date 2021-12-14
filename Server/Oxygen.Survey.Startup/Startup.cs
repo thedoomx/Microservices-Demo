@@ -18,11 +18,11 @@ namespace Oxygen.Survey.Startup
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-            => services
-                .AddDomain(GlobalConstants.Assembly.Survey_Domain)
-                .AddApplication(this.Configuration, GlobalConstants.Assembly.Survey_Application)
-                .AddInfrastructure(this.Configuration)
-                .AddWebComponents(this.Configuration, swagger: true);
+              => services
+                  .AddDomain(GlobalConstants.Assembly.Survey_Domain)
+                  .AddApplication(this.Configuration, GlobalConstants.Assembly.Survey_Application)
+                  .AddInfrastructure(this.Configuration)
+                  .AddWebComponents(this.Configuration);
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
            => app

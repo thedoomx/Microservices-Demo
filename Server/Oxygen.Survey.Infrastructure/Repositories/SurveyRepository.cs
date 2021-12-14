@@ -13,6 +13,8 @@
     using Oxygen.Survey.Application.Queries.Common;
     using Oxygen.Application.Common.Exceptions;
     using Oxygen.Infrastructure.Common.Services;
+    using Oxygen.Survey.Application.SurveyType.Queries.Common;
+    using Oxygen.Survey.Application.QuestionType.Queries.Common;
 
     internal class SurveyRepository : DataRepository<ISurveyDbContext, Domain.Models.Survey>,
         ISurveyDomainRepository,
@@ -79,5 +81,23 @@
                 .Select(x => x.Survey)
                     .AsQueryable())
                .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<SurveyTypeOutputModel>> SearchSurveyTypes(
+           CancellationToken cancellationToken = default)
+           => await this.mapper
+               .ProjectTo<SurveyTypeOutputModel>(this
+                    .Data
+                    .SurveyTypes
+                    .AsQueryable())
+               .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<QuestionTypeOutputModel>> SearchQuestionTypes(
+          CancellationToken cancellationToken = default)
+          => await this.mapper
+              .ProjectTo<QuestionTypeOutputModel>(this
+                   .Data
+                   .QuestionTypes
+                   .AsQueryable())
+              .ToListAsync(cancellationToken);
     }
 }

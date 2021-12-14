@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Oxygen.Survey.Application.Queries.Common;
-using Oxygen.Survey.Application.Queries.Mine;
-using Oxygen.Survey.Application.Survey.Commands.Create;
-using Oxygen.Survey.Application.UserSurveys.Commands.Create;
-using Oxygen.Web.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Oxygen.Survey.Web.Controllers
+﻿namespace Oxygen.Survey.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Oxygen.Survey.Application.Queries.Common;
+    using Oxygen.Survey.Application.Queries.Mine;
+    using Oxygen.Survey.Application.QuestionType.Queries.Common;
+    using Oxygen.Survey.Application.QuestionType.Queries.Search;
+    using Oxygen.Survey.Application.Survey.Commands.Create;
+    using Oxygen.Survey.Application.SurveyType.Queries.Common;
+    using Oxygen.Survey.Application.SurveyType.Queries.Search;
+    using Oxygen.Survey.Application.UserSurveys.Commands.Create;
+    using Oxygen.Web.Common;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class SurveyController : ApiController
     {
         [HttpGet]
@@ -42,5 +46,17 @@ namespace Oxygen.Survey.Web.Controllers
         public async Task<ActionResult<IEnumerable<CreateUsersSurveysCommand>>> UserSurveys(
            [FromQuery] CreateUsersSurveysCommand command)
            => await this.Send(command);
+
+        [HttpGet]
+        [Route(nameof(GetSurveyTypes))]
+        public async Task<ActionResult<IEnumerable<SurveyTypeOutputModel>>> GetSurveyTypes(
+            [FromQuery] SearchSurveyTypesQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Route(nameof(GetQuestionTypes))]
+        public async Task<ActionResult<IEnumerable<QuestionTypeOutputModel>>> GetQuestionTypes(
+            [FromQuery] SearchQuestionTypesQuery query)
+            => await this.Send(query);
     }
 }

@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, resolveForwardRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, resolveForwardRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from 'ngx-strongly-typed-forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuestionType } from '../models/questionType.model';
 import { SurveyService } from '../survey.service';
-import { QuestionForm, QuestionItemForm } from './questionForm.model';
+import { Question } from '../models/question.model';
+import { QuestionItem } from '../models/questionItem.model';
 
 @Component({
   selector: 'app-survey-question',
@@ -13,9 +14,11 @@ import { QuestionForm, QuestionItemForm } from './questionForm.model';
 })
 export class QuestionComponent implements OnInit {
   @ViewChild('newQuestionItem') newQuestionItem:ElementRef;
-  questionForm: FormGroup<QuestionForm>;
+  questionForm: FormGroup<Question>;
   questionTypes: Array<QuestionType>;
-  questionItems: Array<QuestionItemForm> = [];
+  questionItems: Array<QuestionItem> = [];
+
+  @Output() addQuestionEventEmitter = new EventEmitter<Question>();
 
   constructor(
     private surveyService: SurveyService,
@@ -29,12 +32,19 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionForm = this.fb.group<QuestionForm>({
+    this.questionForm = this.fb.group<Question>({
+      id: [null],
+      survey: [null],
       description: ['', Validators.required],
       isRequired: [false, Validators.required],
       questionType: [null, Validators.required],
       questionItems: [null, Validators.required]
     })
+  }
+
+  addQuestion() {
+    var result = this.questionForm.value;
+    this.addQuestionEventEmitter.emit(result);
   }
 
   addOption() {
