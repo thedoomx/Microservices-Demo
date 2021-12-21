@@ -16,7 +16,7 @@ export class SurveyService {
   constructor(private http: HttpClient) { }
 
   createSurvey(survey: Survey): Observable<Survey> {
-    return this.http.put<Survey>(this.surveyPath, survey);
+    return this.http.post<Survey>(this.surveyPathWithoutSlash, survey);
   }
 
   getSurveyTypes(): Observable<Array<SurveyType>> {

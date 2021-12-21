@@ -29,10 +29,9 @@
             return 5;
         }
 
-        [HttpGet]
-        [Route(nameof(Create))]
+        [HttpPost]
         public async Task<ActionResult<CreateSurveyOutputModel>> Create(
-            [FromQuery] CreateSurveyCommand command)
+            CreateSurveyCommand command)
             => await this.Send(command);
 
         [HttpGet]

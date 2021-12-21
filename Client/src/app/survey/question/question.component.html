@@ -24,7 +24,7 @@
                 <div class="form-group" id="questionItems">
                     <div *ngFor="let c of questionItems;let i = index" class="row mt-1">
                         <div class="col-md-8">
-                            <label>{{c}}</label>
+                            <label>{{c.description}}</label>
                         </div>
                         <div class="col-md-4">
                             <button (click)="removeOption(i)" class="btn btn-primary">Remove</button>

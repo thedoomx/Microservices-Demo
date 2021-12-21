@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-10"></div>
         <div class="col-lg-10">
-            <form [formGroup]="surveyForm">
+            <form [formGroup]="surveyForm"  (ngSubmit)="onClickSubmit()">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" formControlName="name">
@@ -26,7 +26,7 @@
                                 <label>{{c.description}}</label>
                             </div>
                             <div class="col-md-4">
-                                <button (click)="removeQuestion(i)">Remove</button>
+                                <button (click)="removeQuestion(i)" class="btn btn-primary">Remove</button>
                             </div>
                         </div>
 
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="btn-toolbar">
-                    <button (click)="createQuestionForm()" class="btn btn-primary mr-2">Add Question</button>
+                    <button type="button" (click)="createQuestionForm()" class="btn btn-primary mr-2">Add Question</button>
                     
                     <button type="submit" class="btn btn-primary" [disabled]="surveyForm.invalid">Submit</button>
                 </div>
@@ -52,7 +52,7 @@
             <h4 class="modal-title">Add new question</h4>
           </div>
           <div class="modal-body">
-                <app-survey-question (addQuestionEventEmitter)="addQuestion($event)"></app-survey-question>
+                <app-survey-question *ngIf="showQuestionModal" (addQuestionEventEmitter)="addQuestion($event)"></app-survey-question>
           </div>
         </div>
       </div>

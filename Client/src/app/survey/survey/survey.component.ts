@@ -21,6 +21,7 @@ export class SurveyComponent implements OnInit {
     questions: Array<Question> = [];
 
     @ViewChild('documentFormModal') myModal;
+    showQuestionModal: boolean;
 
     constructor(
         private surveyService: SurveyService,
@@ -35,7 +36,6 @@ export class SurveyComponent implements OnInit {
 
     ngOnInit(): void {
         this.surveyForm = this.fb.group<Survey>({
-            id: [null],
             name: ['', Validators.required],
             summary: ['', Validators.required],
             surveyType: [null, Validators.required],
@@ -43,16 +43,27 @@ export class SurveyComponent implements OnInit {
         })
     }
 
-    onClickSubmit(data) {
-        debugger;
+    onClickSubmit() {
+        var survey = this.surveyForm.value;
+        this.surveyService.createSurvey(survey).subscribe((res) => {
+            debugger;
+
+        });
     }
 
     createQuestionForm() {
         $("#documentFormModal").modal('show');
+        this.showQuestionModal = true;
     }
 
     addQuestion(question: Question) {
         this.questions.push(question);
+        this.surveyForm.patchValue({
+            questions: this.questions,
+        });
+
+        $("#documentFormModal").modal('hide');
+        this.showQuestionModal = false;
     }
 
     removeQuestion(index: number) {

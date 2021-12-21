@@ -35,8 +35,6 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.questionForm = this.fb.group<Question>({
-      id: [null],
-      survey: [null],
       description: ['', Validators.required],
       isRequired: [false, Validators.required],
       questionType: [null, Validators.required],
@@ -51,8 +49,12 @@ export class QuestionComponent implements OnInit {
 
   addOption() {
     const valueInput = this.newQuestionItem.nativeElement.value;
-    
-    this.questionItems.push(valueInput);
+
+    let questionItem: QuestionItem = {
+      description: valueInput
+    };
+
+    this.questionItems.push(questionItem);
     this.questionForm.patchValue({
       questionItems: this.questionItems,
     });
