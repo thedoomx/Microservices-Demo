@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Oxygen.Watchdog/Oxygen.Watchdog.csproj", "Oxygen.Watchdog/"]
 COPY ["Oxygen.Startup.Common/Oxygen.Startup.Common.csproj", "Oxygen.Startup.Common/"]
-COPY ["Ogyxen.Common/Ogyxen.Common.csproj", "Ogyxen.Common/"]
+COPY ["Oxygen.Common/Oxygen.Common.csproj", "Oxygen.Common/"]
 COPY ["Oxygen.Infrastructure.Common/Oxygen.Infrastructure.Common.csproj", "Oxygen.Infrastructure.Common/"]
 COPY ["Oxygen.Domain.Common/Oxygen.Domain.Common.csproj", "Oxygen.Domain.Common/"]
 COPY ["Oxygen.Application.Common/Oxygen.Application.Common.csproj", "Oxygen.Application.Common/"]

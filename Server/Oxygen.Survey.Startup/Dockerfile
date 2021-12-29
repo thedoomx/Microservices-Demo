@@ -9,7 +9,7 @@ COPY ["Oxygen.Survey.Startup/Oxygen.Survey.Startup.csproj", "Oxygen.Survey.Start
 COPY ["Oxygen.Survey.Application/Oxygen.Survey.Application.csproj", "Oxygen.Survey.Application/"]
 COPY ["Oxygen.Survey.Domain/Oxygen.Survey.Domain.csproj", "Oxygen.Survey.Domain/"]
 COPY ["Oxygen.Domain.Common/Oxygen.Domain.Common.csproj", "Oxygen.Domain.Common/"]
-COPY ["Ogyxen.Common/Ogyxen.Common.csproj", "Ogyxen.Common/"]
+COPY ["Oxygen.Common/Oxygen.Common.csproj", "Oxygen.Common/"]
 COPY ["Oxygen.Infrastructure.Common/Oxygen.Infrastructure.Common.csproj", "Oxygen.Infrastructure.Common/"]
 COPY ["Oxygen.Application.Common/Oxygen.Application.Common.csproj", "Oxygen.Application.Common/"]
 COPY ["Oxygen.Survey.Infrastructure/Oxygen.Survey.Infrastructure.csproj", "Oxygen.Survey.Infrastructure/"]

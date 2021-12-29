@@ -39,8 +39,12 @@ services:
             - "5000:80"
         env_file: Server/Oxygen.Common/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OxygenIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=OxygenIdentityCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
             - IdentitySettings__AdminPassword=adminpass12!
+            - MessageQueueSettings__Host=rabbitmq
+            - MessageQueueSettings__UserName=rabbitmquser
+            - MessageQueueSettings__Password=rabbitmqPassword12!
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
@@ -48,122 +52,122 @@ services:
             - oxygen-network
         depends_on:
             - data
-            
+        
     survey:
-        container_name: survey
-        image: thedoomx/oxygen-survey-service
-        build:
-            context: ./Server
-            dockerfile: ./Oxygen.Survey.Startup/Dockerfile
-        ports: 
-            - "5002:80"
-        env_file: 
-            - Server/Oxygen.Common/Common.env
-        environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OxygenSurveyDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=OxygenSurveyCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmquser
-            - MessageQueueSettings__Password=rabbitmqPassword12!
-        restart: on-failure
-        volumes:
-            - data-protection:/root/.aspnet/DataProtection-Keys
-        networks: 
-            - oxygen-network
-        depends_on:
-            - data
-            - messages
-            
+         container_name: survey
+         image: thedoomx/oxygen-survey-service
+         build:
+             context: ./Server
+             dockerfile: ./Oxygen.Survey.Startup/Dockerfile
+         ports: 
+             - "5002:80"
+         env_file: 
+             - Server/Oxygen.Common/Common.env
+         environment:
+             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OxygenSurveyDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+             - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=OxygenSurveyCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+             - MessageQueueSettings__Host=rabbitmq
+             - MessageQueueSettings__UserName=rabbitmquser
+             - MessageQueueSettings__Password=rabbitmqPassword12!
+         restart: on-failure
+         volumes:
+             - data-protection:/root/.aspnet/DataProtection-Keys
+         networks: 
+             - oxygen-network
+         depends_on:
+             - data
+             - messages
+             
     company:
-        container_name: company
-        image: thedoomx/oxygen-company-service
-        build:
-            context: ./Server
-            dockerfile: ./Oxygen.Company.Startup/Dockerfile
-        ports: 
-            - "5004:80"
-        env_file: 
-            - Server/Oxygen.Common/Common.env
-        environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OxygenCompanyDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=OxygenCompanyCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmquser
-            - MessageQueueSettings__Password=rabbitmqPassword12!
-        restart: on-failure
-        volumes:
-            - data-protection:/root/.aspnet/DataProtection-Keys
-        networks: 
-            - oxygen-network
-        depends_on:
-            - data
-            - messages
-            
+         container_name: company
+         image: thedoomx/oxygen-company-service
+         build:
+             context: ./Server
+             dockerfile: ./Oxygen.Company.Startup/Dockerfile
+         ports: 
+             - "5004:80"
+         env_file: 
+             - Server/Oxygen.Common/Common.env
+         environment:
+             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=OxygenCompanyDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+             - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=OxygenCompanyCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+             - MessageQueueSettings__Host=rabbitmq
+             - MessageQueueSettings__UserName=rabbitmquser
+             - MessageQueueSettings__Password=rabbitmqPassword12!
+         restart: on-failure
+         volumes:
+             - data-protection:/root/.aspnet/DataProtection-Keys
+         networks: 
+             - oxygen-network
+         depends_on:
+             - data
+             - messages
+             
     notifications:
-        container_name: notifications
-        image: thedoomx/oxygen-notifications-service
-        build:
-            context: ./Server
-            dockerfile: ./Oxygen.Notifications/Dockerfile
-        ports: 
-            - "5006:80"
-        env_file: 
-            - Server/Oxygen.Common/Common.env
-        environment:
-            - NotificationSettings__AllowedOrigins=http://localhost
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmquser
-            - MessageQueueSettings__Password=rabbitmqPassword12!
-        restart: on-failure
-        volumes:
-            - data-protection:/root/.aspnet/DataProtection-Keys
-        networks: 
-            - oxygen-network
-        depends_on:
-            - messages
-
+         container_name: notifications
+         image: thedoomx/oxygen-notifications-service
+         build:
+             context: ./Server
+             dockerfile: ./Oxygen.Notifications/Dockerfile
+         ports: 
+             - "5006:80"
+         env_file: 
+             - Server/Oxygen.Common/Common.env
+         environment:
+             - NotificationSettings__AllowedOrigins=http://localhost
+             - MessageQueueSettings__Host=rabbitmq
+             - MessageQueueSettings__UserName=rabbitmquser
+             - MessageQueueSettings__Password=rabbitmqPassword12!
+         restart: on-failure
+         volumes:
+             - data-protection:/root/.aspnet/DataProtection-Keys
+         networks: 
+             - oxygen-network
+         depends_on:
+             - messages
+             
     client:
-        container_name: client
-        image: thedoomx/oxygen-user-client
-        build:
-            context: ./Client
-            dockerfile: ./Dockerfile
-            args:
-                configuration: local
-        ports: 
-            - "80:80"
-        restart: on-failure
-        depends_on:
-            - identity
-            - survey
-            - company
-            - notifications
-            
+         container_name: client
+         image: thedoomx/oxygen-user-client
+         build:
+             context: ./Client
+             dockerfile: ./Dockerfile
+             args:
+                 configuration: local
+         ports: 
+             - "80:80"
+         restart: on-failure
+         depends_on:
+             - identity
+             - survey
+             - company
+             - notifications
+             
     watchdog:
-        container_name: watchdog
-        image: thedoomx/oxygen-watchdog-service
-        build:
-            context: ./Server
-            dockerfile: ./oxygen.Watchdog/Dockerfile
-        ports: 
-            - "5008:80"
-        environment:
-            - HealthChecks-UI__HealthChecks__0__Name=Identity
-            - HealthChecks-UI__HealthChecks__0__Uri=http://identity/health
-            - HealthChecks-UI__HealthChecks__1__Name=Company
-            - HealthChecks-UI__HealthChecks__1__Uri=http://company//health
-            - HealthChecks-UI__HealthChecks__2__Name=Statistics
-            - HealthChecks-UI__HealthChecks__2__Uri=http://survey/health
-            - HealthChecks-UI__HealthChecks__3__Name=Notifications
-            - HealthChecks-UI__HealthChecks__3__Uri=http://notifications/health
-        restart: on-failure
-        networks: 
-            - oxygen-network
-        depends_on:
-            - identity
-            - survey
-            - company
-            - notifications
+         container_name: watchdog
+         image: thedoomx/oxygen-watchdog-service
+         build:
+             context: ./Server
+             dockerfile: ./oxygen.Watchdog/Dockerfile
+         ports: 
+             - "5008:80"
+         environment:
+             - HealthChecks-UI__HealthChecks__0__Name=Identity
+             - HealthChecks-UI__HealthChecks__0__Uri=http://identity/health
+             - HealthChecks-UI__HealthChecks__1__Name=Company
+             - HealthChecks-UI__HealthChecks__1__Uri=http://company//health
+             - HealthChecks-UI__HealthChecks__2__Name=Statistics
+             - HealthChecks-UI__HealthChecks__2__Uri=http://survey/health
+             - HealthChecks-UI__HealthChecks__3__Name=Notifications
+             - HealthChecks-UI__HealthChecks__3__Uri=http://notifications/health
+         restart: on-failure
+         networks: 
+             - oxygen-network
+         depends_on:
+             - identity
+             - survey
+             - company
+             - notifications
 
 networks:
     oxygen-network:

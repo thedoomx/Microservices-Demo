@@ -71,7 +71,9 @@
             services.AddTransient<IMessageService, MessageService>();
 
             var messageQueueSettings = MessageQueueSettingsHelper.GetMessageQueueSettings(configuration);
+#if (DEBUG)
             messageQueueSettings = new MessageQueueSettings("localhost", "", "");
+#endif
 
             services
                 .AddMassTransit(mt =>

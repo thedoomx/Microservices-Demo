@@ -9,7 +9,7 @@ COPY ["Oxygen.Identity.Startup/Oxygen.Identity.Startup.csproj", "Oxygen.Identity
 COPY ["Oxygen.Identity.Web/Oxygen.Identity.Web.csproj", "Oxygen.Identity.Web/"]
 COPY ["Oxygen.Identity.Application/Oxygen.Identity.Application.csproj", "Oxygen.Identity.Application/"]
 COPY ["Oxygen.Application.Common/Oxygen.Application.Common.csproj", "Oxygen.Application.Common/"]
-COPY ["Ogyxen.Common/Ogyxen.Common.csproj", "Ogyxen.Common/"]
+COPY ["Oxygen.Common/Oxygen.Common.csproj", "Oxygen.Common/"]
 COPY ["Oxygen.Domain.Common/Oxygen.Domain.Common.csproj", "Oxygen.Domain.Common/"]
 COPY ["Oxygen.Identity.Domain/Oxygen.Identity.Domain.csproj", "Oxygen.Identity.Domain/"]
 COPY ["Oxygen.Web.Common/Oxygen.Web.Common.csproj", "Oxygen.Web.Common/"]

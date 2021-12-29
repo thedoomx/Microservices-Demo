@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["Oxygen.Company.Startup/Oxygen.Company.Startup.csproj", "Oxygen.Company.Startup/"]
 COPY ["Oxygen.Company.Domain/Oxygen.Company.Domain.csproj", "Oxygen.Company.Domain/"]
 COPY ["Oxygen.Domain.Common/Oxygen.Domain.Common.csproj", "Oxygen.Domain.Common/"]
-COPY ["Ogyxen.Common/Ogyxen.Common.csproj", "Ogyxen.Common/"]
+COPY ["Oxygen.Common/Oxygen.Common.csproj", "Oxygen.Common/"]
 COPY ["Oxygen.Company.Web/Oxygen.Company.Web.csproj", "Oxygen.Company.Web/"]
 COPY ["Oxygen.Company.Application/Oxygen.Company.Application.csproj", "Oxygen.Company.Application/"]
 COPY ["Oxygen.Application.Common/Oxygen.Application.Common.csproj", "Oxygen.Application.Common/"]
