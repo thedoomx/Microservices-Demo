@@ -10,9 +10,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Ogyxen.Application.Common;
-    using Ogyxen.Common.Extensions;
-    using Oxygen.Application.Common;
+	using Oxygen.Application.Common;
+    using Oxygen.Common.Extensions;
     using Oxygen.Identity.Application;
     using Oxygen.Identity.Infrastructure.Persistence;
     using Oxygen.Infrastructure.Common.Events;

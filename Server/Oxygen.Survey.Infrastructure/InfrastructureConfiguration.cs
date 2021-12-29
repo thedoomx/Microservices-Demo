@@ -16,8 +16,7 @@
     using MassTransit;
     using Microsoft.Data.SqlClient;
     using Oxygen.Infrastructure.Common.Services;
-    using Ogyxen.Application.Common;
-    using Ogyxen.Common.Extensions;
+    using Oxygen.Common.Extensions;
     using Oxygen.Application.Common;
     using Oxygen.Infrastructure.Common.Messages;
 

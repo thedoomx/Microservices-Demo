@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ogyxen.Common\Ogyxen.Common.csproj" />
+    <ProjectReference Include="..\Ogyxen.Common\Oxygen.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Web.Common\Oxygen.Web.Common.csproj" />
   </ItemGroup>

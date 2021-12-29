@@ -1,4 +1,4 @@
-﻿namespace Ogyxen.Common.Extensions
+﻿namespace Oxygen.Common.Extensions
 {
     using System.Security.Claims;
     using static Oxygen.Common.Constants.GlobalConstants;

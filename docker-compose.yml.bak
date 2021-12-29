@@ -104,11 +104,11 @@ services:
         image: thedoomx/oxygen-notifications-service
         build:
             context: ./Server
-            dockerfile: ./Oxygen.Notifications/Dockerfile
+            dockerfile: ./oxygen.Notifications/Dockerfile
         ports: 
             - "5006:80"
         env_file: 
-            - Server/Oxygen.Common/Common.env
+            - Server/oxygen.common/Common.env
         environment:
             - NotificationSettings__AllowedOrigins=http://localhost
             - MessageQueueSettings__Host=rabbitmq

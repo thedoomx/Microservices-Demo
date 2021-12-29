@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   identityApiUrl: 'http://localhost:5000/',
-  surveyApiUrl: 'https://localhost:5003/',
+  surveyApiUrl: 'https://localhost:5002/',
   companyApiUrl: 'http://localhost:5004/',
   notificationsUrl: 'http://localhost:5006/',
   statisticsApiUrl: '',

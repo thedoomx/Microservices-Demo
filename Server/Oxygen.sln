@@ -63,7 +63,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Company.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Startup.Common", "Oxygen.Startup.Common\Oxygen.Startup.Common.csproj", "{ABD5527B-3A82-4363-8EDA-3ACCE68E50B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ogyxen.Common", "Ogyxen.Common\Ogyxen.Common.csproj", "{614FD768-79F9-4053-B356-2ABC73E38A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oxygen.Common", "Ogyxen.Common\Oxygen.Common.csproj", "{614FD768-79F9-4053-B356-2ABC73E38A6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

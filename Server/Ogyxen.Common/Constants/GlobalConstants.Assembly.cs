@@ -1,4 +1,4 @@
-﻿namespace Ogyxen.Common.Constants
+﻿namespace Oxygen.Common.Constants
 {
     public partial class GlobalConstants
     {

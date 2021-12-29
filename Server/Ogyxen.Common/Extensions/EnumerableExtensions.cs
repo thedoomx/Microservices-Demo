@@ -1,4 +1,4 @@
-﻿namespace Ogyxen.Common.Extensions
+﻿namespace Oxygen.Common.Extensions
 {
     using System;
     using System.Collections.Generic;

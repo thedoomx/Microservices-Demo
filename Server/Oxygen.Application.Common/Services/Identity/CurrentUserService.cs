@@ -3,7 +3,7 @@
     using System;
     using System.Security.Claims;
     using Microsoft.AspNetCore.Http;
-    using Ogyxen.Common.Extensions;
+    using Oxygen.Common.Extensions;
 
     public class CurrentUserService : ICurrentUserService
     {

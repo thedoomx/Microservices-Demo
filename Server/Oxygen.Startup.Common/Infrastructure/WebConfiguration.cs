@@ -8,10 +8,8 @@
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Services.Identity;
     using System.Text;
-    using Ogyxen.Common.Extensions;
-    using Ogyxen.Application.Common;
+    using Oxygen.Common.Extensions;
     using Microsoft.IdentityModel.Tokens;
-    using Microsoft.AspNetCore.Mvc.Controllers;
 
     public static class WebConfiguration
     {
