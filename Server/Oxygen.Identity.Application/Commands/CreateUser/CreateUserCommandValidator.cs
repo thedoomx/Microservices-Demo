@@ -18,11 +18,6 @@
                 .MaximumLength(MaxPasswordLength)
                 .NotEmpty();
 
-            this.RuleFor(u => u.Name)
-                .MinimumLength(MinNameLength)
-                .MaximumLength(MaxNameLength)
-                .NotEmpty();
-
             this.RuleFor(u => u.FirstName)
                 .MinimumLength(MinNameLength)
                 .MaximumLength(MaxNameLength)

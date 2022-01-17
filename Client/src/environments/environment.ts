@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  identityApiUrl: 'http://localhost:5001/',
-  dealersApiUrl: 'http://localhost:5002/',
-  statisticsApiUrl: 'http://localhost:5003/',
-  notificationsUrl: 'http://localhost:5004/'
+  identityApiUrl: 'http://localhost:5000/',
+  surveyApiUrl: 'https://localhost:5002/',
+  companyApiUrl: 'http://localhost:5004/',
+  notificationsUrl: 'http://localhost:5006/',
+  statisticsApiUrl: '',
+  dealersApiUrl: '',
 };
 
 /*

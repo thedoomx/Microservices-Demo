@@ -19,7 +19,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 5001
+  - port: 5000
     targetPort: 80
   selector:
     web-service: identity
@@ -49,7 +49,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: identity-service
-        image: ivaylokenov/carrentalsystem-identity-service:latest
+        image: thedoomx/oxygen-identity-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -73,11 +73,31 @@ spec:
             secretKeyRef:
               name: environment-secrets
               key: identity-service-connection-string
+        - name: ConnectionStrings__CronJobsConnection
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: identity-service-cron-jobs-connection-string
         - name: IdentitySettings__AdminPassword
           valueFrom:
             secretKeyRef:
               name: environment-secrets
               key: admin-password
+        - name: MessageQueueSettings__Host
+          valueFrom:
+            configMapKeyRef:
+              name: environment-settings
+              key: event-bus-host
+        - name: MessageQueueSettings__UserName
+          valueFrom:
+            configMapKeyRef:
+              name: environment-settings
+              key: event-bus-user
+        - name: MessageQueueSettings__Password
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: event-bus-password
         volumeMounts:
         - name: identity-service-data
           mountPath: /root/.aspnet/DataProtection-Keys

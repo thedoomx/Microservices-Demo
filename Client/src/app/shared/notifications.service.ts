@@ -30,6 +30,7 @@ export class NotificationsService {
             .catch(err => console.log('Error while starting connection: ' + err));
 
         this.hubConnection.on('ReceiveNotification', (data) => {
+            debugger;
             console.log(data);
             this.toastr.success(`${data.manufacturer} ${data.model} for just $${data.pricePerDay}!!!`, "New Car!");
         });

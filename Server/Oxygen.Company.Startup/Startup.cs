@@ -5,7 +5,7 @@ namespace Oxygen.Company.Startup
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Ogyxen.Common.Constants;
+    using Oxygen.Common.Constants;
     using Oxygen.Application.Common;
     using Oxygen.Domain.Common;
     using Oxygen.Startup.Common;

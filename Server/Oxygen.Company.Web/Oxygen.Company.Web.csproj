@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Oxygen.Company.Application\Oxygen.Company.Application.csproj" />
+    <ProjectReference Include="..\Oxygen.Web.Common\Oxygen.Web.Common.csproj" />
   </ItemGroup>
 
 </Project>

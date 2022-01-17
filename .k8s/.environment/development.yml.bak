@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environment-settings
+data:
+  seed-initial-data: "True"
+  event-bus-host: event-bus
+  event-bus-user: rabbitmquser
+  notifications-allowed-origins: http://localhost
+  watchdog-identity-health: http://identity-service:5001/health
+  watchdog-survey-health: http://survey-service:5002/health
+  watchdog-company-health: http://comapny-service:5003/health
+  watchdog-notifications-health: http://notifications-service:5004/health
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: environment-secrets
+data:
+  identity-database-sa-password: aWRlbnRpdHlEYXRhYmFzZVBhc3N3b3JkMTIhQA==
+  survey-database-sa-password: c3VydmV5RGF0YWJhc2VQYXNzd29yZDEyIUA=
+  company-database-sa-password: Y29tcGFueURhdGFiYXNlUGFzc3dvcmQxMiFA
+  security-token-secret: TElVTElOIEMxVDEgRDNWM0xPUE0zTlQgQU5EIFNUVUZGIQ==
+  admin-password: YWRtaW5wYXNzMTIh
+  identity-service-connection-string: U2VydmVyPWlkZW50aXR5LWRhdGFiYXNlO0RhdGFiYXNlPU94eWdlbklkZW50aXR5RGF0YWJhc2U7VXNlciBJZD1zYTtQYXNzd29yZD1pZGVudGl0eURhdGFiYXNlUGFzc3dvcmQxMiFAO011bHRpcGxlQWN0aXZlUmVzdWx0U2V0cz10cnVl
+  identity-service-cron-jobs-connection-string: U2VydmVyPWlkZW50aXR5LWRhdGFiYXNlO0RhdGFiYXNlPU94eWdlbklkZW50aXR5Q3JvbkpvYnNEYXRhYmFzZTtVc2VyIElkPXNhO1Bhc3N3b3JkPWlkZW50aXR5RGF0YWJhc2VQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  survey-service-connection-string: U2VydmVyPXN1cnZleS1kYXRhYmFzZTtEYXRhYmFzZT1PeHlnZW5TdXJ2ZXlEYXRhYmFzZTtVc2VyIElkPXNhO1Bhc3N3b3JkPXN1cnZleURhdGFiYXNlUGFzc3dvcmQxMiFAO011bHRpcGxlQWN0aXZlUmVzdWx0U2V0cz10cnVl
+  survey-service-cron-jobs-connection-string: U2VydmVyPXN1cnZleS1kYXRhYmFzZTtEYXRhYmFzZT1PeHlnZW5TdXJ2ZXlDcm9uSm9ic0RhdGFiYXNlO1VzZXIgSWQ9c2E7UGFzc3dvcmQ9c3VydmV5RGF0YWJhc2VQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  company-service-connection-string: U2VydmVyPWNvbXBhbnktZGF0YWJhc2U7RGF0YWJhc2U9T3h5Z2VuQ29tcGFueURhdGFiYXNlO1VzZXIgSWQ9c2E7UGFzc3dvcmQ9Y29tcGFueURhdGFiYXNlUGFzc3dvcmQxMiFAO011bHRpcGxlQWN0aXZlUmVzdWx0U2V0cz10cnVl
+  company-service-cron-jobs-connection-string: U2VydmVyPWNvbXBhbnktZGF0YWJhc2U7RGF0YWJhc2U9T3h5Z2VuQ29tcGFueUNyb25Kb2JzRGF0YWJhc2U7VXNlciBJZD1zYTtQYXNzd29yZD1jb21wYW55RGF0YWJhc2VQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  event-bus-password: cmFiYml0bXFQYXNzd29yZDEyIQ==

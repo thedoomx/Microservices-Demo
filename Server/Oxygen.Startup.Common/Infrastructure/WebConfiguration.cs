@@ -8,8 +8,7 @@
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Services.Identity;
     using System.Text;
-    using Ogyxen.Common.Extensions;
-    using Ogyxen.Application.Common;
+    using Oxygen.Common.Extensions;
     using Microsoft.IdentityModel.Tokens;
 
     public static class WebConfiguration
@@ -28,7 +27,7 @@
                 .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
                 .AddControllers()
                 .AddFluentValidation(validation => validation
-                    .RegisterValidatorsFromAssemblyContaining<Result>())
+                .RegisterValidatorsFromAssemblyContaining<Result>())
                 .AddNewtonsoftJson();
 
             services.Configure<ApiBehaviorOptions>(options =>

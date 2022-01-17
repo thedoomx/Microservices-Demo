@@ -10,9 +10,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Ogyxen.Application.Common;
-    using Ogyxen.Common.Extensions;
-    using Oxygen.Application.Common;
+	using Oxygen.Application.Common;
+    using Oxygen.Common.Extensions;
     using Oxygen.Identity.Application;
     using Oxygen.Identity.Infrastructure.Persistence;
     using Oxygen.Infrastructure.Common.Events;
@@ -63,31 +62,6 @@
                 })
                 .AddEntityFrameworkStores<MyIdentityDbContext>();
 
-            //var secret = configuration
-            //    .GetSection(nameof(ApplicationSettings))
-            //    .GetValue<string>(nameof(ApplicationSettings.Secret));
-
-            //var key = Encoding.ASCII.GetBytes(secret);
-
-            //services
-            //    .AddAuthentication(authentication =>
-            //    {
-            //        authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    })
-            //    .AddJwtBearer(bearer =>
-            //    {
-            //        bearer.RequireHttpsMetadata = false;
-            //        bearer.SaveToken = true;
-            //        bearer.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(key),
-            //            ValidateIssuer = false,
-            //            ValidateAudience = false
-            //        };
-            //    });
-
             services.AddTransient<IIdentity, IdentityService>();
             services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
 
@@ -104,7 +78,9 @@
             services.AddTransient<IMessageService, MessageService>();
 
             var messageQueueSettings = MessageQueueSettingsHelper.GetMessageQueueSettings(configuration);
+#if (DEBUG)
             messageQueueSettings = new MessageQueueSettings("localhost", "", "");
+#endif
 
             services
                 .AddMassTransit(mt =>

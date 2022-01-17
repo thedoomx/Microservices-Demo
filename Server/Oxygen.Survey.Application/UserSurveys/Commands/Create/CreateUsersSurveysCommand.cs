@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
-    using Common;
     using MediatR;
     using Oxygen.Application.Common;
     using Oxygen.Application.Common.Services.Identity;

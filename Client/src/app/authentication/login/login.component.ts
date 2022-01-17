@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   @Output() emitter: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router,private routerService: RouterExtService) { 
-    if(localStorage.getItem('token')) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private routerService: RouterExtService) {
+    if (localStorage.getItem('token')) {
       this.router.navigate(['cars'])
     }
   }
@@ -33,14 +33,17 @@ export class LoginComponent implements OnInit {
   login() {
     this.authenticationService.login(this.loginForm.value).subscribe(res => {
       this.authenticationService.setToken(res['token']);
+      
+      this.router.navigate(['']).then(() => {
+        window.location.reload();
+      });
+      // this.authenticationService.getDealerId().subscribe(res => {
+      //   this.authenticationService.setId(res);
 
-      this.authenticationService.getDealerId().subscribe(res => {
-        this.authenticationService.setId(res);
-
-        this.router.navigate(['']).then(() => {
-          window.location.reload();
-        });
-      })
+      //   this.router.navigate(['']).then(() => {
+      //     window.location.reload();
+      //   });
+      // })
     })
   }
 }

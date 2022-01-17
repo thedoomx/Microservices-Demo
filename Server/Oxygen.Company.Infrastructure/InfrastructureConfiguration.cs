@@ -13,8 +13,7 @@
     using Oxygen.Infrastructure.Common.Services;
     using Oxygen.Application.Common;
     using Oxygen.Infrastructure.Common.Messages;
-    using Ogyxen.Common.Extensions;
-    using Ogyxen.Application.Common;
+    using Oxygen.Common.Extensions;
     using GreenPipes;
     using Hangfire;
     using Hangfire.SqlServer;
@@ -72,7 +71,9 @@
             services.AddTransient<IMessageService, MessageService>();
 
             var messageQueueSettings = MessageQueueSettingsHelper.GetMessageQueueSettings(configuration);
+#if (DEBUG)
             messageQueueSettings = new MessageQueueSettings("localhost", "", "");
+#endif
 
             services
                 .AddMassTransit(mt =>

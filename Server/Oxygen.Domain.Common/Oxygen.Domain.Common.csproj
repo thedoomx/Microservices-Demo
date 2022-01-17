@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ogyxen.Common\Ogyxen.Common.csproj" />
+    <ProjectReference Include="..\Ogyxen.Common\Oxygen.Common.csproj" />
   </ItemGroup>
 
 </Project>

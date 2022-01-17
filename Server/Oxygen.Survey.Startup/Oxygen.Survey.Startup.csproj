@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>c9d02047-0bbf-4918-8630-aa7c8b18de7d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,10 +11,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Oxygen.Application.Common\Oxygen.Application.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Common\Oxygen.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Startup.Common\Oxygen.Startup.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Survey.Application\Oxygen.Survey.Application.csproj" />
