@@ -8,9 +8,9 @@ data:
   event-bus-user: rabbitmquser
   notifications-allowed-origins: http://localhost
   watchdog-identity-health: http://identity-service:5001/health
-  watchdog-survey-health: http://survey-service:5003/health
-  watchdog-company-health: http://company-service:5005/health
-  watchdog-notifications-health: http://notifications-service:5007/health
+  watchdog-survey-health: http://survey-service:5002/health
+  watchdog-company-health: http://comapny-service:5003/health
+  watchdog-notifications-health: http://notifications-service:5004/health
 ---
 
 apiVersion: v1

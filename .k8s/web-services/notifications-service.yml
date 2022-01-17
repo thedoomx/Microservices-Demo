@@ -19,7 +19,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 5004
+  - port: 5006
     targetPort: 80
   selector:
     web-service: notifications
@@ -49,7 +49,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: notifications-service
-        image: ivaylokenov/carrentalsystem-notifications-service:latest
+        image: thedoomx/oxygen-notifications-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

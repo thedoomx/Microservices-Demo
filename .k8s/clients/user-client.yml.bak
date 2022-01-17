@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: user-client
-        image: thedoomx/oxygen-user-client:latest
+        image: thedoomx/oxygen-user-client
         imagePullPolicy: Always
         ports:
         - containerPort: 80

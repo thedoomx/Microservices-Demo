@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: statistics-database-data
+  name: survey-database-data
 spec:
   accessModes:
   - ReadWriteOnce
@@ -14,37 +14,37 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: statistics-database
+  name: survey-database
 spec:
   clusterIP: None
   ports:
   - port: 1433
     targetPort: 1433
   selector:
-    database: statistics
+    database: survey
 
 ---
 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: statistics-database
+  name: survey-database
 spec:
-  serviceName: statistics-database
+  serviceName: survey-database
   selector:
     matchLabels: 
-      database: statistics
+      database: survey
   template:
     metadata:
       labels:
-        database: statistics
+        database: survey
         system: database
     spec:
       terminationGracePeriodSeconds: 60
       securityContext:
         fsGroup: 10001
       containers:
-      - name: statistics-database
+      - name: survey-database
         image: mcr.microsoft.com/mssql/server:2019-latest
         imagePullPolicy: IfNotPresent
         ports:
@@ -60,12 +60,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: environment-secrets
-              key: statistics-database-sa-password
+              key: survey-database-sa-password
         volumeMounts:
-        - name: statistics-database-data
+        - name: survey-database-data
           mountPath: /var/opt/mssql
       volumes:
-      - name: statistics-database-data
+      - name: survey-database-data
         persistentVolumeClaim:
-          claimName: statistics-database-data
+          claimName: survey-database-data
     

@@ -73,31 +73,16 @@ spec:
             secretKeyRef:
               name: environment-secrets
               key: identity-service-connection-string
-        - name: ConnectionStrings__CronJobsConnection
+              - name: ConnectionStrings__CronJobsConnection
           valueFrom:
             secretKeyRef:
               name: environment-secrets
-              key: identity-service-cron-jobs-connection-string
+              key: identity-service-connection-string
         - name: IdentitySettings__AdminPassword
           valueFrom:
             secretKeyRef:
               name: environment-secrets
               key: admin-password
-        - name: MessageQueueSettings__Host
-          valueFrom:
-            configMapKeyRef:
-              name: environment-settings
-              key: event-bus-host
-        - name: MessageQueueSettings__UserName
-          valueFrom:
-            configMapKeyRef:
-              name: environment-settings
-              key: event-bus-user
-        - name: MessageQueueSettings__Password
-          valueFrom:
-            secretKeyRef:
-              name: environment-secrets
-              key: event-bus-password
         volumeMounts:
         - name: identity-service-data
           mountPath: /root/.aspnet/DataProtection-Keys

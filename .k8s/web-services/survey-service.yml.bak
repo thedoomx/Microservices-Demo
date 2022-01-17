@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: identity-service-data
+  name: survey-service-data
 spec:
   accessModes:
   - ReadWriteOnce
@@ -15,29 +15,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: identity-service
+  name: survey-service
 spec:
   type: LoadBalancer
   ports:
-  - port: 5000
+  - port: 5004
     targetPort: 80
   selector:
-    web-service: identity
+    web-service: survey
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: identity-service
+  name: survey-service
 spec:
   selector:
     matchLabels:
-      web-service: identity
+      web-service: survey
   template:
     metadata:
       labels:
-        web-service: identity
+        web-service: survey
         system: server
     spec:
       affinity:
@@ -45,11 +45,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchLabels:
-                web-service: identity
+                web-service: survey
             topologyKey: "kubernetes.io/hostname"
       containers:
-      - name: identity-service
-        image: thedoomx/oxygen-identity-service:latest
+      - name: survey-service
+        image: thedoomx/oxygen-survey-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -72,17 +72,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: environment-secrets
-              key: identity-service-connection-string
+              key: survey-service-connection-string
         - name: ConnectionStrings__CronJobsConnection
           valueFrom:
             secretKeyRef:
               name: environment-secrets
-              key: identity-service-cron-jobs-connection-string
-        - name: IdentitySettings__AdminPassword
-          valueFrom:
-            secretKeyRef:
-              name: environment-secrets
-              key: admin-password
+              key: survey-service-cron-jobs-connection-string
         - name: MessageQueueSettings__Host
           valueFrom:
             configMapKeyRef:
@@ -99,9 +94,9 @@ spec:
               name: environment-secrets
               key: event-bus-password
         volumeMounts:
-        - name: identity-service-data
+        - name: survey-service-data
           mountPath: /root/.aspnet/DataProtection-Keys
       volumes:
-      - name: identity-service-data
+      - name: survey-service-data
         persistentVolumeClaim:
-          claimName: identity-service-data
+          claimName: survey-service-data

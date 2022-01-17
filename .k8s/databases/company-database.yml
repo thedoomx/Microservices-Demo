@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dealers-database-data
+  name: company-database-data
 spec:
   accessModes:
   - ReadWriteOnce
@@ -14,37 +14,37 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dealers-database
+  name: company-database
 spec:
   clusterIP: None
   ports:
   - port: 1433
     targetPort: 1433
   selector:
-    database: dealers
+    database: company
 
 ---
 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: dealers-database
+  name: company-database
 spec:
-  serviceName: dealers-database
+  serviceName: company-database
   selector:
     matchLabels: 
-      database: dealers
+      database: company
   template:
     metadata:
       labels:
-        database: dealers
+        database: company
         system: database
     spec:
       terminationGracePeriodSeconds: 60
       securityContext:
         fsGroup: 10001
       containers:
-      - name: dealers-database
+      - name: company-database
         image: mcr.microsoft.com/mssql/server:2019-latest
         imagePullPolicy: IfNotPresent
         ports:
@@ -60,12 +60,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: environment-secrets
-              key: dealers-database-sa-password
+              key: company-database-sa-password
         volumeMounts:
-        - name: dealers-database-data
+        - name: company-database-data
           mountPath: /var/opt/mssql
       volumes:
-      - name: dealers-database-data
+      - name: company-database-data
         persistentVolumeClaim:
-          claimName: dealers-database-data
+          claimName: company-database-data
     
