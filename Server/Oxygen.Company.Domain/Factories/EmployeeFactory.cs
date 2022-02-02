@@ -17,6 +17,7 @@ namespace Oxygen.Company.Domain.Factories
         private string employeeFirstName = default!;
         private string employeeSurName = default!;
         private string employeeLastName = default!;
+        private string employeeUserId = default!;
 
         public IEmployeeFactory WithFirstName(string firstName)
         {
@@ -72,6 +73,13 @@ namespace Oxygen.Company.Domain.Factories
             return this;
         }
 
+        public IEmployeeFactory WithUserId(string userId)
+        {
+            this.employeeUserId = userId;
+
+            return this;
+        }
+
         public Employee Build()
         {
             if (!this.departmentSet)
@@ -95,7 +103,8 @@ namespace Oxygen.Company.Domain.Factories
                 this.employeeLastName,
                 this.department,
                 this.office,
-                this.jobTitle);
+                this.jobTitle,
+                this.employeeUserId);
         }
     }
 }

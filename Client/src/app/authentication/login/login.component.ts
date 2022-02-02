@@ -37,13 +37,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['']).then(() => {
         window.location.reload();
       });
-      // this.authenticationService.getDealerId().subscribe(res => {
-      //   this.authenticationService.setId(res);
-
-      //   this.router.navigate(['']).then(() => {
-      //     window.location.reload();
-      //   });
-      // })
     })
   }
 }

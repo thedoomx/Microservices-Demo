@@ -16,5 +16,7 @@
         IEmployeeFactory WithOffice(Office office);
 
         IEmployeeFactory WithJobTitle(JobTitle office);
+
+        IEmployeeFactory WithUserId(string userId);
     }
 }
