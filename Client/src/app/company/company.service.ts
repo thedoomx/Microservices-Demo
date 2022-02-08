@@ -34,6 +34,7 @@ export class CompanyService {
   }
 
   getJobTitles(): Observable<Array<JobTitle>> {
+    debugger;
     return this.http.get<Array<JobTitle>>(this.companyPath + 'getjobTitles')
   }
 

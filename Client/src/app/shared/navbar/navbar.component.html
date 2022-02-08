@@ -6,15 +6,6 @@
           <a class="nav-link" (click)="route('')">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item" *ngIf="token">
-          <a class="nav-link"(click)="route('cars/create')">Create Car Ad</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="route('cars')">All Cars</a>
-        </li>
-        <li class="nav-item" *ngIf="token">
-          <a class="nav-link"(click)="route('cars/mine')">My Cars</a>
-        </li>
-        <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="route('dealers/me')">Profile</a>
           </li>
           <li class="nav-item" *ngIf="token">
@@ -22,9 +13,6 @@
           </li>
           <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="route('survey')">All Surveys</a>
-          </li>
-          <li class="nav-item" *ngIf="token">
-            <a class="nav-link"(click)="route('survey/mine')">My Surveys</a>
           </li>
         <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="logout()">Logout</a>

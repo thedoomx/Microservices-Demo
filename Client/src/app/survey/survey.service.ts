@@ -15,6 +15,14 @@ export class SurveyService {
 
   constructor(private http: HttpClient) { }
 
+  searchAll(): Observable<Array<Survey>> {
+    return this.http.get<Array<Survey>>(this.surveyPath + 'searchAll')
+  }
+
+  search(): Observable<Array<Survey>> {
+    return this.http.get<Array<Survey>>(this.surveyPath + 'search')
+  }
+
   createSurvey(survey: Survey): Observable<Survey> {
     return this.http.post<Survey>(this.surveyPathWithoutSlash, survey);
   }
