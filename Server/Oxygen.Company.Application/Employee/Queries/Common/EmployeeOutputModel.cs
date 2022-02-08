@@ -19,6 +19,8 @@
 
         public string JobTitle { get; private set; } = default!;
 
+        public string UserId { get; private set; } = default!;
+
         public virtual void Mapping(Profile mapper)
             => mapper
                 .CreateMap<Domain.Models.Employee, EmployeeOutputModel>()

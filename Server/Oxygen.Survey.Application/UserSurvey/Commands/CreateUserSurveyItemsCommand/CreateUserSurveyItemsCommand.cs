@@ -9,15 +9,15 @@
     using System.Linq;
     using Oxygen.Survey.Application.UserSurvey.Commands.Common;
 
-    public class CreateUserSurveyCommand : UserSurveyCommand<CreateUserSurveyCommand>, IRequest<Result<CreateUserSurveyOutputModel>>
+    public class CreateUserSurveyItemsCommand : UserSurveyItemsCommand<CreateUserSurveyItemsCommand>, IRequest<Result<CreateUserSurveyItemsOutputModel>>
     {
-        public class CreateUserSurveyCommandHandler : IRequestHandler<CreateUserSurveyCommand, Result<CreateUserSurveyOutputModel>>
+        public class CreateUserSurveyItemsCommandHandler : IRequestHandler<CreateUserSurveyItemsCommand, Result<CreateUserSurveyItemsOutputModel>>
         {
             private readonly IUserSurveyItemFactory _userSurveyItemFactory;
             private readonly ISurveyDomainRepository _surveyDomainRepository;
             private readonly IUserSurveyDomainRepository _userSurveyDomainRepository;
 
-            public CreateUserSurveyCommandHandler(
+            public CreateUserSurveyItemsCommandHandler(
                 IUserSurveyItemFactory userSurveyItemFactory,
                 ISurveyDomainRepository surveyDomainRepository,
                 IUserSurveyDomainRepository userSurveyDomainRepository)
@@ -27,8 +27,8 @@
                 this._userSurveyDomainRepository = userSurveyDomainRepository;
             }
 
-            public async Task<Result<CreateUserSurveyOutputModel>> Handle(
-                CreateUserSurveyCommand request,
+            public async Task<Result<CreateUserSurveyItemsOutputModel>> Handle(
+                CreateUserSurveyItemsCommand request,
                 CancellationToken cancellationToken)
             {
                 var survey = await this._surveyDomainRepository.GetSurveyWithQuestionsDataById(request.SurveyId);
@@ -50,7 +50,7 @@
 
                 await this._userSurveyDomainRepository.Save(userSurvey);
 
-                return new CreateUserSurveyOutputModel(userSurvey.Id);
+                return new CreateUserSurveyItemsOutputModel(userSurvey.Id);
             }
         }
     }

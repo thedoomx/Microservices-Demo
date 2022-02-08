@@ -6,4 +6,5 @@ export interface Employee {
     department: number;
     jobTitle: number;
     office: number;
+    userId: string;
 }
