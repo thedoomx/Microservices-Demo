@@ -17,9 +17,8 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
   getEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(this.companyPath);
+    return this.http.get<Array<Employee>>(this.companyPath + 'getemployees');
   }
-
 
   getCar(id: string): Observable<Employee> {
     return this.http.get<Employee>(this.companyPath + id);
@@ -34,7 +33,6 @@ export class CompanyService {
   }
 
   getJobTitles(): Observable<Array<JobTitle>> {
-    debugger;
     return this.http.get<Array<JobTitle>>(this.companyPath + 'getjobTitles')
   }
 

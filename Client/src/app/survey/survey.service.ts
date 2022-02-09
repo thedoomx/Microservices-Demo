@@ -23,6 +23,10 @@ export class SurveyService {
     return this.http.get<Array<Survey>>(this.surveyPath + 'search')
   }
 
+  getSurvey(id: string): Observable<Survey> {
+    return this.http.get<Survey>(this.surveyPath + id);
+  }
+
   createSurvey(survey: Survey): Observable<Survey> {
     return this.http.post<Survey>(this.surveyPathWithoutSlash, survey);
   }

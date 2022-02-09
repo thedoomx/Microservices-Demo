@@ -5,5 +5,6 @@ export interface Survey {
     name: string;
     summary: string;
     surveyType: number;
-    questions: Array<Question>
+    questions: Array<Question>,
+    employeeIds: Array<number>
 }

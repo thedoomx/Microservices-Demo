@@ -6,6 +6,7 @@
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
     using Oxygen.Survey.Application.QuestionType.Queries.Search;
     using Oxygen.Survey.Application.Survey.Commands.Create;
+	using Oxygen.Survey.Application.Survey.Queries.Details;
 	using Oxygen.Survey.Application.Survey.Queries.Search;
 	using Oxygen.Survey.Application.SurveyType.Queries.Common;
     using Oxygen.Survey.Application.SurveyType.Queries.Search;
@@ -19,6 +20,12 @@
 
     public class SurveyController : ApiController
     {
+        [HttpGet]
+        [Route(Id)]
+        public async Task<ActionResult<SurveyOutputModel>> GetSurveyDetails(
+            [FromRoute] SurveyDetailsQuery query)
+            => await this.Send(query);
+
         [HttpPost]
         public async Task<ActionResult<CreateSurveyOutputModel>> Create(
             CreateSurveyCommand command)

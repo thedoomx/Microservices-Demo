@@ -20,7 +20,7 @@
             public async Task<IEnumerable<SurveyOutputModel>> Handle(
                 MineSurveysQuery request,
                 CancellationToken cancellationToken)
-                => await this._surveyRepository.Get(request.UserId, cancellationToken);
+                => await this._surveyRepository.GetMine(request.UserId, cancellationToken);
         }
     }
 }

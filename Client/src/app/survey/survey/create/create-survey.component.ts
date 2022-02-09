@@ -39,7 +39,8 @@ export class CreateSurveyComponent implements OnInit {
             name: ['', Validators.required],
             summary: ['', Validators.required],
             surveyType: [null, Validators.required],
-            questions: [null, Validators.required]
+            questions: [null, Validators.required],
+            employeeIds: [null]
         })
     }
 

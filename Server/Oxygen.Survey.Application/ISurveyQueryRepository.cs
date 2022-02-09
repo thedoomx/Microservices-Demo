@@ -13,9 +13,11 @@
 
     public interface ISurveyQueryRepository : IQueryRepository<Domain.Models.Survey>
     {
+        Task<SurveyOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
+
         Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<SurveyOutputModel>> Get(string? userId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<SurveyOutputModel>> GetMine(string? userId, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<SurveyTypeOutputModel>> SearchSurveyTypes(
            CancellationToken cancellationToken = default);
