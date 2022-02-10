@@ -43,6 +43,10 @@ export class AssignEmployeesComponent implements OnInit {
 
         this.id = this.route.snapshot.paramMap.get('id');
 
+        this.submitModel = {} as AssignEmployeesSurveys;
+        this.submitModel.id = Number(this.id);
+        this.submitModel.employees = new Array<AssignEmployee>()
+
         this.employees = [];
 
         this.companyService.getEmployees().subscribe(res => {
@@ -68,25 +72,17 @@ export class AssignEmployeesComponent implements OnInit {
     }
 
     onClickSubmit() {
-      var temp = this.employees;
-      var temp2 = this.surveyForm.value.employeeIds;
+      var selectedEmployeeIds = this.surveyForm.value.employeeIds;
+      var selectedEmployees =  this.employees.filter(x => selectedEmployeeIds.some(y => y.id == x.id));
 
-      var temp3=  this.employees.filter(x => temp2.some(y => y.id == x.id));
-
-      this.submitModel = {} as AssignEmployeesSurveys;
-      this.submitModel.id = Number(this.id);
-      this.submitModel.employees = new Array<AssignEmployee>()
-
-      temp3.forEach(obj => {
+      selectedEmployees.forEach(obj => {
         let employee = {} as AssignEmployee;
         employee.userId = obj.userId;
         employee.employeeId = obj.id;
         this.submitModel.employees.push(employee);
       });
-      debugger;
 
       this.surveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
-        debugger;
         this.router.navigate(['survey']);
     });
     }

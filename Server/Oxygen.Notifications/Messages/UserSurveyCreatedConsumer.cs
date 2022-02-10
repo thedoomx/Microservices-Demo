@@ -19,6 +19,6 @@
             => await this.hub
                 .Clients
                 .User(context.Message.UserId)
-                .SendAsync(ReceiveNotificationEndpoint, context.Message);
+                .SendAsync(ReceiveNotificationAssignedSurveyEndpoint, context.Message);
     }
 }

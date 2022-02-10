@@ -18,6 +18,6 @@
             => await this.hub
                 .Clients
                 .Groups(AuthenticatedUsersGroup)
-                .SendAsync(ReceiveNotificationEndpoint, context.Message);
+                .SendAsync(ReceiveNotificationCreatedUserEndpoint, context.Message);
     }
 }
