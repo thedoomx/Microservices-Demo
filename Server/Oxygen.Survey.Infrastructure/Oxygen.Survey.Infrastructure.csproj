@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Persistence\Migrations\20211027134800_Init.cs" />
-    <Compile Remove="Persistence\Migrations\20211027134800_Init.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\**" />
+    <EmbeddedResource Remove="Persistence\Migrations\**" />
+    <None Remove="Persistence\Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

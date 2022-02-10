@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Survey } from './models/survey.model';
 import { QuestionType } from './models/questionType.model';
 import { SurveyType } from './models/surveyType.model';
+import { AssignEmployeesSurveys } from './models/assignEmployeesSurveys.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class SurveyService {
 
   createSurvey(survey: Survey): Observable<Survey> {
     return this.http.post<Survey>(this.surveyPathWithoutSlash, survey);
+  }
+
+  createEmployeesSurveys(survey: AssignEmployeesSurveys): Observable<AssignEmployeesSurveys> {
+    return this.http.post<AssignEmployeesSurveys>(this.surveyPath + 'createEmployeesSurveys', survey);
   }
 
   getSurveyTypes(): Observable<Array<SurveyType>> {

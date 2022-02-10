@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Survey\Commands\Edit\" />
-    <Folder Include="UserSurvey\Queries\" />
+    <Folder Include="EmployeeSurveys\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

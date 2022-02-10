@@ -8,7 +8,7 @@
 
     public class MineSurveysQuery : IRequest<IEnumerable<SurveyOutputModel>>
     {
-        public string? UserId { get; set; }
+        public int? EmployeeId { get; set; }
 
         public class MineSurveysQueryHandler : IRequestHandler<MineSurveysQuery, IEnumerable<SurveyOutputModel>>
         {
@@ -20,7 +20,7 @@
             public async Task<IEnumerable<SurveyOutputModel>> Handle(
                 MineSurveysQuery request,
                 CancellationToken cancellationToken)
-                => await this._surveyRepository.GetMine(request.UserId, cancellationToken);
+                => await this._surveyRepository.GetMine(request.EmployeeId, cancellationToken);
         }
     }
 }

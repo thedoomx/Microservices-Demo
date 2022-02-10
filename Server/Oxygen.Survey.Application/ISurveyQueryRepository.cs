@@ -17,7 +17,7 @@
 
         Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<SurveyOutputModel>> GetMine(string? userId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<SurveyOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<SurveyTypeOutputModel>> SearchSurveyTypes(
            CancellationToken cancellationToken = default);

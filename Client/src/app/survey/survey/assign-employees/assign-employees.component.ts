@@ -6,6 +6,8 @@ import { SurveyService } from '../../survey.service';
 import { CompanyService } from 'src/app/company/company.service';
 import { Survey } from '../../models/survey.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { AssignEmployeesSurveys } from '../../models/assignEmployeesSurveys.model';
+import { AssignEmployee } from '../../models/assignEmployee.model';
 
 @Component({
     selector: 'app-survey-assign-employees',
@@ -17,6 +19,7 @@ export class AssignEmployeesComponent implements OnInit {
     employees: Array<Employee>;
     surveyForm:  FormGroup;
     surveyName: string;
+    submitModel: AssignEmployeesSurveys;
 
     selectedItems = [];
     dropdownSettings = {
@@ -65,5 +68,26 @@ export class AssignEmployeesComponent implements OnInit {
     }
 
     onClickSubmit() {
+      var temp = this.employees;
+      var temp2 = this.surveyForm.value.employeeIds;
+
+      var temp3=  this.employees.filter(x => temp2.some(y => y.id == x.id));
+
+      this.submitModel = {} as AssignEmployeesSurveys;
+      this.submitModel.id = Number(this.id);
+      this.submitModel.employees = new Array<AssignEmployee>()
+
+      temp3.forEach(obj => {
+        let employee = {} as AssignEmployee;
+        employee.userId = obj.userId;
+        employee.employeeId = obj.id;
+        this.submitModel.employees.push(employee);
+      });
+      debugger;
+
+      this.surveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
+        debugger;
+        this.router.navigate(['survey']);
+    });
     }
 }

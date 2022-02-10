@@ -34,5 +34,11 @@ export class NotificationsService {
             console.log(data);
             this.toastr.success(`${data.manufacturer} ${data.model} for just $${data.pricePerDay}!!!`, "New Car!");
         });
+
+        this.hubConnection.on('ReceiveNotification1', (data) => {
+            debugger;
+            console.log(data);
+            this.toastr.success(`${data.manufacturer} ${data.model} for just $${data.pricePerDay}!!!`, "New Car!");
+        });
     }
 }

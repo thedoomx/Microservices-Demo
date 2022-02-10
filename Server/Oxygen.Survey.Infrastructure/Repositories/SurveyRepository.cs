@@ -77,13 +77,13 @@
 					.All())
 			   .ToListAsync(cancellationToken);
 
-		public async Task<IEnumerable<SurveyOutputModel>> GetMine(string userId, CancellationToken cancellationToken = default)
+		public async Task<IEnumerable<SurveyOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default)
 			=> await this.mapper
 			   .ProjectTo<SurveyOutputModel>(this
 				.Data
-				.UserSurveys
+				.EmployeeSurveys
 				.Include(x => x.Survey)
-				.Where(x => x.UserId == userId)
+				.Where(x => x.EmployeeId == employeeId)
 				.Select(x => x.Survey)
 					.AsQueryable())
 			   .ToListAsync(cancellationToken);
