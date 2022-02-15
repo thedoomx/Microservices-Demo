@@ -6,6 +6,8 @@ import { QuestionType } from '../models/questionType.model';
 import { SurveyService } from '../survey.service';
 import { Question } from '../models/question.model';
 import { QuestionItem } from '../models/questionItem.model';
+import { questionTypeConstants } from '../constants/question-types.constants';
+
 
 @Component({
   selector: 'app-survey-question',
@@ -17,6 +19,7 @@ export class QuestionComponent implements OnInit {
   questionForm: FormGroup<Question>;
   questionTypes: Array<QuestionType>;
   questionItems: Array<QuestionItem> = [];
+  showQuestionOptions: boolean = false;
 
   canAddQuestionItem: boolean;
 
@@ -26,7 +29,6 @@ export class QuestionComponent implements OnInit {
     private surveyService: SurveyService,
     private fb: FormBuilder,
     private router: Router) {
-
       this.surveyService.getQuestionTypes().subscribe(res => {
         this.questionTypes = res;
       });
@@ -66,6 +68,22 @@ export class QuestionComponent implements OnInit {
 
   removeOption(index: number) {
      this.questionItems.splice(index,1);
+  }
+
+  onQuestionTypeChange($event) {
+    let selectedItemText = this.questionTypes[$event.target.selectedIndex].type;
+    
+    if(selectedItemText == questionTypeConstants.freeText) {
+      this.questionForm.get('questionItems').clearValidators();
+      this.questionForm.get('questionItems').updateValueAndValidity();
+      this.showQuestionOptions = false;
+      this.questionItems = [];
+    }
+    else {
+      this.questionForm.get('questionItems').setValidators([Validators.required]);
+      this.questionForm.get('questionItems').updateValueAndValidity();
+      this.showQuestionOptions = true;
+    }
   }
 
   onNewQuestionItemChange(searchValue: string): void {  

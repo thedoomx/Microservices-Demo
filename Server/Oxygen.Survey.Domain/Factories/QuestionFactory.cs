@@ -1,15 +1,20 @@
 ﻿namespace Oxygen.Survey.Domain.Factories
 {
-    using Oxygen.Survey.Domain.Exceptions;
+	using Oxygen.Common.Constants;
+	using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
+	using System;
+	using System.Collections.Generic;
 
-    public class QuestionFactory
+	public class QuestionFactory
     {
         private QuestionType questionType = default!;
         private bool questionTypeSet = false;
 
         private string questionDescription = default!;
         private bool questionIsRequired = default!;
+
+        private List<QuestionItem> questionItems = new List<QuestionItem>();
 
         public QuestionFactory WithDescription(string description)
         {
@@ -33,6 +38,17 @@
             return this;
         }
 
+        public QuestionFactory WithQuestionItem(Action<QuestionItemFactory> questionItem)
+        {
+            var questionItemFactory = new QuestionItemFactory();
+
+            questionItem(questionItemFactory);
+
+            this.questionItems.Add(questionItemFactory.Build());
+
+            return this;
+        }
+
         public Question Build()
         {
             if (!this.questionTypeSet)
@@ -40,10 +56,19 @@
                 throw new InvalidQuestionException("Question type must have a value.");
             }
 
-            return new Question(
+            if (this.questionItems.Count == 0 && this.questionType.Type != GlobalConstants.QuestionType.Free_text)
+            {
+                throw new InvalidSurveyException("Question must have question items.");
+            }
+
+            var question = new Question(
                 this.questionDescription,
                 this.questionIsRequired,
                 this.questionType);
+
+            this.questionItems.ForEach(x => question.AddQuestionItem(x));
+
+            return question;
         }
     }
 }
