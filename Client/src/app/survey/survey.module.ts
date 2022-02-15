@@ -9,6 +9,7 @@ import { CreateSurveyComponent } from './survey/create/create-survey.component';
 import { ListSurveyComponent } from './survey/list/list-survey.component';
 import { AssignEmployeesComponent } from './survey/assign-employees/assign-employees.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ListMineSurveyComponent } from './survey/list-mine/list-mine-survey.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     SurveyComponent,
     CreateSurveyComponent,
     ListSurveyComponent,
+    ListMineSurveyComponent,
     AssignEmployeesComponent
   ],
   providers: [

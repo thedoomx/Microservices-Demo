@@ -24,7 +24,11 @@ export class AuthenticationService {
     localStorage.setItem('token', token);
   }
 
-  setId(dealerId) {
-    localStorage.setItem('dealerId', dealerId);
+  setId(userId) {
+    localStorage.setItem('userId', userId);
+  }
+
+  setEmployeeId(employeeId) {
+    localStorage.setItem('employeeId', employeeId);
   }
 }

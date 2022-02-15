@@ -35,8 +35,8 @@
             => await this.Send(query);
 
         [HttpGet]
-        [Route(nameof(Search))]
-        public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> Search(
+        [Route(nameof(SearchMine))]
+        public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> SearchMine(
             [FromQuery] MineSurveysQuery query)
             => await this.Send(query);
 

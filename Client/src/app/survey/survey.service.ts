@@ -20,6 +20,10 @@ export class SurveyService {
     return this.http.get<Array<Survey>>(this.surveyPath + 'searchAll')
   }
 
+  searchMine(employeeId: string): Observable<Array<Survey>> {
+    return this.http.get<Array<Survey>>(this.surveyPath + 'searchMine?employeeId=' + employeeId)
+  }
+
   search(): Observable<Array<Survey>> {
     return this.http.get<Array<Survey>>(this.surveyPath + 'search')
   }

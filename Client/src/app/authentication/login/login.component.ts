@@ -5,6 +5,7 @@ import { AuthenticationService } from '../authentication.service';
 import { LoginFormModel } from './login.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterExtService } from 'src/app/shared/rouer-ext.service';
+import { CompanyService } from 'src/app/company/company.service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,14 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   @Output() emitter: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private routerService: RouterExtService) {
+  constructor(private fb: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private companyService: CompanyService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private routerService: RouterExtService) {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['cars'])
+      this.router.navigate(['survey'])
     }
   }
 
@@ -32,11 +38,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authenticationService.login(this.loginForm.value).subscribe(res => {
+      this.authenticationService.setId(res['userId']);
       this.authenticationService.setToken(res['token']);
-      
-      this.router.navigate(['']).then(() => {
-        window.location.reload();
+     
+
+      this.companyService.getEmployeeIdByUserId(res['userId']).subscribe(result => {
+       
+        this.authenticationService.setEmployeeId(result);
+
+        this.router.navigate(['']).then(() => {
+          window.location.reload();
+        });
       });
+      
     })
   }
 }

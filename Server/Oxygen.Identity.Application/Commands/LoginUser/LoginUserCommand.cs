@@ -31,7 +31,7 @@
                 var user = result.Data;
 
 
-                return new LoginOutputModel(user.Token);
+                return new LoginOutputModel(user.UserId, user.Token);
             }
         }
     }

@@ -5,14 +5,14 @@
         <li class="nav-item active">
           <a class="nav-link" (click)="route('')">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf="token">
-            <a class="nav-link"(click)="route('dealers/me')">Profile</a>
-          </li>
           <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="route('company')">Company</a>
           </li>
           <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="route('survey')">All Surveys</a>
+          </li>
+          <li class="nav-item" *ngIf="token">
+            <a class="nav-link"(click)="route('survey/list-mine-survey')">Mine Surveys</a>
           </li>
         <li class="nav-item" *ngIf="token">
             <a class="nav-link"(click)="logout()">Logout</a>
