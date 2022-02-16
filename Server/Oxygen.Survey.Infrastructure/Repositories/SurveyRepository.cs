@@ -34,10 +34,10 @@
 			await this.Data.Questions.AddAsync(question, cancellationToken);
 		}
 
-		public async Task AddQuestionItem(QuestionItem questionItem,
+		public async Task AddQuestionAnswer(QuestionAnswer questionAnswer,
 			CancellationToken cancellationToken = default)
 		{
-			await this.Data.QuestionItems.AddAsync(questionItem, cancellationToken);
+			await this.Data.QuestionAnswers.AddAsync(questionAnswer, cancellationToken);
 		}
 
 		public async Task<Survey> GetById(int id,
@@ -82,7 +82,7 @@
 				.All()
 				.Where(x => x.Id == id)
 				.Include(x => x.Questions)
-				.ThenInclude(x => x.QuestionItems)
+				.ThenInclude(x => x.QuestionAnswers)
 				.FirstOrDefaultAsync(cancellationToken);
 
 		public async Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default)
@@ -135,7 +135,7 @@
 					.Where(x => x.Id == id)
 					.Include(x => x.SurveyType)
 					.Include(x => x.Questions)
-					.ThenInclude(x => x.QuestionItems))
+					.ThenInclude(x => x.QuestionAnswers))
 			   .FirstOrDefaultAsync(cancellationToken);
 	}
 }

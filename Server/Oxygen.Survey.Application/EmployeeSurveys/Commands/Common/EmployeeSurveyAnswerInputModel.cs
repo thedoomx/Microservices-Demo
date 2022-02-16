@@ -1,9 +1,9 @@
 ﻿namespace Oxygen.Survey.Application.EmployeeSurvey.Commands.Common
 {
-    public class EmployeeSurveyItemInputModel
+    public class EmployeeSurveyAnswerInputModel
     {
         public int QuestionId { get; set; }
 
-        public int QuestionItemId { get; set; }
+        public int QuestionAnswerId { get; set; }
     }
 }

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Survey\Commands\Edit\" />
+    <Compile Remove="Survey\Commands\Edit\**" />
+    <EmbeddedResource Remove="Survey\Commands\Edit\**" />
+    <None Remove="Survey\Commands\Edit\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="EmployeeSurveys\Queries\" />
   </ItemGroup>
 

@@ -6,7 +6,7 @@
     {
         public QuestionInputModel()
         {
-            this.QuestionItems = new HashSet<QuestionItemInputModel>();
+            this.QuestionAnswers = new HashSet<QuestionAnswerInputModel>();
         }
 
         public string Description { get; set; } = default!;
@@ -15,6 +15,6 @@
 
         public int QuestionType { get; set; }
 
-        public IEnumerable<QuestionItemInputModel> QuestionItems { get; set; }
+        public IEnumerable<QuestionAnswerInputModel> QuestionAnswers { get; set; }
     }
 }

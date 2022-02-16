@@ -33,11 +33,11 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-               .HasMany(d => d.QuestionItems)
+               .HasMany(d => d.QuestionAnswers)
                .WithOne()
                .Metadata
                .PrincipalToDependent
-               .SetField("questionItems");
+               .SetField("questionAnswers");
         }
     }
 }

@@ -8,7 +8,7 @@
 	{
         public QuestionOutputModel()
         {
-            this.QuestionItems = new HashSet<QuestionItemOutputModel>();
+            this.QuestionAnswers = new HashSet<QuestionAnswerOutputModel>();
         }
 
         public string Description { get; set; } = default!;
@@ -17,7 +17,7 @@
 
         public string QuestionType { get; set; }
 
-        public IEnumerable<QuestionItemOutputModel> QuestionItems { get; set; }
+        public IEnumerable<QuestionAnswerOutputModel> QuestionAnswers { get; set; }
 
         public virtual void Mapping(Profile mapper)
             => mapper

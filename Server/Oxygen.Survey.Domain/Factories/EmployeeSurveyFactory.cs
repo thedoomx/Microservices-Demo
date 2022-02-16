@@ -12,7 +12,7 @@
         private bool surveySet = false;
         private bool isSubmitted = default!;
 
-        private List<EmployeeSurveyItem> employeeSurveyItems = new List<EmployeeSurveyItem>();
+        private List<EmployeeSurveyAnswer> employeeSurveyAnswers = new List<EmployeeSurveyAnswer>();
 
         public IEmployeeSurveyFactory WithEmployeeId(int employeeId)
         {
@@ -27,13 +27,13 @@
             return this;
         }
 
-        public IEmployeeSurveyFactory WithQuestionAnswer(Action<IEmployeeSurveyItemFactory> employeeSurveyItem)
+        public IEmployeeSurveyFactory WithQuestionAnswer(Action<IEmployeeSurveyAnswerFactory> employeeSurveyAnswer)
         {
-            var questionFactory = new EmployeeSurveyItemFactory();
+            var questionFactory = new EmployeeSurveyAnswerFactory();
 
-            employeeSurveyItem(questionFactory);
+            employeeSurveyAnswer(questionFactory);
 
-            this.employeeSurveyItems.Add(questionFactory.Build());
+            this.employeeSurveyAnswers.Add(questionFactory.Build());
 
             return this;
         }
@@ -50,7 +50,7 @@
                 this.survey,
                 this.isSubmitted);
 
-            this.employeeSurveyItems.ForEach(x => employeeSurvey.AddEmployeeSurveyItem(x));
+            this.employeeSurveyAnswers.ForEach(x => employeeSurvey.AddEmployeeSurveyAnswer(x));
 
             return employeeSurvey;
         }

@@ -121,7 +121,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionItems",
+                name: "QuestionAnswers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -130,9 +130,9 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionItems", x => x.Id);
+                    table.PrimaryKey("PK_QuestionAnswers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuestionItems_Questions_QuestionId",
+                        name: "FK_QuestionAnswers_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
@@ -140,52 +140,53 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeSurveyItems",
+                name: "EmployeeSurveyAnswers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionId = table.Column<int>(nullable: false),
-                    QuestionItemId = table.Column<int>(nullable: false),
+                    QuestionAnswerId = table.Column<int>(nullable: false),
+                    FreeText = table.Column<string>(nullable: true),
                     EmployeeSurveyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeSurveyItems", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeSurveyAnswers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeSurveyItems_EmployeeSurveys_EmployeeSurveyId",
+                        name: "FK_EmployeeSurveyAnswers_EmployeeSurveys_EmployeeSurveyId",
                         column: x => x.EmployeeSurveyId,
                         principalTable: "EmployeeSurveys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EmployeeSurveyItems_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
+                        name: "FK_EmployeeSurveyAnswers_QuestionAnswers_QuestionAnswerId",
+                        column: x => x.QuestionAnswerId,
+                        principalTable: "QuestionAnswers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EmployeeSurveyItems_QuestionItems_QuestionItemId",
-                        column: x => x.QuestionItemId,
-                        principalTable: "QuestionItems",
+                        name: "FK_EmployeeSurveyAnswers_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSurveyItems_EmployeeSurveyId",
-                table: "EmployeeSurveyItems",
+                name: "IX_EmployeeSurveyAnswers_EmployeeSurveyId",
+                table: "EmployeeSurveyAnswers",
                 column: "EmployeeSurveyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSurveyItems_QuestionId",
-                table: "EmployeeSurveyItems",
-                column: "QuestionId");
+                name: "IX_EmployeeSurveyAnswers_QuestionAnswerId",
+                table: "EmployeeSurveyAnswers",
+                column: "QuestionAnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSurveyItems_QuestionItemId",
-                table: "EmployeeSurveyItems",
-                column: "QuestionItemId");
+                name: "IX_EmployeeSurveyAnswers_QuestionId",
+                table: "EmployeeSurveyAnswers",
+                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeSurveys_SurveyId",
@@ -193,8 +194,8 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 column: "SurveyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionItems_QuestionId",
-                table: "QuestionItems",
+                name: "IX_QuestionAnswers_QuestionId",
+                table: "QuestionAnswers",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
@@ -216,7 +217,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeSurveyItems");
+                name: "EmployeeSurveyAnswers");
 
             migrationBuilder.DropTable(
                 name: "Messages");
@@ -225,7 +226,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 name: "EmployeeSurveys");
 
             migrationBuilder.DropTable(
-                name: "QuestionItems");
+                name: "QuestionAnswers");
 
             migrationBuilder.DropTable(
                 name: "Questions");

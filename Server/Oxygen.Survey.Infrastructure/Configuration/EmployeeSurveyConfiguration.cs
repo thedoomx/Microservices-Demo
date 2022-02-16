@@ -28,11 +28,11 @@
                 .HasDefaultValue(false);
 
             builder
-                .HasMany(d => d.EmployeeSurveyItems)
+                .HasMany(d => d.EmployeeSurveyAnswers)
                 .WithOne()
                 .Metadata
                 .PrincipalToDependent
-                .SetField("employeeSurveyItems");
+                .SetField("employeeSurveyAnswers");
         }
     }
 }

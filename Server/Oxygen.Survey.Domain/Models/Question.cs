@@ -8,7 +8,7 @@
 
     public class Question : Entity<int>
     {
-        private readonly HashSet<QuestionItem> questionItems;
+        private readonly HashSet<QuestionAnswer> questionAnswers;
 
         internal Question(string description, bool isRequired, QuestionType questionType)
         {
@@ -18,7 +18,7 @@
             this.IsRequired = isRequired;
             this.QuestionType = questionType;
 
-            this.questionItems = new HashSet<QuestionItem>();
+            this.questionAnswers = new HashSet<QuestionAnswer>();
         }
 
         private Question(string description, bool isRequired)
@@ -28,7 +28,7 @@
             this.Description = description;
             this.IsRequired = isRequired;
 
-            this.questionItems = new HashSet<QuestionItem>();
+            this.questionAnswers = new HashSet<QuestionAnswer>();
         }
 
         public string Description { get; private set; }
@@ -59,11 +59,11 @@
             return this;
         }
 
-        public IReadOnlyCollection<QuestionItem> QuestionItems => this.questionItems.ToList().AsReadOnly();
+        public IReadOnlyCollection<QuestionAnswer> QuestionAnswers => this.questionAnswers.ToList().AsReadOnly();
 
-        public void AddQuestionItem(QuestionItem questionItem)
+        public void AddQuestionAnswer(QuestionAnswer questionAnswer)
         {
-            this.questionItems.Add(questionItem);
+            this.questionAnswers.Add(questionAnswer);
         }
 
         private void Validate(string description)

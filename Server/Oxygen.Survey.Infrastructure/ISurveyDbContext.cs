@@ -9,7 +9,7 @@
     {
         DbSet<Question> Questions { get; }
 
-        DbSet<QuestionItem> QuestionItems { get; }
+        DbSet<QuestionAnswer> QuestionAnswers { get; }
 
         DbSet<QuestionType> QuestionTypes { get; }
 
@@ -19,6 +19,6 @@
 
         DbSet<EmployeeSurvey> EmployeeSurveys { get; }
 
-        DbSet<EmployeeSurveyItem> EmployeeSurveyItems { get; }
+        DbSet<EmployeeSurveyAnswer> EmployeeSurveyAnswers { get; }
     }
 }

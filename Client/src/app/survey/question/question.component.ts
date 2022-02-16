@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { QuestionType } from '../models/questionType.model';
 import { SurveyService } from '../survey.service';
 import { Question } from '../models/question.model';
-import { QuestionItem } from '../models/questionItem.model';
+import { QuestionAnswer } from '../models/questionAnswer.model';
 import { questionTypeConstants } from '../constants/question-types.constants';
 
 
@@ -15,13 +15,13 @@ import { questionTypeConstants } from '../constants/question-types.constants';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  @ViewChild('newQuestionItem') newQuestionItem:ElementRef;
+  @ViewChild('newQuestionAnswer') newQuestionAnswer:ElementRef;
   questionForm: FormGroup<Question>;
   questionTypes: Array<QuestionType>;
-  questionItems: Array<QuestionItem> = [];
+  questionAnswers: Array<QuestionAnswer> = [];
   showQuestionOptions: boolean = false;
 
-  canAddQuestionItem: boolean;
+  canAddQuestionAnswer: boolean;
 
   @Output() addQuestionEventEmitter = new EventEmitter<Question>();
 
@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
       description: ['', Validators.required],
       isRequired: [false, Validators.required],
       questionType: [null, Validators.required],
-      questionItems: [[], Validators.required]
+      questionAnswers: [[], Validators.required]
     })
   }
 
@@ -50,48 +50,48 @@ export class QuestionComponent implements OnInit {
   }
 
   addOption() {
-    const valueInput = this.newQuestionItem.nativeElement.value;
+    const valueInput = this.newQuestionAnswer.nativeElement.value;
 
-    let questionItem: QuestionItem = {
+    let questionAnswer: QuestionAnswer = {
       description: valueInput
     };
 
-    this.questionItems.push(questionItem);
+    this.questionAnswers.push(questionAnswer);
     this.questionForm.patchValue({
-      questionItems: this.questionItems,
+      questionAnswers: this.questionAnswers,
     });
 
-    this.canAddQuestionItem = false;
+    this.canAddQuestionAnswer = false;
 
-    this.newQuestionItem.nativeElement.value = '';
+    this.newQuestionAnswer.nativeElement.value = '';
   }
 
   removeOption(index: number) {
-     this.questionItems.splice(index,1);
+     this.questionAnswers.splice(index,1);
   }
 
   onQuestionTypeChange($event) {
     let selectedItemText = this.questionTypes[$event.target.selectedIndex].type;
     
     if(selectedItemText == questionTypeConstants.freeText) {
-      this.questionForm.get('questionItems').clearValidators();
-      this.questionForm.get('questionItems').updateValueAndValidity();
+      this.questionForm.get('questionAnswers').clearValidators();
+      this.questionForm.get('questionAnswers').updateValueAndValidity();
       this.showQuestionOptions = false;
-      this.questionItems = [];
+      this.questionAnswers = [];
     }
     else {
-      this.questionForm.get('questionItems').setValidators([Validators.required]);
-      this.questionForm.get('questionItems').updateValueAndValidity();
+      this.questionForm.get('questionAnswers').setValidators([Validators.required]);
+      this.questionForm.get('questionAnswers').updateValueAndValidity();
       this.showQuestionOptions = true;
     }
   }
 
-  onNewQuestionItemChange(searchValue: string): void {  
+  onNewQuestionAnswerChange(searchValue: string): void {  
     if(searchValue.length > 0) {
-      this.canAddQuestionItem = true;
+      this.canAddQuestionAnswer = true;
     }
     else {
-      this.canAddQuestionItem = false;
+      this.canAddQuestionAnswer = false;
     }
   }
 

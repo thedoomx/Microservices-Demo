@@ -9,26 +9,26 @@
     using System.Linq;
     using Oxygen.Survey.Application.EmployeeSurvey.Commands.Common;
 
-    public class CreateEmployeeSurveyItemsCommand : EmployeeSurveyItemsCommand<CreateEmployeeSurveyItemsCommand>, IRequest<Result<CreateEmployeeSurveyItemsOutputModel>>
+    public class CreateEmployeeSurveyAnswersCommand : EmployeeSurveyAnswersCommand<CreateEmployeeSurveyAnswersCommand>, IRequest<Result<CreateEmployeeSurveyAnswersOutputModel>>
     {
-        public class CreateEmployeeSurveyItemsCommandHandler : IRequestHandler<CreateEmployeeSurveyItemsCommand, Result<CreateEmployeeSurveyItemsOutputModel>>
+        public class CreateEmployeeSurveyAnswersCommandHandler : IRequestHandler<CreateEmployeeSurveyAnswersCommand, Result<CreateEmployeeSurveyAnswersOutputModel>>
         {
-            private readonly IEmployeeSurveyItemFactory _employeeSurveyItemFactory;
+            private readonly IEmployeeSurveyAnswerFactory _employeeSurveyAnswerFactory;
             private readonly ISurveyDomainRepository _surveyDomainRepository;
             private readonly IEmployeeSurveyDomainRepository _employeeSurveyDomainRepository;
 
-            public CreateEmployeeSurveyItemsCommandHandler(
-                IEmployeeSurveyItemFactory employeeSurveyItemFactory,
+            public CreateEmployeeSurveyAnswersCommandHandler(
+                IEmployeeSurveyAnswerFactory employeeSurveyAnswerFactory,
                 ISurveyDomainRepository surveyDomainRepository,
                 IEmployeeSurveyDomainRepository employeeSurveyDomainRepository)
             {
-                this._employeeSurveyItemFactory = employeeSurveyItemFactory;
+                this._employeeSurveyAnswerFactory = employeeSurveyAnswerFactory;
                 this._surveyDomainRepository = surveyDomainRepository;
                 this._employeeSurveyDomainRepository = employeeSurveyDomainRepository;
             }
 
-            public async Task<Result<CreateEmployeeSurveyItemsOutputModel>> Handle(
-                CreateEmployeeSurveyItemsCommand request,
+            public async Task<Result<CreateEmployeeSurveyAnswersOutputModel>> Handle(
+                CreateEmployeeSurveyAnswersCommand request,
                 CancellationToken cancellationToken)
             {
                 var survey = await this._surveyDomainRepository.GetSurveyWithQuestionsDataById(request.SurveyId);
@@ -38,19 +38,19 @@
                 foreach (var questionAnswer in request.QuestionAnswers)
                 {
                     var question = survey.Questions.FirstOrDefault(x => x.Id == questionAnswer.QuestionId);
-                    var questionItem = question.QuestionItems.FirstOrDefault(x => x.Id == questionAnswer.QuestionItemId);
+                    var questionAnswerEntity = question.QuestionAnswers.FirstOrDefault(x => x.Id == questionAnswer.QuestionAnswerId);
 
-                    var employeeSurveyItem = this._employeeSurveyItemFactory
+                    var employeeSurveyAnswer = this._employeeSurveyAnswerFactory
                     .WithQuestion(question)
-                    .WithQuestionItem(questionItem)
+                    .WithQuestionAnswer(questionAnswerEntity)
                     .Build();
 
-                    employeeSurvey.AddEmployeeSurveyItem(employeeSurveyItem);
+                    employeeSurvey.AddEmployeeSurveyAnswer(employeeSurveyAnswer);
                 }
 
                 await this._employeeSurveyDomainRepository.Save(employeeSurvey);
 
-                return new CreateEmployeeSurveyItemsOutputModel(employeeSurvey.Id);
+                return new CreateEmployeeSurveyAnswersOutputModel(employeeSurvey.Id);
             }
         }
     }

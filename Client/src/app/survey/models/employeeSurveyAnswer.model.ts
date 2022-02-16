@@ -1,6 +1,6 @@
-export interface EmployeeSurveyItem {
+export interface EmployeeSurveyAnswer {
     id?: number;
     employeeSurvey: number;
     question: number;
-    questionItem: number;
+    questionAnswer: number;
 }

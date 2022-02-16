@@ -28,7 +28,7 @@
 					.MapFrom(x => x.QuestionType.Type));
 
 			mapper
-				.CreateMap<QuestionItem, QuestionItemOutputModel>();
+				.CreateMap<QuestionAnswer, QuestionAnswerOutputModel>();
 		}
 			
 	}

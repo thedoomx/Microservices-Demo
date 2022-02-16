@@ -32,10 +32,16 @@
             public const int MaxTypeLength = 50;
         }
 
-        public class QuestionItem
+        public class QuestionAnswer
         {
             public const int MinDescriptionLength = 2;
             public const int MaxDescriptionLength = 300;
+        }
+
+        public class EmployeeSurveyAnswer
+        {
+            public const int MinFreeTextLength = 5;
+            public const int MaxFreeTextLength = 300;
         }
     }
 }

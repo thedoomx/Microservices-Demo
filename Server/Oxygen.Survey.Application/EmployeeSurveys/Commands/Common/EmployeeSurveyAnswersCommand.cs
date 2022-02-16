@@ -3,18 +3,18 @@
 	using Oxygen.Application.Common;
 	using System.Collections.Generic;
 
-	public abstract class EmployeeSurveyItemsCommand<TCommand> : EntityCommand<int>
+	public abstract class EmployeeSurveyAnswersCommand<TCommand> : EntityCommand<int>
 		where TCommand : EntityCommand<int>
 	{
-		public EmployeeSurveyItemsCommand()
+		public EmployeeSurveyAnswersCommand()
 		{
-			this.QuestionAnswers = new HashSet<EmployeeSurveyItemInputModel>();
+			this.QuestionAnswers = new HashSet<EmployeeSurveyAnswerInputModel>();
 		}
 
 		public string EmployeeId { get; set; } = default!;
 
 		public int SurveyId { get; set; }
 
-		public IEnumerable<EmployeeSurveyItemInputModel> QuestionAnswers { get; set; }
+		public IEnumerable<EmployeeSurveyAnswerInputModel> QuestionAnswers { get; set; }
 	}
 }

@@ -3,12 +3,12 @@
 	using AutoMapper;
 	using Oxygen.Survey.Domain.Models;
 
-	public class QuestionItemOutputModel
+	public class QuestionAnswerOutputModel
 	{
 		public string Description { get; set; } = default!;
 
 		public virtual void Mapping(Profile mapper)
 			=> mapper
-				.CreateMap<QuestionItem, QuestionItemOutputModel>();
+				.CreateMap<QuestionAnswer, QuestionAnswerOutputModel>();
 	}
 }

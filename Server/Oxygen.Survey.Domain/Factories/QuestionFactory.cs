@@ -14,7 +14,7 @@
 		private string questionDescription = default!;
 		private bool questionIsRequired = default!;
 
-		private List<QuestionItem> questionItems = new List<QuestionItem>();
+		private List<QuestionAnswer> questionAnswers = new List<QuestionAnswer>();
 
 		public IQuestionFactory WithDescription(string description)
 		{
@@ -38,62 +38,44 @@
 			return this;
 		}
 
-		public IQuestionFactory WithQuestionItem(QuestionItem questionItem)
+		public IQuestionFactory WithQuestionAnswer(QuestionAnswer questionAnswer)
 		{
-			this.questionItems.Add(questionItem);
+			this.questionAnswers.Add(questionAnswer);
 
 			return this;
 		}
 
-		public IQuestionFactory WithQuestionItem(Action<IQuestionItemFactory> questionItem)
+		public IQuestionFactory WithQuestionAnswer(Action<IQuestionAnswerFactory> questionAnswer)
 		{
-			var questionItemFactory = new QuestionItemFactory();
+			var questionAnswerFactory = new QuestionAnswerFactory();
 
-			questionItem(questionItemFactory);
+			questionAnswer(questionAnswerFactory);
 
-			this.questionItems.Add(questionItemFactory.Build());
+			this.questionAnswers.Add(questionAnswerFactory.Build());
 
 			return this;
 		}
 
-		public IQuestionFactory WithQuestionItems(IEnumerable<QuestionItem> questionItems)
+		public IQuestionFactory WithQuestionAnswers(IEnumerable<QuestionAnswer> questionAnswers)
 		{
-			this.questionItems.AddRange(questionItems);
+			this.questionAnswers.AddRange(questionAnswers);
 
 			return this;
 		}
 
-		public IQuestionFactory WithQuestionItems(IEnumerable<Action<IQuestionItemFactory>> questionItems)
+		public IQuestionFactory WithQuestionAnswers(IEnumerable<Action<IQuestionAnswerFactory>> questionAnswers)
 		{
-			IList<QuestionItem> tempQuestionItems = new List<QuestionItem>();
-
-			foreach (var action in questionItems)
+			foreach (var action in questionAnswers)
 			{
-				var questionItemFactory = new QuestionItemFactory();
+				var questionAnswerFactory = new QuestionAnswerFactory();
 
-				action(questionItemFactory);
+				action(questionAnswerFactory);
 
-				this.questionItems.Add(questionItemFactory.Build());
+				this.questionAnswers.Add(questionAnswerFactory.Build());
 			}
 
 			return this;
 		}
-
-		//public QuestionFactory WithQuestionItems(params Action<QuestionItemFactory>[] questionItems)
-		//{
-		//    IList<QuestionItem> tempQuestionItems = new List<QuestionItem>();
-
-		//    foreach (var action in questionItems)
-		//    {
-		//        var questionItemFactory = new QuestionItemFactory();
-
-		//        action(questionItemFactory);
-
-		//        this.questionItems.Add(questionItemFactory.Build());
-		//    }
-
-		//    return this;
-		//}
 
 		public Question Build()
 		{
@@ -102,9 +84,9 @@
 				throw new InvalidQuestionException("Question type must have a value.");
 			}
 
-			if (this.questionItems.Count == 0 && this.questionType.Type != GlobalConstants.QuestionType.Free_text)
+			if (this.questionAnswers.Count == 0 && this.questionType.Type != GlobalConstants.QuestionType.Free_text)
 			{
-				throw new InvalidSurveyException("Question must have question items.");
+				throw new InvalidSurveyException("Question must have question answers.");
 			}
 
 			var question = new Question(
@@ -112,7 +94,7 @@
 				this.questionIsRequired,
 				this.questionType);
 
-			this.questionItems.ForEach(x => question.AddQuestionItem(x));
+			this.questionAnswers.ForEach(x => question.AddQuestionAnswer(x));
 
 			return question;
 		}

@@ -10,6 +10,6 @@
 
         IEmployeeSurveyFactory WithSurvey(Survey survey);
 
-        IEmployeeSurveyFactory WithQuestionAnswer(Action<IEmployeeSurveyItemFactory> userSurveyItem);
+        IEmployeeSurveyFactory WithQuestionAnswer(Action<IEmployeeSurveyAnswerFactory> employeeSurveyAnswer);
     }
 }

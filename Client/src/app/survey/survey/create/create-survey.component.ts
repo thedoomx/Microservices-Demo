@@ -15,7 +15,7 @@ declare var $: any;
     styleUrls: ['./create-survey.component.css']
 })
 export class CreateSurveyComponent implements OnInit {
-    @ViewChild('newSurveyItem') newQSurveyItem: ElementRef;
+    @ViewChild('newSurveyItem') newSurveyItem: ElementRef;
     surveyForm: FormGroup<Survey>;
     surveyTypes: Array<SurveyType>;
     questions: Array<Question> = [];

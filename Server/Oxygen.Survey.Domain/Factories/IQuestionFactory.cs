@@ -15,12 +15,12 @@
 
 		IQuestionFactory WithQuestionType(QuestionType questionType);
 
-		IQuestionFactory WithQuestionItem(QuestionItem questionItem);
+		IQuestionFactory WithQuestionAnswer(QuestionAnswer questionAnswer);
 
-		IQuestionFactory WithQuestionItem(Action<IQuestionItemFactory> questionItem);
+		IQuestionFactory WithQuestionAnswer(Action<IQuestionAnswerFactory> questionAnswer);
 
-		IQuestionFactory WithQuestionItems(IEnumerable<QuestionItem> questionItems);
+		IQuestionFactory WithQuestionAnswers(IEnumerable<QuestionAnswer> questionAnswers);
 
-		IQuestionFactory WithQuestionItems(IEnumerable<Action<IQuestionItemFactory>> questionItems);
+		IQuestionFactory WithQuestionAnswers(IEnumerable<Action<IQuestionAnswerFactory>> questionAnswers);
 	}
 }

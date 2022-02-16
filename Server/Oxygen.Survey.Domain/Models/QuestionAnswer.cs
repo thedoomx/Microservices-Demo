@@ -2,11 +2,11 @@
 {
     using Oxygen.Domain.Common.Models;
     using Oxygen.Survey.Domain.Exceptions;
-    using static Oxygen.Survey.Domain.Models.ModelConstants.QuestionItem;
+    using static Oxygen.Survey.Domain.Models.ModelConstants.QuestionAnswer;
 
-    public class QuestionItem : Entity<int>
+    public class QuestionAnswer : Entity<int>
     {
-        public QuestionItem(string description)
+        public QuestionAnswer(string description)
         {
             this.Validate(description);
 
@@ -15,7 +15,7 @@
 
         public string Description { get; private set; }
 
-        public QuestionItem ChangeDescription(string description)
+        public QuestionAnswer ChangeDescription(string description)
         {
             this.ValidateType(description);
             this.Description = description;
@@ -29,7 +29,7 @@
         }
 
         private void ValidateType(string description)
-            => Guard.ForStringLength<InvalidQuestionItemException>(
+            => Guard.ForStringLength<InvalidQuestionAnswerException>(
                 description,
                 MinDescriptionLength,
                 MaxDescriptionLength,

@@ -4,11 +4,11 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using static Domain.Models.ModelConstants.Common;
-    using static Domain.Models.ModelConstants.QuestionItem;
+    using static Domain.Models.ModelConstants.QuestionAnswer;
 
-    internal class QuestionItemConfiguration : IEntityTypeConfiguration<QuestionItem>
+    internal class QuestionAnswerConfiguration : IEntityTypeConfiguration<QuestionAnswer>
     {
-        public void Configure(EntityTypeBuilder<QuestionItem> builder)
+        public void Configure(EntityTypeBuilder<QuestionAnswer> builder)
         {
             builder
                 .HasKey(c => c.Id);

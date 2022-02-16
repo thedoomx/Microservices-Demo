@@ -6,9 +6,9 @@
     using static Domain.Models.ModelConstants.Common;
     //using static Domain.Models.ModelConstants.UserSurveyItem;
 
-    internal class EmployeeSurveyItemConfiguration : IEntityTypeConfiguration<EmployeeSurveyItem>
+    internal class EmployeeSurveyAnswerConfiguration : IEntityTypeConfiguration<EmployeeSurveyAnswer>
     {
-        public void Configure(EntityTypeBuilder<EmployeeSurveyItem> builder)
+        public void Configure(EntityTypeBuilder<EmployeeSurveyAnswer> builder)
         {
             builder
                 .HasKey(c => c.Id);
@@ -21,9 +21,9 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .HasOne(c => c.QuestionItem)
+                .HasOne(c => c.QuestionAnswer)
                 .WithMany()
-                .HasForeignKey("QuestionItemId")
+                .HasForeignKey("QuestionAnswerId")
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }

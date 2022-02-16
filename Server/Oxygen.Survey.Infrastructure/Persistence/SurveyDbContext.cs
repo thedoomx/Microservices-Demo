@@ -35,11 +35,11 @@
 
         public DbSet<QuestionType> QuestionTypes { get; set; } = default!;
 
-        public DbSet<QuestionItem> QuestionItems { get; set; } = default!;
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; } = default!;
 
         public DbSet<EmployeeSurvey> EmployeeSurveys { get; set; } = default!;
 
-        public DbSet<EmployeeSurveyItem> EmployeeSurveyItems { get; set; } = default!;
+        public DbSet<EmployeeSurveyAnswer> EmployeeSurveyAnswers { get; set; } = default!;
 
         protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
 

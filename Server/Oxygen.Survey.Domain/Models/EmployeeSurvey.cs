@@ -7,7 +7,7 @@
 
     public class EmployeeSurvey : Entity<int>, IAggregateRoot
     {
-        private readonly HashSet<EmployeeSurveyItem> employeeSurveyItems;
+        private readonly HashSet<EmployeeSurveyAnswer> employeeSurveyAnswers;
 
         internal EmployeeSurvey(int employeeId, Survey survey, bool isSubmitted)
         {
@@ -15,7 +15,7 @@
             this.Survey = survey;
             this.IsSubmitted = isSubmitted;
 
-            this.employeeSurveyItems = new HashSet<EmployeeSurveyItem>();
+            this.employeeSurveyAnswers = new HashSet<EmployeeSurveyAnswer>();
         }
 
         private EmployeeSurvey(int employeeId, bool isSubmitted)
@@ -23,7 +23,7 @@
             this.EmployeeId = employeeId;
             this.IsSubmitted = isSubmitted;
 
-            this.employeeSurveyItems = new HashSet<EmployeeSurveyItem>();
+            this.employeeSurveyAnswers = new HashSet<EmployeeSurveyAnswer>();
         }
 
         public int EmployeeId { get; private set; }
@@ -32,12 +32,12 @@
 
         public bool IsSubmitted { get; private set; }
 
-        public IReadOnlyCollection<EmployeeSurveyItem> EmployeeSurveyItems => 
-            this.employeeSurveyItems.ToList().AsReadOnly();
+        public IReadOnlyCollection<EmployeeSurveyAnswer> EmployeeSurveyAnswers => 
+            this.employeeSurveyAnswers.ToList().AsReadOnly();
 
-        public void AddEmployeeSurveyItem(EmployeeSurveyItem employeeSurveyItem)
+        public void AddEmployeeSurveyAnswer(EmployeeSurveyAnswer employeeSurveyAnswer)
         {
-            this.employeeSurveyItems.Add(employeeSurveyItem);
+            this.employeeSurveyAnswers.Add(employeeSurveyAnswer);
         }
     }
 }

@@ -19,18 +19,18 @@
         {
             private readonly ISurveyFactory _surveyFactory;
             private readonly IQuestionFactory _questionFactory;
-            private readonly IQuestionItemFactory _questionItemFactory;
+            private readonly IQuestionAnswerFactory _questionAnswerFactory;
             private readonly ISurveyDomainRepository _surveyDomainRepository;
 
             public CreateSurveyCommandHandler(
                 ISurveyFactory surveyFactory,
                 IQuestionFactory questionFactory,
-                IQuestionItemFactory questionItemFactory,
+                IQuestionAnswerFactory questionAnswerFactory,
                 ISurveyDomainRepository surveyDomainRepository)
             {
                 this._surveyFactory = surveyFactory;
                 this._questionFactory = questionFactory;
-                this._questionItemFactory = questionItemFactory;
+                this._questionAnswerFactory = questionAnswerFactory;
                 this._surveyDomainRepository = surveyDomainRepository;
             }
 
@@ -51,25 +51,23 @@
                 {
                     var questionType = questionTypes.FirstOrDefault(x => x.Id == question.QuestionType);
 
-                    
-
-                    var questionItemsList = new List<QuestionItem>();
-					foreach (var questionItem in question.QuestionItems)
+                    var questionAnswersList = new List<QuestionAnswer>();
+					foreach (var questionAnswer in question.QuestionAnswers)
 					{
-                        var questionItemEntity = this._questionItemFactory
-                                                    .WithDescription(questionItem.Description)
+                        var questionAnswerEntity = this._questionAnswerFactory
+                                                    .WithDescription(questionAnswer.Description)
                                                     .Build();
 
-                        await this._surveyDomainRepository.AddQuestionItem(questionItemEntity, cancellationToken);
+                        await this._surveyDomainRepository.AddQuestionAnswer(questionAnswerEntity, cancellationToken);
 
-                        questionItemsList.Add(questionItemEntity);
+                        questionAnswersList.Add(questionAnswerEntity);
 					}
 
                     var questionEntity = this._questionFactory
                                             .WithDescription(question.Description)
                                             .WithRequired(question.IsRequired)
                                             .WithQuestionType(questionType)
-                                            .WithQuestionItems(questionItemsList)
+                                            .WithQuestionAnswers(questionAnswersList)
                                             .Build();
 
                     await this._surveyDomainRepository.AddQuestion(questionEntity, cancellationToken);

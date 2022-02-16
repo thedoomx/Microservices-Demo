@@ -7,7 +7,7 @@
     {
         public EmployeeSurveyData()
         {
-            this.EmployeeSurveyItems = new HashSet<EmployeeSurveyItem>();
+            this.EmployeeSurveyItems = new HashSet<EmployeeSurveyAnswer>();
         }
 
         public int Id { get; set; }
@@ -20,6 +20,6 @@
 
         public Survey Survey { get; set; } = default!;
 
-        public IEnumerable<EmployeeSurveyItem> EmployeeSurveyItems { get; set; }
+        public IEnumerable<EmployeeSurveyAnswer> EmployeeSurveyItems { get; set; }
     }
 }

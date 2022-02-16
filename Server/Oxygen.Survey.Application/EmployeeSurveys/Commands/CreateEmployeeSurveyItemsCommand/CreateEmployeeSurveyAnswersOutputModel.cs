@@ -1,8 +1,8 @@
 ﻿namespace Oxygen.Survey.Application.EmployeeSurvey.Commands.CreateUserSurveyCommand
 {
-    public class CreateEmployeeSurveyItemsOutputModel
+    public class CreateEmployeeSurveyAnswersOutputModel
     {
-        public CreateEmployeeSurveyItemsOutputModel(int employeeSurveyId)
+        public CreateEmployeeSurveyAnswersOutputModel(int employeeSurveyId)
             => this.EmployeeSurveyId = employeeSurveyId;
 
         public int EmployeeSurveyId { get; }

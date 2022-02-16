@@ -68,7 +68,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.ToTable("EmployeeSurveys");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,21 +78,24 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.Property<int?>("EmployeeSurveyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionId")
+                    b.Property<string>("FreeText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuestionAnswerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionItemId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeSurveyId");
 
+                    b.HasIndex("QuestionAnswerId");
+
                     b.HasIndex("QuestionId");
 
-                    b.HasIndex("QuestionItemId");
-
-                    b.ToTable("EmployeeSurveyItems");
+                    b.ToTable("EmployeeSurveyAnswers");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
@@ -128,7 +131,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +151,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("QuestionItems");
+                    b.ToTable("QuestionAnswers");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionType", b =>
@@ -220,21 +223,21 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyAnswer", b =>
                 {
                     b.HasOne("Oxygen.Survey.Domain.Models.EmployeeSurvey", null)
-                        .WithMany("EmployeeSurveyItems")
+                        .WithMany("EmployeeSurveyAnswers")
                         .HasForeignKey("EmployeeSurveyId");
+
+                    b.HasOne("Oxygen.Survey.Domain.Models.QuestionAnswer", "QuestionAnswer")
+                        .WithMany()
+                        .HasForeignKey("QuestionAnswerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Oxygen.Survey.Domain.Models.QuestionItem", "QuestionItem")
-                        .WithMany()
-                        .HasForeignKey("QuestionItemId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -252,10 +255,10 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasForeignKey("SurveyId");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionAnswer", b =>
                 {
                     b.HasOne("Oxygen.Survey.Domain.Models.Question", null)
-                        .WithMany("QuestionItems")
+                        .WithMany("QuestionAnswers")
                         .HasForeignKey("QuestionId");
                 });
 
