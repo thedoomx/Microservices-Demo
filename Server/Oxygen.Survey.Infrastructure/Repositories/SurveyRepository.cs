@@ -16,6 +16,7 @@
 	using Oxygen.Survey.Application.SurveyType.Queries.Common;
 	using Oxygen.Survey.Application.QuestionType.Queries.Common;
 	using Oxygen.Survey.Domain.Models;
+	using Oxygen.Survey.Application.Survey.Queries.Submit;
 
 	internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
 		ISurveyDomainRepository,
@@ -125,6 +126,16 @@
 					.All()
 					.Where(x => x.Id == id)
 					.Include(x => x.SurveyType))
+			   .FirstOrDefaultAsync(cancellationToken);
+
+		public async Task<SubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default)
+			 => await this.mapper
+			   .ProjectTo<SubmitSurveyOutputModel>(this
+					.All()
+					.Where(x => x.Id == id)
+					.Include(x => x.SurveyType)
+					.Include(x => x.Questions)
+					.ThenInclude(x => x.QuestionItems))
 			   .FirstOrDefaultAsync(cancellationToken);
 	}
 }

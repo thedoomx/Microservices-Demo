@@ -7,9 +7,12 @@
     using System.Threading.Tasks;
     using Oxygen.Survey.Application.SurveyType.Queries.Common;
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Submit;
 
-    public interface ISurveyQueryRepository : IQueryRepository<Domain.Models.Survey>
+	public interface ISurveyQueryRepository : IQueryRepository<Domain.Models.Survey>
     {
+        Task<SubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default);
+
         Task<SurveyOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default);
