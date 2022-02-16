@@ -11,6 +11,39 @@
                     <label>Summary</label>
                     <input type="text" class="form-control" formControlName="summary">
                 </div>
+
+                <div class="form-group" id="questions" *ngIf="surveyLoaded">
+                    <div *ngFor="let question of questions;let i = index">
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <label>{{i+1}}: {{question.description}}</label>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-8"  *ngIf="question.questionType == freeTextType">
+                                <textarea></textarea>
+                            </div>
+
+                            <div class="col-md-8"  *ngIf="question.questionType == radioType">
+                                <div *ngFor="let questionAnswer of question.questionAnswers;let i = index">
+                                    <input id="{{questionAnswer.id}}" type="radio" name="{{'Question-' + question.id}}" value="questionAnswer.id">
+                                    <label for="{{questionAnswer.id}}">{{questionAnswer.description}}</label>
+                                 </div>
+                            </div>
+                            
+                            <div class="col-md-8"  *ngIf="question.questionType == checkboxType">
+                                <input type="checkbox" />
+                                {{ 'Checkbox' }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="btn-toolbar">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

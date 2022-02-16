@@ -11,11 +11,13 @@
             this.QuestionAnswers = new HashSet<QuestionAnswerOutputModel>();
         }
 
+        public int Id { get; private set; }
+
         public string Description { get; set; } = default!;
 
         public bool IsRequired { get; set; }
 
-        public string QuestionType { get; set; }
+        public string QuestionType { get; set; } = default!;
 
         public IEnumerable<QuestionAnswerOutputModel> QuestionAnswers { get; set; }
 

@@ -7,6 +7,8 @@ import { CompanyService } from 'src/app/company/company.service';
 import { Survey } from '../../models/survey.model';
 import { AssignEmployeesSurveys } from '../../models/assignEmployeesSurveys.model';
 import { AssignEmployee } from '../../models/assignEmployee.model';
+import { questionTypeConstants } from '../../constants/question-types.constants';
+import { SubmitQuestion } from '../../models/submitQuestion.model';
 
 @Component({
     selector: 'app-survey-submit',
@@ -18,6 +20,12 @@ export class SubmitComponent implements OnInit {
     surveyForm:  FormGroup;
     surveyName: string;
     submitModel: AssignEmployeesSurveys;
+    surveyLoaded: boolean = false;
+    questions: Array<SubmitQuestion>;
+
+    freeTextType: string = questionTypeConstants.freeText;
+    radioType: string = questionTypeConstants.radio;
+    checkboxType: string = questionTypeConstants.checkbox;
 
     constructor(
         private route: ActivatedRoute,
@@ -25,10 +33,11 @@ export class SubmitComponent implements OnInit {
         private companyService: CompanyService,
         private fb: FormBuilder,
         private router: Router) {
-
+          
           this.surveyForm = this.fb.group({
             name: ['', Validators.required],
             summary: ['', Validators.required],
+            questions: [[], Validators.required]
           })
 
         this.id = this.route.snapshot.paramMap.get('id');
@@ -39,11 +48,13 @@ export class SubmitComponent implements OnInit {
 
     fetchSubmitSurvey() {
         this.surveyService.getSubmitSurveyDetails(this.id).subscribe(survey => {
-            debugger;
+            this.surveyLoaded = true;
+            this.questions = survey.questions;
 
           this.surveyForm = this.fb.group({
             name: [survey.name, Validators.required],
             summary: [survey.summary, Validators.required],
+            questions: [survey.questions, Validators.required],
           })
         })
       }
