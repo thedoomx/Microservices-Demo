@@ -33,13 +33,13 @@ export class SubmitComponent implements OnInit {
 
         this.id = this.route.snapshot.paramMap.get('id');
 
-        this.submitModel = {} as AssignEmployeesSurveys;
-        this.submitModel.id = Number(this.id);
+        // this.submitModel = {} as AssignEmployeesSurveys;
+        // this.submitModel.id = Number(this.id);
     }
 
-    fetchSurvey() {
-        this.surveyService.getSurvey(this.id).subscribe(survey => {
-            this.surveyName = survey.name;
+    fetchSubmitSurvey() {
+        this.surveyService.getSubmitSurveyDetails(this.id).subscribe(survey => {
+            debugger;
 
           this.surveyForm = this.fb.group({
             name: [survey.name, Validators.required],
@@ -49,12 +49,12 @@ export class SubmitComponent implements OnInit {
       }
 
     ngOnInit(): void {
-        this.fetchSurvey()
+        this.fetchSubmitSurvey()
     }
 
     onClickSubmit() {
-      this.surveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
-        this.router.navigate(['survey']);
-    });
+      // this.surveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
+      //   this.router.navigate(['survey']);
+      // });
     }
 }

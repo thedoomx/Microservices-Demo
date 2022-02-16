@@ -96,7 +96,20 @@
 
 			this.questionAnswers.ForEach(x => question.AddQuestionAnswer(x));
 
+			this.ResetFields();
+
 			return question;
+		}
+
+		private void ResetFields()
+		{
+			this.questionType = default!;
+			this.questionTypeSet = false;
+
+			this.questionDescription = default!;
+			this.questionIsRequired = default!;
+
+			this.questionAnswers = new List<QuestionAnswer>();
 		}
 	}
 }

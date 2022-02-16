@@ -22,7 +22,7 @@
 
         public class Question
         {
-            public const int MinDescriptionLength = 10;
+            public const int MinDescriptionLength = 5;
             public const int MaxDescriptionLength = 300;
         }
 

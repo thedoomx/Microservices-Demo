@@ -5,6 +5,7 @@ import { AssignEmployeesComponent } from './survey/assign-employees/assign-emplo
 import { CreateSurveyComponent } from './survey/create/create-survey.component';
 import { ListMineSurveyComponent } from './survey/list-mine/list-mine-survey.component';
 import { ListSurveyComponent } from './survey/list/list-survey.component';
+import { SubmitComponent } from './survey/submit/submit.component';
 import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path:'list-mine-survey', component: ListMineSurveyComponent, },
     { path:'', component: SurveyComponent, },
     { path:':id/assign-employees', component: AssignEmployeesComponent, },
+    { path:':id/submit-survey', component: SubmitComponent, },
 
   ];
   
