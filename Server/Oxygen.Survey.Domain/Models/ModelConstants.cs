@@ -40,8 +40,8 @@
 
         public class EmployeeSurveyAnswer
         {
-            public const int MinFreeTextLength = 5;
-            public const int MaxFreeTextLength = 300;
+            public const int MinTextValueLength = 5;
+            public const int MaxTextValueLength = 300;
         }
     }
 }

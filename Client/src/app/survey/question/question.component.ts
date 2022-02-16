@@ -73,7 +73,7 @@ export class QuestionComponent implements OnInit {
   onQuestionTypeChange($event) {
     let selectedItemText = this.questionTypes[$event.target.selectedIndex].type;
     
-    if(selectedItemText == questionTypeConstants.freeText) {
+    if(selectedItemText == questionTypeConstants.freeText || selectedItemText == questionTypeConstants.checkbox) {
       this.questionForm.get('questionAnswers').clearValidators();
       this.questionForm.get('questionAnswers').updateValueAndValidity();
       this.showQuestionOptions = false;

@@ -10,7 +10,7 @@ using Oxygen.Survey.Infrastructure.Persistence;
 namespace Oxygen.Survey.Infrastructure.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20220216123400_Init")]
+    [Migration("20220216141429_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,17 +77,24 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool?>("BoolValue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(null);
+
                     b.Property<int?>("EmployeeSurveyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FreeText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionAnswerId")
+                    b.Property<int?>("QuestionAnswerId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TextValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.HasKey("Id");
 
@@ -234,8 +241,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.HasOne("Oxygen.Survey.Domain.Models.QuestionAnswer", "QuestionAnswer")
                         .WithMany()
                         .HasForeignKey("QuestionAnswerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
                         .WithMany()

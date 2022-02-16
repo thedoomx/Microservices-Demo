@@ -3,8 +3,7 @@
     using Domain.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using static Domain.Models.ModelConstants.Common;
-    //using static Domain.Models.ModelConstants.UserSurveyItem;
+    using static Domain.Models.ModelConstants.EmployeeSurveyAnswer;
 
     internal class EmployeeSurveyAnswerConfiguration : IEntityTypeConfiguration<EmployeeSurveyAnswer>
     {
@@ -24,8 +23,16 @@
                 .HasOne(c => c.QuestionAnswer)
                 .WithMany()
                 .HasForeignKey("QuestionAnswerId")
-                .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Property(c => c.TextValue)
+                .IsRequired()
+                .HasMaxLength(MaxTextValueLength);
+
+            builder
+                .Property(c => c.BoolValue)
+                .HasDefaultValue(null);
         }
     }
 }

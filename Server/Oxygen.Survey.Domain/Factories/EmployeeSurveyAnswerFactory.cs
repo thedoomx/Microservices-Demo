@@ -11,7 +11,8 @@
         private QuestionAnswer questionAnswer = default!;
         private bool questionAnswerSet = default!;
 
-        private string freeText = default!;
+        private string textValue = default!;
+        private bool boolValue = default!;
 
         public IEmployeeSurveyAnswerFactory WithQuestion(Question question)
         {
@@ -29,9 +30,15 @@
             return this;
         }
 
-        public IEmployeeSurveyAnswerFactory WithFreeText(string freeText)
+        public IEmployeeSurveyAnswerFactory WithTextValue(string textVal)
         {
-            this.freeText = freeText;
+            this.textValue = textVal;
+            return this;
+        }
+
+        public IEmployeeSurveyAnswerFactory WithBoolValue(bool boolVal)
+        {
+            this.boolValue = boolVal;
             return this;
         }
 
@@ -47,7 +54,7 @@
                 throw new InvalidEmployeeSurveyAnswerException("Question answer must have a value.");
             }
 
-            return new EmployeeSurveyAnswer(this.question, this.questionAnswer, this.freeText);
+            return new EmployeeSurveyAnswer(this.question, this.questionAnswer, this.textValue, this.boolValue);
         }
     }
 }

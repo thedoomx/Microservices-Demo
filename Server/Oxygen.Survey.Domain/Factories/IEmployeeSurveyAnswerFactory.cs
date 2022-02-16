@@ -8,5 +8,10 @@
         IEmployeeSurveyAnswerFactory WithQuestion(Question question);
 
         IEmployeeSurveyAnswerFactory WithQuestionAnswer(QuestionAnswer questionAnswer);
+
+        IEmployeeSurveyAnswerFactory WithTextValue(string textValue);
+
+        IEmployeeSurveyAnswerFactory WithBoolValue(bool boolValue);
+
     }
 }

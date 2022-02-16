@@ -146,8 +146,9 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionId = table.Column<int>(nullable: false),
-                    QuestionAnswerId = table.Column<int>(nullable: false),
-                    FreeText = table.Column<string>(nullable: true),
+                    QuestionAnswerId = table.Column<int>(nullable: true),
+                    TextValue = table.Column<string>(maxLength: 300, nullable: false),
+                    BoolValue = table.Column<bool>(nullable: true),
                     EmployeeSurveyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

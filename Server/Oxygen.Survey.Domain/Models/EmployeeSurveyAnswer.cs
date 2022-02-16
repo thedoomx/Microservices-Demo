@@ -6,29 +6,34 @@
 
     public class EmployeeSurveyAnswer : Entity<int>
     {
-        internal EmployeeSurveyAnswer(Question question, QuestionAnswer questionAnswer, string freeText)
+        internal EmployeeSurveyAnswer(Question question, QuestionAnswer questionAnswer, string textValue, bool? boolValue)
         {
-            this.Validate(freeText);
+            this.Validate(textValue);
 
             this.Question = question;
             this.QuestionAnswer = questionAnswer;
-            this.FreeText = freeText;
+
+            this.TextValue = textValue;
+            this.BoolValue = boolValue;
         }
 
-        private EmployeeSurveyAnswer(string freeText)
+        private EmployeeSurveyAnswer(string textValue, bool? boolValue)
         {
-            this.Validate(freeText);
+            this.Validate(textValue);
 
-            this.FreeText = freeText;
+            this.TextValue = textValue;
+            this.BoolValue = boolValue;
         }
 
         public Question Question { get; private set; }
 
         public QuestionAnswer QuestionAnswer { get; private set; }
 
-		public string FreeText { get; private set; }
+		public string TextValue { get; private set; }
 
-		public EmployeeSurveyAnswer ChangeQuestion(Question question)
+        public bool? BoolValue { get; private set; }
+
+        public EmployeeSurveyAnswer ChangeQuestion(Question question)
         {
             this.Question = question;
 
@@ -42,16 +47,16 @@
             return this;
         }
 
-        private void Validate(string freeText)
+        private void Validate(string textValue)
         {
-            this.ValidateFreeText(freeText);
+            this.ValidateFreeText(textValue);
         }
 
-        private void ValidateFreeText(string description)
+        private void ValidateFreeText(string textValue)
             => Guard.ForStringLength<InvalidEmployeeSurveyAnswerException>(
-                description,
-                MinFreeTextLength,
-                MaxFreeTextLength,
-                nameof(this.FreeText));
+                textValue,
+                MinTextValueLength,
+                MaxTextValueLength,
+                nameof(this.TextValue));
     }
 }
