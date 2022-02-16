@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
       description: ['', Validators.required],
       isRequired: [false, Validators.required],
       questionType: [null, Validators.required],
-      questionItems: [null, Validators.required]
+      questionItems: [[], Validators.required]
     })
   }
 

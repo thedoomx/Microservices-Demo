@@ -1,8 +1,6 @@
 ﻿namespace Oxygen.Survey.Application.Survey.Commands.Common
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class QuestionInputModel
     {

@@ -6,7 +6,7 @@
 	using System;
 	using System.Collections.Generic;
 
-	public class QuestionFactory
+	public class QuestionFactory : IQuestionFactory
 	{
 		private QuestionType questionType = default!;
 		private bool questionTypeSet = false;
@@ -16,36 +16,36 @@
 
 		private List<QuestionItem> questionItems = new List<QuestionItem>();
 
-		public QuestionFactory WithDescription(string description)
+		public IQuestionFactory WithDescription(string description)
 		{
 			this.questionDescription = description;
 			return this;
 		}
 
-		public QuestionFactory WithRequired(bool isRequired)
+		public IQuestionFactory WithRequired(bool isRequired)
 		{
 			this.questionIsRequired = isRequired;
 			return this;
 		}
 
-		public QuestionFactory WithQuestionType(string type)
+		public IQuestionFactory WithQuestionType(string type)
 			=> this.WithQuestionType(new QuestionType(type));
 
-		public QuestionFactory WithQuestionType(QuestionType questionType)
+		public IQuestionFactory WithQuestionType(QuestionType questionType)
 		{
 			this.questionType = questionType;
 			this.questionTypeSet = true;
 			return this;
 		}
 
-		public QuestionFactory WithQuestionItem(QuestionItem questionItem)
+		public IQuestionFactory WithQuestionItem(QuestionItem questionItem)
 		{
 			this.questionItems.Add(questionItem);
 
 			return this;
 		}
 
-		public QuestionFactory WithQuestionItem(Action<QuestionItemFactory> questionItem)
+		public IQuestionFactory WithQuestionItem(Action<IQuestionItemFactory> questionItem)
 		{
 			var questionItemFactory = new QuestionItemFactory();
 
@@ -56,14 +56,14 @@
 			return this;
 		}
 
-		public QuestionFactory WithQuestionItems(IEnumerable<QuestionItem> questionItems)
+		public IQuestionFactory WithQuestionItems(IEnumerable<QuestionItem> questionItems)
 		{
 			this.questionItems.AddRange(questionItems);
 
 			return this;
 		}
 
-		public QuestionFactory WithQuestionItems(IEnumerable<Action<QuestionItemFactory>> questionItems)
+		public IQuestionFactory WithQuestionItems(IEnumerable<Action<IQuestionItemFactory>> questionItems)
 		{
 			IList<QuestionItem> tempQuestionItems = new List<QuestionItem>();
 

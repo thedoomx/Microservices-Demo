@@ -48,6 +48,13 @@
             return this;
         }
 
+        public ISurveyFactory WithQuestion(Question question)
+        {
+            this.questions.Add(question);
+
+            return this;
+        }
+
         public Survey Build()
         {
             if (!this.surveyTypeSet)

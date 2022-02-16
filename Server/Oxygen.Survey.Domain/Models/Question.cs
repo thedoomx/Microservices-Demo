@@ -1,12 +1,9 @@
 ﻿namespace Oxygen.Survey.Domain.Models
 {
-    using Oxygen.Domain.Common;
     using Oxygen.Domain.Common.Models;
     using Oxygen.Survey.Domain.Exceptions;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using static Oxygen.Survey.Domain.Models.ModelConstants.Question;
 
     public class Question : Entity<int>
@@ -67,8 +64,6 @@
         public void AddQuestionItem(QuestionItem questionItem)
         {
             this.questionItems.Add(questionItem);
-
-            //this.RaiseEvent(new QuestionItemAddedEvent());
         }
 
         private void Validate(string description)

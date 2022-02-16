@@ -6,6 +6,10 @@ namespace Oxygen.Survey.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "EntityFrameworkHiLoSequence",
+                incrementBy: 10);
+
             migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
@@ -93,8 +97,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 300, nullable: false),
                     IsRequired = table.Column<bool>(nullable: false, defaultValue: false),
                     QuestionTypeId = table.Column<int>(nullable: false),
@@ -121,8 +124,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 name: "QuestionItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 300, nullable: false),
                     QuestionId = table.Column<int>(nullable: true)
                 },
@@ -236,6 +238,9 @@ namespace Oxygen.Survey.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "SurveyTypes");
+
+            migrationBuilder.DropSequence(
+                name: "EntityFrameworkHiLoSequence");
         }
     }
 }

@@ -15,8 +15,9 @@
 	using Oxygen.Infrastructure.Common.Services;
 	using Oxygen.Survey.Application.SurveyType.Queries.Common;
 	using Oxygen.Survey.Application.QuestionType.Queries.Common;
+	using Oxygen.Survey.Domain.Models;
 
-	internal class SurveyRepository : DataRepository<ISurveyDbContext, Domain.Models.Survey>,
+	internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
 		ISurveyDomainRepository,
 		ISurveyQueryRepository
 	{
@@ -26,13 +27,25 @@
 			: base(db, publisher)
 			=> this.mapper = mapper;
 
-		public async Task<Domain.Models.Survey> GetById(int id,
+		public async Task AddQuestion(Question question,
+			CancellationToken cancellationToken = default)
+		{
+			await this.Data.Questions.AddAsync(question, cancellationToken);
+		}
+
+		public async Task AddQuestionItem(QuestionItem questionItem,
+			CancellationToken cancellationToken = default)
+		{
+			await this.Data.QuestionItems.AddAsync(questionItem, cancellationToken);
+		}
+
+		public async Task<Survey> GetById(int id,
 			CancellationToken cancellationToken = default)
 		{
 			return await this.All().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 		}
 
-		public async Task<Domain.Models.SurveyType> GetSurveyTypeById(int id,
+		public async Task<SurveyType> GetSurveyTypeById(int id,
 			CancellationToken cancellationToken = default)
 			=> await this
 				.Data
@@ -40,7 +53,7 @@
 				.Where(x => x.Id == id)
 				.FirstOrDefaultAsync(cancellationToken);
 
-		public async Task<IEnumerable<Domain.Models.QuestionType>> GetQuestionTypes(
+		public async Task<IEnumerable<QuestionType>> GetQuestionTypes(
 			CancellationToken cancellationToken = default)
 			=> await this
 				.Data
@@ -63,7 +76,7 @@
 			}
 		}
 
-		public async Task<Domain.Models.Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default)
+		public async Task<Survey> GetSurveyWithQuestionsDataById(int id, CancellationToken cancellationToken = default)
 		=> await this
 				.All()
 				.Where(x => x.Id == id)

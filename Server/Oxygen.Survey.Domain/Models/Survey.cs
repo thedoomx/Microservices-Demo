@@ -3,10 +3,8 @@
     using Oxygen.Domain.Common;
     using Oxygen.Domain.Common.Models;
     using Oxygen.Survey.Domain.Exceptions;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using static Oxygen.Survey.Domain.Models.ModelConstants.Survey;
 
     public class Survey : Entity<int>, IAggregateRoot
@@ -61,8 +59,6 @@
         public void AddQuestion(Question question)
         {
             this.questions.Add(question);
-
-            //this.RaiseEvent(new QuestionAddedEvent());
         }
 
         private void Validate(string name, string summary)

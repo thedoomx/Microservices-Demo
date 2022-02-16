@@ -18,15 +18,19 @@
         public class CreateSurveyCommandHandler : IRequestHandler<CreateSurveyCommand, Result<CreateSurveyOutputModel>>
         {
             private readonly ISurveyFactory _surveyFactory;
+            private readonly IQuestionFactory _questionFactory;
             private readonly IQuestionItemFactory _questionItemFactory;
             private readonly ISurveyDomainRepository _surveyDomainRepository;
 
             public CreateSurveyCommandHandler(
                 ISurveyFactory surveyFactory,
-                IQuestionItemFactory _questionItemFactory,
+                IQuestionFactory questionFactory,
+                IQuestionItemFactory questionItemFactory,
                 ISurveyDomainRepository surveyDomainRepository)
             {
                 this._surveyFactory = surveyFactory;
+                this._questionFactory = questionFactory;
+                this._questionItemFactory = questionItemFactory;
                 this._surveyDomainRepository = surveyDomainRepository;
             }
 
@@ -45,19 +49,32 @@
 
                 foreach (var question in request.Questions)
                 {
-                    var tempList = new List<QuestionItem>();
-					foreach (var questionItem in question.QuestionItems)
-					{
-                        tempList.Add(this._questionItemFactory.WithDescription(questionItem.Description).Build());
-					}
-
                     var questionType = questionTypes.FirstOrDefault(x => x.Id == question.QuestionType);
 
-                    surveyFactory = surveyFactory.WithQuestion(x => x
-                    .WithDescription(question.Description)
-                    .WithRequired(question.IsRequired)
-                    .WithQuestionType(questionType)
-                    .WithQuestionItems(tempList));
+                    
+
+                    var questionItemsList = new List<QuestionItem>();
+					foreach (var questionItem in question.QuestionItems)
+					{
+                        var questionItemEntity = this._questionItemFactory
+                                                    .WithDescription(questionItem.Description)
+                                                    .Build();
+
+                        await this._surveyDomainRepository.AddQuestionItem(questionItemEntity, cancellationToken);
+
+                        questionItemsList.Add(questionItemEntity);
+					}
+
+                    var questionEntity = this._questionFactory
+                                            .WithDescription(question.Description)
+                                            .WithRequired(question.IsRequired)
+                                            .WithQuestionType(questionType)
+                                            .WithQuestionItems(questionItemsList)
+                                            .Build();
+
+                    await this._surveyDomainRepository.AddQuestion(questionEntity, cancellationToken);
+
+                    surveyFactory = surveyFactory.WithQuestion(questionEntity);
                 }
 
                 var survey = surveyFactory.Build();

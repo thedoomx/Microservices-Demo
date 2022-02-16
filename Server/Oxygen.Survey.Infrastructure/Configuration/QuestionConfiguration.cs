@@ -12,6 +12,8 @@
         {
             builder
                 .HasKey(c => c.Id);
+                
+            builder.Property(o => o.Id).UseHiLo();
 
             builder
                 .Property(c => c.Description)

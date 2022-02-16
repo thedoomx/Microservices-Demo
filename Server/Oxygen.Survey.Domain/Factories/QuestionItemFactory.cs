@@ -3,11 +3,11 @@
 	using Oxygen.Survey.Domain.Exceptions;
     using Oxygen.Survey.Domain.Models;
 
-    public class QuestionItemFactory
+    public class QuestionItemFactory : IQuestionItemFactory
     {
         private string questionItemDescription = default!;
 
-        public QuestionItemFactory WithDescription(string description)
+        public IQuestionItemFactory WithDescription(string description)
         {
             this.questionItemDescription = description;
             return this;

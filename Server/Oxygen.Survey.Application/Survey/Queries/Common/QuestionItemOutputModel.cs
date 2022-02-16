@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Oxygen.Survey.Application.Survey.Queries.Common
+﻿namespace Oxygen.Survey.Application.Survey.Queries.Common
 {
 	public class QuestionItemOutputModel
 	{
