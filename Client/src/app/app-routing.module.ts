@@ -8,20 +8,12 @@ const routes: Routes = [
     loadChildren: () => import('./authentication/authentication-routing.module').then(m => m.AuthenticationRoutingModule)
   },
   {
-    path: 'cars',
-    loadChildren: () => import('./cars/cars-routing.module').then(m => m.CarsRoutingModule)
-  },
-  {
     path: 'survey',
     loadChildren: () => import('./survey/survey-routing.module').then(m => m.SurveyRoutingModule)
   },
   {
     path: 'company',
     loadChildren: () => import('./company/company-routing.module').then(m => m.CompanyRoutingModule)
-  },
-  {
-    path: 'dealers',
-    loadChildren: () => import('./dealers/dealers-routing.module').then(m => m.DealersRoutingModule)
   },
   {
     path: '',
