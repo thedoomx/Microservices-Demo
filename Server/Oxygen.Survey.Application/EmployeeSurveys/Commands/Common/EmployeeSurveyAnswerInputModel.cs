@@ -4,6 +4,10 @@
     {
         public int QuestionId { get; set; }
 
-        public int QuestionAnswerId { get; set; }
-    }
+        public int? QuestionAnswerId { get; set; }
+
+		public string TextValue { get; set; }
+
+		public bool? BoolValue { get; set; }
+	}
 }

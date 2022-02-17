@@ -11,7 +11,7 @@
 			this.QuestionAnswers = new HashSet<EmployeeSurveyAnswerInputModel>();
 		}
 
-		public string EmployeeId { get; set; } = default!;
+		public int EmployeeId { get; set; } = default!;
 
 		public int SurveyId { get; set; }
 

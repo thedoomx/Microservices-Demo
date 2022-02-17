@@ -12,31 +12,37 @@
                     <input type="text" class="form-control" formControlName="summary">
                 </div>
 
-                <div class="form-group" id="questions" *ngIf="surveyLoaded">
-                    <div *ngFor="let question of questions;let i = index">
+                <div class="form-group" *ngIf="surveyLoaded" formArrayName="questionAnswers">
+                    <div *ngFor="let questionAnswer of questionAnswers.controls;let i = index">
                         <div class="row">
 
                             <div class="col-md-8">
-                                <label>{{i+1}}: {{question.description}}</label>
+                                <label>{{i+1}}: {{questions[i].description}}</label>
                             </div>
                             
                         </div>
 
-                        <div class="row">
+                        <div class="row" formGroupName="{{i}}">
 
-                            <div class="col-md-8"  *ngIf="question.questionType == freeTextType">
-                                <textarea></textarea>
+                            <div class="col-md-8"  *ngIf="questions[i].questionType == freeTextType" >
+                                <textarea 
+                                formControlName="textValue">
+                                </textarea>
                             </div>
 
-                            <div class="col-md-8"  *ngIf="question.questionType == radioType">
-                                <div *ngFor="let questionAnswer of question.questionAnswers;let i = index">
-                                    <input id="{{questionAnswer.id}}" type="radio" name="{{'Question-' + question.id}}" value="questionAnswer.id">
-                                    <label for="{{questionAnswer.id}}">{{questionAnswer.description}}</label>
+                            <div class="col-md-8"  *ngIf="questions[i].questionType == radioType" >
+                                <div *ngFor="let qAnswer of questions[i].questionAnswers;let j = index">
+                                    <input id="{{qAnswer.id}}" 
+                                    type="radio" 
+                                    value="{{qAnswer.id}}" 
+                                    formControlName="questionAnswerId">
+                                    <label for="{{qAnswer.id}}">{{qAnswer.description}}</label>
                                  </div>
                             </div>
                             
-                            <div class="col-md-8"  *ngIf="question.questionType == checkboxType">
-                                <input type="checkbox" />
+                            <div class="col-md-8"  *ngIf="questions[i].questionType == checkboxType" >
+                                <input type="checkbox" 
+                                formControlName="boolValue" />
                                 {{ 'Checkbox' }}
                             </div>
                         </div>
@@ -45,7 +51,7 @@
                 </div>
 
                 <div class="btn-toolbar">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="surveyForm.invalid">Submit</button>
                 </div>
             </form>
         </div>

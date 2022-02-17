@@ -84,7 +84,9 @@
 				throw new InvalidQuestionException("Question type must have a value.");
 			}
 
-			if (this.questionAnswers.Count == 0 && this.questionType.Type != GlobalConstants.QuestionType.Free_text)
+			if (this.questionAnswers.Count == 0 && 
+				(this.questionType.Type != GlobalConstants.QuestionType.Free_text &&
+				this.questionType.Type != GlobalConstants.QuestionType.Checkbox))
 			{
 				throw new InvalidSurveyException("Question must have question answers.");
 			}

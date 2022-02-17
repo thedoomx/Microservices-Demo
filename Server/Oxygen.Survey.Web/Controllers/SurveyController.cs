@@ -1,6 +1,7 @@
 ﻿namespace Oxygen.Survey.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+	using Oxygen.Survey.Application.EmployeeSurvey.Commands.CreateUserSurveyCommand;
 	using Oxygen.Survey.Application.EmployeeSurvey.Commands.CreateUserSurveysCommand;
 	using Oxygen.Survey.Application.Queries.Common;
     using Oxygen.Survey.Application.Queries.Mine;
@@ -18,6 +19,13 @@
 
     public class SurveyController : ApiController
     {
+        [HttpPost]
+        [Route(nameof(SubmitEmployeeSurvey))]
+        public async Task<ActionResult<CreateEmployeeSurveyAnswersOutputModel>> SubmitEmployeeSurvey(
+           [FromBody] CreateEmployeeSurveyAnswersCommand command)
+           => await this.Send(command);
+
+
         [HttpGet]
         [Route(nameof(GetSubmitSurveyDetails))]
         public async Task<ActionResult<SubmitSurveyOutputModel>> GetSubmitSurveyDetails(
