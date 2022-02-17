@@ -1,4 +1,4 @@
-﻿namespace Oxygen.Survey.Application.Survey.Queries.Submit
+﻿namespace Oxygen.Survey.Application.Survey.Queries.GetSubmit
 {
 	using AutoMapper;
 	using Oxygen.Survey.Application.Queries.Common;
@@ -6,9 +6,9 @@
 	using Oxygen.Survey.Domain.Models;
 	using System.Collections.Generic;
 
-	public class SubmitSurveyOutputModel : SurveyOutputModel
+	public class GetSubmitSurveyOutputModel : SurveyOutputModel
 	{
-		public SubmitSurveyOutputModel()
+		public GetSubmitSurveyOutputModel()
 		{
 			this.Questions = new HashSet<QuestionOutputModel>();
 		}
@@ -18,7 +18,7 @@
 		public new virtual void Mapping(Profile mapper)
 		{
 			mapper
-				.CreateMap<Survey, SubmitSurveyOutputModel>()
+				.CreateMap<Survey, GetSubmitSurveyOutputModel>()
 				.ForMember(x => x.SurveyType, cfg => cfg
 					.MapFrom(x => x.SurveyType.Name));
 

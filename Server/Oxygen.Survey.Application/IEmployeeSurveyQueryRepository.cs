@@ -1,16 +1,12 @@
 ﻿namespace Oxygen.Survey.Application
 {
     using Oxygen.Application.Common.Contracts;
-    using Oxygen.Survey.Application.Queries.Common;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using Oxygen.Survey.Domain.Models;
+	using Oxygen.Survey.Application.EmployeeSurvey.Queries.Common;
 
-    public interface IEmployeeSurveyQueryRepository : IQueryRepository<Domain.Models.EmployeeSurvey>
+	public interface IEmployeeSurveyQueryRepository : IQueryRepository<Domain.Models.EmployeeSurvey>
     {
-        //Task<IEnumerable<SurveyOutputModel>> Get(string? userId, CancellationToken cancellationToken = default);
+        Task<EmployeeSurveyOutputModel> GetEmployeeSurveyDetails(int employeeSurveyId, CancellationToken cancellationToken = default);
     }
 }

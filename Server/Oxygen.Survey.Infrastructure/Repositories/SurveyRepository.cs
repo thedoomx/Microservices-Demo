@@ -10,13 +10,13 @@
 	using Oxygen.Infrastructure.Common.Persistence;
 	using Oxygen.Survey.Application;
 	using Oxygen.Survey.Domain.Repositories;
-	using Oxygen.Survey.Application.Queries.Common;
 	using Oxygen.Application.Common.Exceptions;
 	using Oxygen.Infrastructure.Common.Services;
 	using Oxygen.Survey.Application.SurveyType.Queries.Common;
 	using Oxygen.Survey.Application.QuestionType.Queries.Common;
 	using Oxygen.Survey.Domain.Models;
-	using Oxygen.Survey.Application.Survey.Queries.Submit;
+	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
+	using Oxygen.Survey.Application.Queries.Common;
 
 	internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
 		ISurveyDomainRepository,
@@ -128,9 +128,9 @@
 					.Include(x => x.SurveyType))
 			   .FirstOrDefaultAsync(cancellationToken);
 
-		public async Task<SubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default)
+		public async Task<GetSubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default)
 			 => await this.mapper
-			   .ProjectTo<SubmitSurveyOutputModel>(this
+			   .ProjectTo<GetSubmitSurveyOutputModel>(this
 					.All()
 					.Where(x => x.Id == id)
 					.Include(x => x.SurveyType)

@@ -1,35 +1,27 @@
 ﻿namespace Oxygen.Survey.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-	using Oxygen.Survey.Application.EmployeeSurvey.Commands.CreateUserSurveyCommand;
-	using Oxygen.Survey.Application.EmployeeSurvey.Commands.CreateUserSurveysCommand;
-	using Oxygen.Survey.Application.Queries.Common;
-    using Oxygen.Survey.Application.Queries.Mine;
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
     using Oxygen.Survey.Application.QuestionType.Queries.Search;
     using Oxygen.Survey.Application.Survey.Commands.Create;
 	using Oxygen.Survey.Application.Survey.Queries.Details;
 	using Oxygen.Survey.Application.Survey.Queries.Search;
-	using Oxygen.Survey.Application.Survey.Queries.Submit;
+	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
 	using Oxygen.Survey.Application.SurveyType.Queries.Common;
     using Oxygen.Survey.Application.SurveyType.Queries.Search;
     using Oxygen.Web.Common;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+	using Oxygen.Survey.Application.Survey.Queries.Common;
+	using Oxygen.Survey.Application.Queries.Survey.Mine;
+	using Oxygen.Survey.Application.Queries.Common;
 
-    public class SurveyController : ApiController
+	public class SurveyController : ApiController
     {
-        [HttpPost]
-        [Route(nameof(SubmitEmployeeSurvey))]
-        public async Task<ActionResult<CreateEmployeeSurveyAnswersOutputModel>> SubmitEmployeeSurvey(
-           [FromBody] CreateEmployeeSurveyAnswersCommand command)
-           => await this.Send(command);
-
-
         [HttpGet]
         [Route(nameof(GetSubmitSurveyDetails))]
-        public async Task<ActionResult<SubmitSurveyOutputModel>> GetSubmitSurveyDetails(
-            [FromQuery] SubmitSurveyQuery query)
+        public async Task<ActionResult<GetSubmitSurveyOutputModel>> GetSubmitSurveyDetails(
+            [FromQuery] GetSubmitSurveyQuery query)
             => await this.Send(query);
 
         [HttpGet]
@@ -55,12 +47,7 @@
             [FromQuery] MineSurveysQuery query)
             => await this.Send(query);
 
-        [HttpPost]
-        [Route(nameof(CreateEmployeesSurveys))]
-        public async Task<ActionResult<CreateEmployeesSurveysOutputModel>> CreateEmployeesSurveys(
-           [FromBody] CreateEmployeesSurveysCommand command)
-           => await this.Send(command);
-
+        
         [HttpGet]
         [Route(nameof(GetSurveyTypes))]
         public async Task<ActionResult<IEnumerable<SurveyTypeOutputModel>>> GetSurveyTypes(

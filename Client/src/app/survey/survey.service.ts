@@ -18,10 +18,6 @@ export class SurveyService {
 
   constructor(private http: HttpClient) { }
 
-  submitEmployeeSurvey(survey: SubmitEmployeeSurvey): Observable<number> {
-    return this.http.post<number>(this.surveyPath + 'submitEmployeeSurvey', survey);
-  }
-
   getSubmitSurveyDetails(id: string): Observable<SubmitSurvey> {
     return this.http.get<SubmitSurvey>(this.surveyPath + 'getSubmitSurveyDetails?Id=' + id)
   }
@@ -44,10 +40,6 @@ export class SurveyService {
 
   createSurvey(survey: Survey): Observable<Survey> {
     return this.http.post<Survey>(this.surveyPathWithoutSlash, survey);
-  }
-
-  createEmployeesSurveys(survey: AssignEmployeesSurveys): Observable<AssignEmployeesSurveys> {
-    return this.http.post<AssignEmployeesSurveys>(this.surveyPath + 'createEmployeesSurveys', survey);
   }
 
   getSurveyTypes(): Observable<Array<SurveyType>> {

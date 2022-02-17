@@ -1,17 +1,17 @@
 ﻿namespace Oxygen.Survey.Application
 {
     using Oxygen.Application.Common.Contracts;
-    using Oxygen.Survey.Application.Queries.Common;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Oxygen.Survey.Application.SurveyType.Queries.Common;
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
-	using Oxygen.Survey.Application.Survey.Queries.Submit;
+	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
+	using Oxygen.Survey.Application.Queries.Common;
 
 	public interface ISurveyQueryRepository : IQueryRepository<Domain.Models.Survey>
     {
-        Task<SubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default);
+        Task<GetSubmitSurveyOutputModel> GetSubmitSurveyDetails(int id, CancellationToken cancellationToken = default);
 
         Task<SurveyOutputModel> GetDetails(int id, CancellationToken cancellationToken = default);
 

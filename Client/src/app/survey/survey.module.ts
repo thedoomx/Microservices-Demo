@@ -11,6 +11,7 @@ import { AssignEmployeesComponent } from './survey/assign-employees/assign-emplo
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ListMineSurveyComponent } from './survey/list-mine/list-mine-survey.component';
 import { SubmitComponent } from './survey/submit/submit.component';
+import { EmployeeSurveyService } from './employee-survey.service';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SubmitComponent } from './survey/submit/submit.component';
     SubmitComponent
   ],
   providers: [
-    SurveyService
+    SurveyService,
+    EmployeeSurveyService
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,13 @@
-﻿namespace Oxygen.Survey.Application.Survey.Queries.Submit
+﻿namespace Oxygen.Survey.Application.Survey.Queries.GetSubmit
 {
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
     using Oxygen.Application.Common;
-    using Oxygen.Survey.Application.Queries.Common;
 
-    public class SubmitSurveyQuery : EntityCommand<int>, IRequest<SubmitSurveyOutputModel>
+    public class GetSubmitSurveyQuery : EntityCommand<int>, IRequest<GetSubmitSurveyOutputModel>
     {
-        public class SubmitSurveyQueryHandler : IRequestHandler<SubmitSurveyQuery, SubmitSurveyOutputModel>
+        public class SubmitSurveyQueryHandler : IRequestHandler<GetSubmitSurveyQuery, GetSubmitSurveyOutputModel>
         {
             private readonly ISurveyQueryRepository _surveyRepository;
 
@@ -18,8 +17,8 @@
                 this._surveyRepository = surveyRepository;
             }
 
-            public async Task<SubmitSurveyOutputModel> Handle(
-                SubmitSurveyQuery request,
+            public async Task<GetSubmitSurveyOutputModel> Handle(
+                GetSubmitSurveyQuery request,
                 CancellationToken cancellationToken)
             {
                 var surveyDetails = await this._surveyRepository.GetSubmitSurveyDetails(

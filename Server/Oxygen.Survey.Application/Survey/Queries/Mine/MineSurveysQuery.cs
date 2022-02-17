@@ -1,10 +1,10 @@
-﻿namespace Oxygen.Survey.Application.Queries.Mine
+﻿namespace Oxygen.Survey.Application.Queries.Survey.Mine
 {
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
-    using Oxygen.Survey.Application.Queries.Common;
+	using Oxygen.Survey.Application.Queries.Common;
 
     public class MineSurveysQuery : IRequest<IEnumerable<SurveyOutputModel>>
     {

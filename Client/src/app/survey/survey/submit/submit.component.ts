@@ -1,17 +1,13 @@
 import { Component, ElementRef, OnInit, resolveForwardRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from 'src/app/company/models/employee.model';
 import { SurveyService } from '../../survey.service';
 import { CompanyService } from 'src/app/company/company.service';
-import { Survey } from '../../models/survey.model';
-import { AssignEmployeesSurveys } from '../../models/assignEmployeesSurveys.model';
-import { AssignEmployee } from '../../models/assignEmployee.model';
 import { questionTypeConstants } from '../../constants/question-types.constants';
 import { SubmitQuestion } from '../../models/submitQuestion.model';
 import { SubmitEmployeeSurvey } from '../../models/submitEmployeeSurvey.model';
 import { SubmitEmployeeSurveyAnswer } from '../../models/submitEmployeeSurveyAnswer.model';
-import { SubmitQuestionAnswer } from '../../models/submitQuestionAnswer.model';
+import { EmployeeSurveyService } from '../../employee-survey.service';
 
 @Component({
   selector: 'app-survey-submit',
@@ -33,6 +29,7 @@ export class SubmitComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private surveyService: SurveyService,
+    private employeeSurveyService: EmployeeSurveyService,
     private companyService: CompanyService,
     private fb: FormBuilder,
     private router: Router) {
@@ -141,7 +138,7 @@ export class SubmitComponent implements OnInit {
 
     this.submitModel.questionAnswers = questionAnswers;
 
-    this.surveyService.submitEmployeeSurvey(this.submitModel).subscribe((res) => {
+    this.employeeSurveyService.submitEmployeeSurvey(this.submitModel).subscribe((res) => {
       this.router.navigate(['survey']);
     });
   }

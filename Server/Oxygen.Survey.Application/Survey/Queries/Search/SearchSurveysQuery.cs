@@ -1,10 +1,8 @@
 ﻿using MediatR;
-using Oxygen.Survey.Application.Queries.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Oxygen.Survey.Application.Queries.Common;
 
 namespace Oxygen.Survey.Application.Survey.Queries.Search
 {

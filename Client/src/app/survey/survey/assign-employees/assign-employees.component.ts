@@ -8,6 +8,7 @@ import { Survey } from '../../models/survey.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { AssignEmployeesSurveys } from '../../models/assignEmployeesSurveys.model';
 import { AssignEmployee } from '../../models/assignEmployee.model';
+import { EmployeeSurveyService } from '../../employee-survey.service';
 
 @Component({
     selector: 'app-survey-assign-employees',
@@ -31,6 +32,7 @@ export class AssignEmployeesComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private surveyService: SurveyService,
+        private employeeSurveyService: EmployeeSurveyService,
         private companyService: CompanyService,
         private fb: FormBuilder,
         private router: Router) {
@@ -82,7 +84,7 @@ export class AssignEmployeesComponent implements OnInit {
         this.submitModel.employees.push(employee);
       });
 
-      this.surveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
+      this.employeeSurveyService.createEmployeesSurveys(this.submitModel).subscribe((res) => {
         this.router.navigate(['survey']);
     });
     }

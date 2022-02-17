@@ -4,9 +4,9 @@
     using System.Threading.Tasks;
     using MediatR;
 	using Oxygen.Application.Common;
-	using Oxygen.Survey.Application.Queries.Common;
+    using Oxygen.Survey.Application.Queries.Common;
 
-	public class SurveyDetailsQuery : EntityCommand<int>, IRequest<SurveyOutputModel>
+    public class SurveyDetailsQuery : EntityCommand<int>, IRequest<SurveyOutputModel>
     {
         public class SurveyDetailsQueryHandler : IRequestHandler<SurveyDetailsQuery, SurveyOutputModel>
         {
