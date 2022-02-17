@@ -12,6 +12,8 @@
             builder
                 .HasKey(c => c.Id);
 
+            builder.Property(o => o.Id).UseHiLo();
+
             builder
                 .HasOne(c => c.Question)
                 .WithMany()
@@ -27,7 +29,6 @@
 
             builder
                 .Property(c => c.TextValue)
-                .IsRequired()
                 .HasMaxLength(MaxTextValueLength);
 
             builder

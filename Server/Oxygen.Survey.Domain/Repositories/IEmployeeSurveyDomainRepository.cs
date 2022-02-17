@@ -7,6 +7,13 @@
 
     public interface IEmployeeSurveyDomainRepository : IDomainRepository<EmployeeSurvey>
     {
-        Task<EmployeeSurvey> GetById(int id, CancellationToken cancellationToken = default);
+        Task AddEmployeeSurveyAnswer(EmployeeSurveyAnswer employeeSurveyAnswer,
+            CancellationToken cancellationToken = default);
+
+        Task<EmployeeSurvey> GetById(int id,
+            CancellationToken cancellationToken = default);
+
+        Task<EmployeeSurvey> GetByEmployeeIdAndSurveyId(int employeeId, int surveyId,
+           CancellationToken cancellationToken = default);
     }
 }

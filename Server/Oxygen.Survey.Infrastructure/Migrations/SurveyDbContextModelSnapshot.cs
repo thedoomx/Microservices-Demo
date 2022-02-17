@@ -73,7 +73,8 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<bool?>("BoolValue")
                         .ValueGeneratedOnAdd()
@@ -90,7 +91,6 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TextValue")
-                        .IsRequired()
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 

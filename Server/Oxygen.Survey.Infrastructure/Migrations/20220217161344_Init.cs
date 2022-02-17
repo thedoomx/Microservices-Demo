@@ -143,11 +143,10 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                 name: "EmployeeSurveyAnswers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     QuestionId = table.Column<int>(nullable: false),
                     QuestionAnswerId = table.Column<int>(nullable: true),
-                    TextValue = table.Column<string>(maxLength: 300, nullable: false),
+                    TextValue = table.Column<string>(maxLength: 300, nullable: true),
                     BoolValue = table.Column<bool>(nullable: true),
                     EmployeeSurveyId = table.Column<int>(nullable: true)
                 },

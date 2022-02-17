@@ -81,8 +81,8 @@
 		=> await this
 				.All()
 				.Where(x => x.Id == id)
-				.Include(x => x.Questions)
-				.ThenInclude(x => x.QuestionAnswers)
+				.Include(x => x.Questions).ThenInclude(x => x.QuestionType)
+				.Include(x => x.Questions).ThenInclude(x => x.QuestionAnswers)
 				.FirstOrDefaultAsync(cancellationToken);
 
 		public async Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default)

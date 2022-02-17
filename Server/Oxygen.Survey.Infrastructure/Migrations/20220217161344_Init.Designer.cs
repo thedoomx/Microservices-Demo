@@ -10,7 +10,7 @@ using Oxygen.Survey.Infrastructure.Persistence;
 namespace Oxygen.Survey.Infrastructure.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20220216141429_Init")]
+    [Migration("20220217161344_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,7 +75,8 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<bool?>("BoolValue")
                         .ValueGeneratedOnAdd()
@@ -92,7 +93,6 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TextValue")
-                        .IsRequired()
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 

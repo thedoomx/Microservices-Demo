@@ -32,6 +32,13 @@
 
         public bool IsSubmitted { get; private set; }
 
+        public EmployeeSurvey Submit()
+        {
+            this.IsSubmitted = true;
+
+            return this;
+        }
+
         public IReadOnlyCollection<EmployeeSurveyAnswer> EmployeeSurveyAnswers => 
             this.employeeSurveyAnswers.ToList().AsReadOnly();
 
