@@ -1,6 +1,7 @@
 ﻿namespace Oxygen.Survey.Domain.Models
 {
-    using Oxygen.Domain.Common;
+	using Oxygen.Common.Constants;
+	using Oxygen.Domain.Common;
     using System;
     using System.Collections.Generic;
 
@@ -11,9 +12,9 @@
         public IEnumerable<object> GetData()
             => new List<QuestionType>
             {
-                new QuestionType("Checkbox"),
-                new QuestionType("Free text"),
-                new QuestionType("Radio"),
+                new QuestionType(GlobalConstants.QuestionType.Checkbox),
+                new QuestionType(GlobalConstants.QuestionType.Free_text),
+                new QuestionType(GlobalConstants.QuestionType.Radio),
             };
     }
 }

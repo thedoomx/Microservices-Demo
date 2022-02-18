@@ -3,7 +3,10 @@
     using Microsoft.AspNetCore.Mvc;
     using Oxygen.Company.Application.Department.Queries.Common;
     using Oxygen.Company.Application.Department.Queries.Search;
-    using Oxygen.Company.Application.JobTitle.Queries.Common;
+	using Oxygen.Company.Application.Employee.Queries.Common;
+	using Oxygen.Company.Application.Employee.Queries.Id;
+	using Oxygen.Company.Application.Employee.Queries.Search;
+	using Oxygen.Company.Application.JobTitle.Queries.Common;
     using Oxygen.Company.Application.JobTitle.Queries.Search;
     using Oxygen.Company.Application.Office.Queries.Common;
     using Oxygen.Company.Application.Office.Queries.Search;
@@ -31,6 +34,18 @@
         [Route(nameof(GetOffices))]
         public async Task<ActionResult<IEnumerable<OfficeOutputModel>>> GetOffices(
             [FromQuery] SearchOfficesQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Route(nameof(GetEmployees))]
+        public async Task<ActionResult<IEnumerable<EmployeeOutputModel>>> GetEmployees(
+            [FromQuery] SearchEmployeesQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Route(nameof(GetEmployeeIdByUserId))]
+        public async Task<ActionResult<int>> GetEmployeeIdByUserId(
+            [FromQuery] EmployeeIdQuery query)
             => await this.Send(query);
     }
 }

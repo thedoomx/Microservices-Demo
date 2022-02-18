@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Survey\Commands\Edit\" />
-    <Folder Include="Survey\Queries\Search\" />
-    <Folder Include="UserSurvey\Queries\" />
+    <Compile Remove="Survey\Commands\Edit\**" />
+    <EmbeddedResource Remove="Survey\Commands\Edit\**" />
+    <None Remove="Survey\Commands\Edit\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Oxygen.Application.Common\Oxygen.Application.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Common\Oxygen.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj" />
   </ItemGroup>

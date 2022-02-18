@@ -5,12 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Persistence\Migrations\20211027134800_Init.cs" />
-    <Compile Remove="Persistence\Migrations\20211027134800_Init.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
+    <Compile Remove="Persistence\Migrations\**" />
+    <EmbeddedResource Remove="Persistence\Migrations\**" />
+    <None Remove="Persistence\Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Oxygen.Infrastructure.Common\Oxygen.Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\Oxygen.Startup.Common\Oxygen.Startup.Common.csproj" />
     <ProjectReference Include="..\Oxygen.Survey.Application\Oxygen.Survey.Application.csproj" />
     <ProjectReference Include="..\Oxygen.Survey.Domain\Oxygen.Survey.Domain.csproj" />
   </ItemGroup>

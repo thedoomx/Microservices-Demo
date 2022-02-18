@@ -29,10 +29,14 @@ export class NotificationsService {
             .then(() => console.log('Connection started'))
             .catch(err => console.log('Error while starting connection: ' + err));
 
-        this.hubConnection.on('ReceiveNotification', (data) => {
-            debugger;
+        this.hubConnection.on('ReceiveNotificationCreatedUser', (data) => {
             console.log(data);
-            this.toastr.success(`${data.manufacturer} ${data.model} for just $${data.pricePerDay}!!!`, "New Car!");
+            this.toastr.success(`Welcome, ${data.firstName}, ${data.lastName}!!!`, "New Employee!");
+        });
+
+        this.hubConnection.on('ReceiveNotificationAssignedSurvey', (data) => {
+            console.log(data);
+            this.toastr.success(`You have been assigned to: ${data.surveyName}!!!`, "New Survey!");
         });
     }
 }

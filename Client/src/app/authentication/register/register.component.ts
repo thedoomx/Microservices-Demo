@@ -8,6 +8,7 @@ import { CompanyService } from 'src/app/company/company.service';
 import { JobTitle } from 'src/app/company/models/jobTitle.model';
 import { Department } from 'src/app/company/models/department.model';
 import { Office } from 'src/app/company/models/office.model';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -59,9 +60,12 @@ export class RegisterComponent implements OnInit {
     const { email, password, firstName, surName, lastName, department, jobTitle, office } = form;
     const userData = { email, password, firstName, surName, lastName, department, jobTitle, office };
 
-    this.authenticationService.register(userData).subscribe(res => {
+    this.authenticationService.register(userData).pipe(
+      switchMap((data) => {
+        return this.authenticationService.login({email, password})
+      })
+    ).subscribe(res => {
       this.authenticationService.setToken(res['token']);
-      debugger;
       this.router.navigate(['']).then(() => {
         window.location.reload();
       });

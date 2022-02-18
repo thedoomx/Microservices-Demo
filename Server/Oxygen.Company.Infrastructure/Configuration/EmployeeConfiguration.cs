@@ -45,6 +45,10 @@
                .WithMany()
                .HasForeignKey("JobTitleId")
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+               .Property(c => c.UserId)
+               .IsRequired();
         }
     }
 }

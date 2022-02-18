@@ -10,8 +10,9 @@ namespace Oxygen.Notifications
     using Microsoft.Extensions.Hosting;
     using Oxygen.Startup.Common;
     using Oxygen.Startup.Common.Infrastructure;
+	using System;
 
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
             => this.Configuration = configuration;
@@ -27,11 +28,12 @@ namespace Oxygen.Notifications
                 .AddHealth(
                     this.Configuration,
                     databaseHealthChecks: false)
-                //.AddMessaging(
-                //    this.Configuration,
-                //    usePolling: false,
-                //    consumers: typeof(CarAdCreatedConsumer))
-                .AddSignalR();
+				.AddMessaging(
+					this.Configuration,
+					usePolling: false,
+                    addMessageServices: false,
+                    consumers: new Type[] { typeof(UserCreatedConsumer), typeof(UserSurveyCreatedConsumer) })
+				.AddSignalR();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

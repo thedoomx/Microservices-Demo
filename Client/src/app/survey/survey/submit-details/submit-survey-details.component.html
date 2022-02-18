@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10"></div>
+        <div class="col-lg-10">
+            <form *ngIf="employeeSurveyLoaded">
+                <div class="form-group">
+                    <label>Survey: {{employeeSurvey.survey.name}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Summary: {{employeeSurvey.survey.name}}</label>
+                </div>
+                <div class="form-group">
+                    <label>Type: {{employeeSurvey.survey.surveyType}}</label>
+                </div>
+
+                <div class="form-group">
+                    <div *ngFor="let employeeSurveyAnswer of employeeSurvey.employeeSurveyAnswers;let i = index">
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <label>{{i+1}}: {{employeeSurveyAnswer.question.description}}</label>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+
+                                <div *ngIf="employeeSurveyAnswer.question.questionType == freeTextType">
+                                    <textarea disabled>{{employeeSurveyAnswer.textValue}}</textarea>
+                                </div>
+
+                                <div *ngIf="employeeSurveyAnswer.question.questionType == radioType">
+                                    <label>{{employeeSurveyAnswer.questionAnswer.description}}</label>
+                                </div>
+
+                                <div *ngIf="employeeSurveyAnswer.question.questionType == checkboxType">
+                                    <input type="checkbox" disabled [checked]="employeeSurveyAnswer.boolValue" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn-toolbar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

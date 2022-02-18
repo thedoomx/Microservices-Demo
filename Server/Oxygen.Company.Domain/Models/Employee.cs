@@ -7,7 +7,7 @@
 
     public class Employee : Entity<int>, IAggregateRoot
     {
-        internal Employee(string firstName, string surName, string lastName, Department department, Office office, JobTitle jobTitle)
+        internal Employee(string firstName, string surName, string lastName, Department department, Office office, JobTitle jobTitle, string userId)
         {
             this.Validate(firstName, surName, lastName);
 
@@ -17,13 +17,15 @@
             this.Department = department;
             this.Office = office;
             this.JobTitle = jobTitle;
+            this.UserId = userId;
         }
 
-        private Employee(string firstName, string surName, string lastName)
+        private Employee(string firstName, string surName, string lastName, string userId)
         {
             this.FirstName = firstName;
             this.SurName = surName;
             this.LastName = lastName;
+            this.UserId = userId;
         }
 
         public string FirstName { get; private set; }
@@ -37,6 +39,8 @@
         public Office Office { get; private set; }
 
         public JobTitle JobTitle { get; private set; }
+
+        public string UserId { get; private set; }
 
         public Employee ChangeFirstName(string firstName)
         {

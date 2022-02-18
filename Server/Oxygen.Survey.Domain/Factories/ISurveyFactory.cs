@@ -13,5 +13,7 @@
         ISurveyFactory WithSurveyType(SurveyType surveyType);
 
         ISurveyFactory WithQuestion(Action<QuestionFactory> question);
+
+        ISurveyFactory WithQuestion(Question question);
     }
 }

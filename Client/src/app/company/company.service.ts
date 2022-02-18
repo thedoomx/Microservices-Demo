@@ -17,17 +17,20 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
   getEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(this.companyPath);
+    return this.http.get<Array<Employee>>(this.companyPath + 'getemployees');
   }
 
-
-  getCar(id: string): Observable<Employee> {
-    return this.http.get<Employee>(this.companyPath + id);
+  getEmployeeIdByUserId(userId: string): Observable<number> {
+    return this.http.get<number>(this.companyPath + 'GetEmployeeIdByUserId?userId=' + userId);
   }
 
-  editCar(id: string, car: Employee): Observable<Employee> {
-    return this.http.put<Employee>(this.companyPath + id, car);
-  }
+  // getCar(id: string): Observable<Employee> {
+  //   return this.http.get<Employee>(this.companyPath + id);
+  // }
+
+  // editCar(id: string, car: Employee): Observable<Employee> {
+  //   return this.http.put<Employee>(this.companyPath + id, car);
+  // }
 
   getDepartments(): Observable<Array<Department>> {
     return this.http.get<Array<Department>>(this.companyPath + 'getdepartments')

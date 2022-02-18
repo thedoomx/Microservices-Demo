@@ -17,6 +17,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Oxygen.Infrastructure.Common.Persistence.Models.Message", b =>
@@ -42,12 +43,75 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurvey", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsSubmitted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int?>("SurveyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("EmployeeSurveys");
+                });
+
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
+
+                    b.Property<bool?>("BoolValue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(null);
+
+                    b.Property<int?>("EmployeeSurveyId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuestionAnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TextValue")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeSurveyId");
+
+                    b.HasIndex("QuestionAnswerId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("EmployeeSurveyAnswers");
+                });
+
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -74,12 +138,13 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "EntityFrameworkHiLoSequence")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -93,7 +158,7 @@ namespace Oxygen.Survey.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("QuestionItems");
+                    b.ToTable("QuestionAnswers");
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionType", b =>
@@ -157,57 +222,30 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                     b.ToTable("SurveyTypes");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurvey", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurvey", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsSubmitted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int?>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SurveyId");
-
-                    b.ToTable("UserSurveys");
+                    b.HasOne("Oxygen.Survey.Domain.Models.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.EmployeeSurveyAnswer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasOne("Oxygen.Survey.Domain.Models.EmployeeSurvey", null)
+                        .WithMany("EmployeeSurveyAnswers")
+                        .HasForeignKey("EmployeeSurveyId");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
+                    b.HasOne("Oxygen.Survey.Domain.Models.QuestionAnswer", "QuestionAnswer")
+                        .WithMany()
+                        .HasForeignKey("QuestionAnswerId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Property<int>("QuestionItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserSurveyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("QuestionItemId");
-
-                    b.HasIndex("UserSurveyId");
-
-                    b.ToTable("UserSurveyItems");
+                    b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Oxygen.Survey.Domain.Models.Question", b =>
@@ -223,10 +261,10 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .HasForeignKey("SurveyId");
                 });
 
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionItem", b =>
+            modelBuilder.Entity("Oxygen.Survey.Domain.Models.QuestionAnswer", b =>
                 {
                     b.HasOne("Oxygen.Survey.Domain.Models.Question", null)
-                        .WithMany("QuestionItems")
+                        .WithMany("QuestionAnswers")
                         .HasForeignKey("QuestionId");
                 });
 
@@ -236,33 +274,6 @@ namespace Oxygen.Survey.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("SurveyTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurvey", b =>
-                {
-                    b.HasOne("Oxygen.Survey.Domain.Models.Survey", "Survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Oxygen.Survey.Domain.Models.UserSurveyItem", b =>
-                {
-                    b.HasOne("Oxygen.Survey.Domain.Models.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Oxygen.Survey.Domain.Models.QuestionItem", "QuestionItem")
-                        .WithMany()
-                        .HasForeignKey("QuestionItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Oxygen.Survey.Domain.Models.UserSurvey", null)
-                        .WithMany("UserSurveyItems")
-                        .HasForeignKey("UserSurveyId");
                 });
 #pragma warning restore 612, 618
         }

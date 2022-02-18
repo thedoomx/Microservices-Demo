@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CarsService } from 'src/app/cars/cars.service';
-import { Category } from 'src/app/cars/category.model';
 import { NotificationsService } from '../notifications.service';
 
 @Component({
@@ -17,11 +15,14 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getToken();
+    if(this.token) {
+      
+    }
     this.notificationsService.subscribe();
   }
 
   getToken() {
-    this.token = localStorage.getItem('token')
+    this.token = localStorage.getItem('token');
   }
 
   route(param) {

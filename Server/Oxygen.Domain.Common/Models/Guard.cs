@@ -5,6 +5,17 @@ namespace Oxygen.Domain.Common.Models
 
     public static class Guard
     {
+        public static void AgainstEmptyBool<TException>(bool? value, string name = "Value")
+            where TException : BaseDomainException, new()
+        {
+            if (value.HasValue)
+            {
+                return;
+            }
+
+            ThrowException<TException>($"{name} cannot be null.");
+        }
+
         public static void AgainstEmptyString<TException>(string value, string name = "Value")
             where TException : BaseDomainException, new()
         {

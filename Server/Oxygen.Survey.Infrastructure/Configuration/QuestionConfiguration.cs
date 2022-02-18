@@ -12,6 +12,8 @@
         {
             builder
                 .HasKey(c => c.Id);
+                
+            builder.Property(o => o.Id).UseHiLo();
 
             builder
                 .Property(c => c.Description)
@@ -31,11 +33,11 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-               .HasMany(d => d.QuestionItems)
+               .HasMany(d => d.QuestionAnswers)
                .WithOne()
                .Metadata
                .PrincipalToDependent
-               .SetField("questionItems");
+               .SetField("questionAnswers");
         }
     }
 }

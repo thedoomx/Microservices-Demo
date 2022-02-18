@@ -48,11 +48,23 @@
             return this;
         }
 
+        public ISurveyFactory WithQuestion(Question question)
+        {
+            this.questions.Add(question);
+
+            return this;
+        }
+
         public Survey Build()
         {
             if (!this.surveyTypeSet)
             {
                 throw new InvalidSurveyException("Survey type must have a value.");
+            }
+
+            if (this.questions.Count == 0)
+            {
+                throw new InvalidSurveyException("Survey must have questions.");
             }
 
             var survey = new Survey(

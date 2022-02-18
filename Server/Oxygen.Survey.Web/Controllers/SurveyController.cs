@@ -1,33 +1,35 @@
 ﻿namespace Oxygen.Survey.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Oxygen.Survey.Application.Queries.Common;
-    using Oxygen.Survey.Application.Queries.Mine;
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
     using Oxygen.Survey.Application.QuestionType.Queries.Search;
     using Oxygen.Survey.Application.Survey.Commands.Create;
-    using Oxygen.Survey.Application.SurveyType.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Details;
+	using Oxygen.Survey.Application.Survey.Queries.Search;
+	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
+	using Oxygen.Survey.Application.SurveyType.Queries.Common;
     using Oxygen.Survey.Application.SurveyType.Queries.Search;
-    using Oxygen.Survey.Application.UserSurveys.Commands.Create;
     using Oxygen.Web.Common;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
+	using Oxygen.Survey.Application.Survey.Queries.Common;
+	using Oxygen.Survey.Application.Queries.Survey.Mine;
+	using Oxygen.Survey.Application.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Mine;
 
-    public class SurveyController : ApiController
+	public class SurveyController : ApiController
     {
         [HttpGet]
-        [Route(nameof(Test))]
-        public async Task<ActionResult<int>> Test()
-        {
-            var a = new CreateSurveyCommand();
-            a.Name = "Test";
-            a.Summary = "Summary";
-            a.SurveyType = 1;
+        [Route(nameof(GetSubmitSurveyDetails))]
+        public async Task<ActionResult<GetSubmitSurveyOutputModel>> GetSubmitSurveyDetails(
+            [FromQuery] GetSubmitSurveyQuery query)
+            => await this.Send(query);
 
-            return 5;
-        }
+        [HttpGet]
+        [Route(Id)]
+        public async Task<ActionResult<SurveyOutputModel>> GetSurveyDetails(
+            [FromRoute] SurveyDetailsQuery query)
+            => await this.Send(query);
 
         [HttpPost]
         public async Task<ActionResult<CreateSurveyOutputModel>> Create(
@@ -35,17 +37,18 @@
             => await this.Send(command);
 
         [HttpGet]
-        [Route(nameof(Search))]
-        public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> Search(
-            [FromQuery] MineSurveysQuery query)
+        [Route(nameof(SearchAll))]
+        public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> SearchAll(
+            [FromQuery] SearchSurveysQuery query)
             => await this.Send(query);
 
         [HttpGet]
-        [Route(nameof(UserSurveys))]
-        public async Task<ActionResult<IEnumerable<CreateUsersSurveysCommand>>> UserSurveys(
-           [FromQuery] CreateUsersSurveysCommand command)
-           => await this.Send(command);
+        [Route(nameof(SearchMine))]
+        public async Task<ActionResult<IEnumerable<MineSurveysOutputModel>>> SearchMine(
+            [FromQuery] MineSurveysQuery query)
+            => await this.Send(query);
 
+        
         [HttpGet]
         [Route(nameof(GetSurveyTypes))]
         public async Task<ActionResult<IEnumerable<SurveyTypeOutputModel>>> GetSurveyTypes(

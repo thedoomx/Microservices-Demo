@@ -5,12 +5,9 @@
     using Oxygen.Company.Application.Employee.Queries.Common;
     using Oxygen.Company.Application.JobTitle.Queries.Common;
     using Oxygen.Company.Application.Office.Queries.Common;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using Domain.Models;
 
     public interface IEmployeeQueryRepository : IQueryRepository<Domain.Models.Employee>
     {

@@ -1,4 +1,4 @@
-import { QuestionItem } from "./questionItem.model";
+import { QuestionAnswer } from "./questionAnswer.model";
 
 export interface Question {
     id?: number;
@@ -6,5 +6,5 @@ export interface Question {
     isRequired: boolean;
     questionType: number;
     survey?: number;
-    questionItems: Array<QuestionItem>
+    questionAnswers: Array<QuestionAnswer>
 }

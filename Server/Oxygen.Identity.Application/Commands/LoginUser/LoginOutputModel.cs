@@ -2,11 +2,14 @@
 {
     public class LoginOutputModel
     {
-        public LoginOutputModel(string token)
+        public LoginOutputModel(string userId, string token)
         {
+            this.UserId = userId;
             this.Token = token;
         }
 
-        public string Token { get; }
+		public string UserId { get; set; }
+
+		public string Token { get; }
     }
 }

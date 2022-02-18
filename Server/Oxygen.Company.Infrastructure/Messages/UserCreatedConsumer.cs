@@ -53,6 +53,7 @@
                 .WithDepartment(department)
                 .WithJobTitle(jobTitle)
                 .WithOffice(office)
+                .WithUserId(message.UserId)
                 .Build();
 
             this._data.Employees.Add(employee);

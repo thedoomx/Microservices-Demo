@@ -10,7 +10,6 @@
     using Domain.Models;
     using Oxygen.Domain.Common.Models;
     using Oxygen.Infrastructure.Common.Persistence;
-    using Oxygen.Survey.Infrastructure.Persistence.Models;
 
     internal class SurveyDbContext : MessageDbContext,
         ISurveyDbContext
@@ -36,11 +35,11 @@
 
         public DbSet<QuestionType> QuestionTypes { get; set; } = default!;
 
-        public DbSet<QuestionItem> QuestionItems { get; set; } = default!;
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; } = default!;
 
-        public DbSet<UserSurvey> UserSurveys { get; set; } = default!;
+        public DbSet<EmployeeSurvey> EmployeeSurveys { get; set; } = default!;
 
-        public DbSet<UserSurveyItem> UserSurveyItems { get; set; } = default!;
+        public DbSet<EmployeeSurveyAnswer> EmployeeSurveyAnswers { get; set; } = default!;
 
         protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();
 

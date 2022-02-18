@@ -22,7 +22,7 @@
 
         public class Question
         {
-            public const int MinDescriptionLength = 10;
+            public const int MinDescriptionLength = 5;
             public const int MaxDescriptionLength = 300;
         }
 
@@ -32,10 +32,16 @@
             public const int MaxTypeLength = 50;
         }
 
-        public class QuestionItem
+        public class QuestionAnswer
         {
             public const int MinDescriptionLength = 2;
             public const int MaxDescriptionLength = 300;
+        }
+
+        public class EmployeeSurveyAnswer
+        {
+            public const int MinTextValueLength = 5;
+            public const int MaxTextValueLength = 300;
         }
     }
 }
