@@ -7,8 +7,9 @@
     using Oxygen.Identity.Application.Commands.ChangePassword;
     using Oxygen.Identity.Application.Commands.LoginUser;
     using Oxygen.Web.Common;
+	using Oxygen.Identity.Application.Queries.User.Details;
 
-    public class IdentityController : ApiController
+	public class IdentityController : ApiController
     {
         [HttpPost]
         [Route(nameof(Register))]
@@ -28,5 +29,11 @@
         public async Task<ActionResult> ChangePassword(
             ChangePasswordCommand command)
             => await this.Send(command);
+
+        [HttpGet]
+        [Route(nameof(GetDetails))]
+        public async Task<ActionResult<UserDetailsOutputModel>> GetDetails(
+            [FromQuery] UserDetailsQuery query)
+            => await this.Send(query);
     }
 }
