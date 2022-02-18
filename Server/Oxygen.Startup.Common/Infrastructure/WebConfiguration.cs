@@ -108,7 +108,9 @@
 			if (messagingHealthChecks)
 			{
 				var messageQueueSettings = MessageQueueSettingsHelper.GetMessageQueueSettings(configuration);
+#if (DEBUG)
 				messageQueueSettings = new MessageQueueSettings("localhost", "", "");
+#endif
 
 				var messageQueueConnectionString =
 					$"amqp://{messageQueueSettings.UserName}:{messageQueueSettings.Password}@{messageQueueSettings.Host}/";
