@@ -1,9 +1,10 @@
-﻿namespace Oxygen.Survey.Application.Survey.Queries.Common
+﻿namespace Oxygen.Survey.Application.Queries.Common
 {
 	using AutoMapper;
+	using Oxygen.Application.Common.Mapping;
 	using Oxygen.Survey.Domain.Models;
 
-	public class QuestionAnswerOutputModel
+	public class QuestionAnswerOutputModel : IMapFrom<QuestionAnswer>
 	{
 		public int Id { get; private set; }
 

@@ -11,7 +11,7 @@
 
         IEmployeeSurveyAnswerFactory WithTextValue(string textValue);
 
-        IEmployeeSurveyAnswerFactory WithBoolValue(bool boolValue);
+        IEmployeeSurveyAnswerFactory WithBoolValue(bool? boolValue);
 
     }
 }

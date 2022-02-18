@@ -1,6 +1,7 @@
 ﻿namespace Oxygen.Survey.Application.Survey.Queries.Common
 {
 	using AutoMapper;
+	using Oxygen.Survey.Application.Queries.Common;
 	using Oxygen.Survey.Domain.Models;
     using System.Collections.Generic;
 
