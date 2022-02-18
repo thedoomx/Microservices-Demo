@@ -17,6 +17,7 @@
 	using Oxygen.Survey.Domain.Models;
 	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
 	using Oxygen.Survey.Application.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Mine;
 
 	internal class SurveyRepository : DataRepository<ISurveyDbContext, Survey>,
 		ISurveyDomainRepository,
@@ -91,14 +92,13 @@
 					.All())
 			   .ToListAsync(cancellationToken);
 
-		public async Task<IEnumerable<SurveyOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default)
+		public async Task<IEnumerable<MineSurveysOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default)
 			=> await this.mapper
-			   .ProjectTo<SurveyOutputModel>(this
+			   .ProjectTo<MineSurveysOutputModel>(this
 				.Data
 				.EmployeeSurveys
 				.Include(x => x.Survey)
 				.Where(x => x.EmployeeId == employeeId)
-				.Select(x => x.Survey)
 					.AsQueryable())
 			   .ToListAsync(cancellationToken);
 

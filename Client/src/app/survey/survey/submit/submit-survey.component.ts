@@ -11,13 +11,14 @@ import { EmployeeSurveyService } from '../../employee-survey.service';
 
 @Component({
   selector: 'app-survey-submit',
-  templateUrl: './submit.component.html',
-  styleUrls: ['./submit.component.css']
+  templateUrl: './submit-survey.component.html',
+  styleUrls: ['./submit-survey.component.css']
 })
-export class SubmitComponent implements OnInit {
+export class SubmitSurveyComponent implements OnInit {
   id: string;
   surveyForm: FormGroup;
   surveyName: string;
+  surveySummary: string;
   submitModel: SubmitEmployeeSurvey;
   surveyLoaded: boolean = false;
   questions: Array<SubmitQuestion>;
@@ -35,8 +36,6 @@ export class SubmitComponent implements OnInit {
     private router: Router) {
 
     this.surveyForm = this.fb.group({
-      name: ['', Validators.required],
-      summary: ['', Validators.required],
       questions: [[], Validators.required],
       questionAnswers: this.fb.array([])
     })
@@ -55,11 +54,11 @@ export class SubmitComponent implements OnInit {
   fetchSubmitSurvey() {
     this.surveyService.getSubmitSurveyDetails(this.id).subscribe(survey => {
 
+      this.surveyName = survey.name;
+      this.surveySummary = survey.summary;
       this.questions = survey.questions;
 
       this.surveyForm = this.fb.group({
-        name: [survey.name, Validators.required],
-        summary: [survey.summary, Validators.required],
         questions: [survey.questions, Validators.required],
         questionAnswers: this.fb.array([])
       })

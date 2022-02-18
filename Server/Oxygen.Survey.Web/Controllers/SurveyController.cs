@@ -15,6 +15,7 @@
 	using Oxygen.Survey.Application.Survey.Queries.Common;
 	using Oxygen.Survey.Application.Queries.Survey.Mine;
 	using Oxygen.Survey.Application.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Mine;
 
 	public class SurveyController : ApiController
     {
@@ -43,7 +44,7 @@
 
         [HttpGet]
         [Route(nameof(SearchMine))]
-        public async Task<ActionResult<IEnumerable<SurveyOutputModel>>> SearchMine(
+        public async Task<ActionResult<IEnumerable<MineSurveysOutputModel>>> SearchMine(
             [FromQuery] MineSurveysQuery query)
             => await this.Send(query);
 

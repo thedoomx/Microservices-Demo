@@ -10,8 +10,9 @@ import { ListSurveyComponent } from './survey/list/list-survey.component';
 import { AssignEmployeesComponent } from './survey/assign-employees/assign-employees.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ListMineSurveyComponent } from './survey/list-mine/list-mine-survey.component';
-import { SubmitComponent } from './survey/submit/submit.component';
+import { SubmitSurveyComponent } from './survey/submit/submit-survey.component';
 import { EmployeeSurveyService } from './employee-survey.service';
+import { SubmitSurveyDetailsComponent } from './survey/submit-details/submit-survey-details.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EmployeeSurveyService } from './employee-survey.service';
     ListSurveyComponent,
     ListMineSurveyComponent,
     AssignEmployeesComponent,
-    SubmitComponent
+    SubmitSurveyComponent,
+    SubmitSurveyDetailsComponent
   ],
   providers: [
     SurveyService,

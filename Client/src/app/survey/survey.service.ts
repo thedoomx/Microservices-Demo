@@ -8,6 +8,7 @@ import { SurveyType } from './models/surveyType.model';
 import { AssignEmployeesSurveys } from './models/assignEmployeesSurveys.model';
 import { SubmitSurvey } from './models/submitSurvey.model';
 import { SubmitEmployeeSurvey } from './models/submitEmployeeSurvey.model';
+import { MineSurveys } from './models/mineSurveys.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class SurveyService {
     return this.http.get<Array<Survey>>(this.surveyPath + 'searchAll')
   }
 
-  searchMine(employeeId: string): Observable<Array<Survey>> {
-    return this.http.get<Array<Survey>>(this.surveyPath + 'searchMine?employeeId=' + employeeId)
+  searchMine(employeeId: string): Observable<Array<MineSurveys>> {
+    return this.http.get<Array<MineSurveys>>(this.surveyPath + 'searchMine?employeeId=' + employeeId)
   }
 
   search(): Observable<Array<Survey>> {

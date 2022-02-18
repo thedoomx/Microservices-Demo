@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MineSurveys } from '../../models/mineSurveys.model';
 import { Survey } from '../../models/survey.model';
 import { SurveyService } from '../../survey.service';
 
@@ -9,7 +10,7 @@ import { SurveyService } from '../../survey.service';
   styleUrls: ['./list-mine-survey.component.css']
 })
 export class ListMineSurveyComponent implements OnInit {
-  surveys: Array<Survey>;
+  surveys: Array<MineSurveys>;
   id: string;
   employeeId: string;
 
@@ -26,6 +27,7 @@ export class ListMineSurveyComponent implements OnInit {
 
   fetchSurveys() {
     this.surveyService.searchMine(this.employeeId).subscribe(surveys => {
+      debugger;
       this.surveys = surveys;
     })
   }

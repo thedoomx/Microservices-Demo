@@ -8,6 +8,7 @@ import { SurveyType } from './models/surveyType.model';
 import { AssignEmployeesSurveys } from './models/assignEmployeesSurveys.model';
 import { SubmitSurvey } from './models/submitSurvey.model';
 import { SubmitEmployeeSurvey } from './models/submitEmployeeSurvey.model';
+import { EmployeeSurveyDetails } from './models/employeeSurveyDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class EmployeeSurveyService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployeeSurveyDetails(id: string): Observable<SubmitSurvey> {
-    return this.http.get<SubmitSurvey>(this.employeeSurveyPath + 'getEmployeeSurveyDetails?Id=' + id)
+  getEmployeeSurveyDetails(id: string): Observable<EmployeeSurveyDetails> {
+    return this.http.get<EmployeeSurveyDetails>(this.employeeSurveyPath + 'getEmployeeSurveyDetails?Id=' + id)
   }
 
   submitEmployeeSurvey(survey: SubmitEmployeeSurvey): Observable<number> {

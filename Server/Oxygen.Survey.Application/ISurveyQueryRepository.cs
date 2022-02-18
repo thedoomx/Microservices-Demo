@@ -8,6 +8,7 @@
     using Oxygen.Survey.Application.QuestionType.Queries.Common;
 	using Oxygen.Survey.Application.Survey.Queries.GetSubmit;
 	using Oxygen.Survey.Application.Queries.Common;
+	using Oxygen.Survey.Application.Survey.Queries.Mine;
 
 	public interface ISurveyQueryRepository : IQueryRepository<Domain.Models.Survey>
     {
@@ -17,7 +18,7 @@
 
         Task<IEnumerable<SurveyOutputModel>> GetAll(CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<SurveyOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<MineSurveysOutputModel>> GetMine(int? employeeId, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<SurveyTypeOutputModel>> SearchSurveyTypes(
            CancellationToken cancellationToken = default);
