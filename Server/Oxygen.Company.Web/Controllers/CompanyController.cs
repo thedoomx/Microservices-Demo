@@ -4,6 +4,7 @@
     using Oxygen.Company.Application.Department.Queries.Common;
     using Oxygen.Company.Application.Department.Queries.Search;
 	using Oxygen.Company.Application.Employee.Queries.Common;
+	using Oxygen.Company.Application.Employee.Queries.Details;
 	using Oxygen.Company.Application.Employee.Queries.Id;
 	using Oxygen.Company.Application.Employee.Queries.Search;
 	using Oxygen.Company.Application.JobTitle.Queries.Common;
@@ -18,6 +19,12 @@
 
     public class CompanyController : ApiController
     {
+        [HttpGet]
+        [Route(Id)]
+        public async Task<ActionResult<EmployeeOutputModel>> GetEmployeeDetails(
+            [FromRoute] EmployeeDetailsQuery query)
+            => await this.Send(query);
+
         [HttpGet]
         [Route(nameof(GetDepartments))]
         public async Task<ActionResult<IEnumerable<DepartmentOutputModel>>> GetDepartments(

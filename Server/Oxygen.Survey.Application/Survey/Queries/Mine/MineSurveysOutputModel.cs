@@ -21,6 +21,5 @@
 			mapper
 			   .CreateMap<Survey, SurveyOutputModel>();
 		}
-
 	}
 }

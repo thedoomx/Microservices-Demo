@@ -125,9 +125,12 @@
 		public static IServiceCollection AddSwagger(
 			this IServiceCollection services, bool swagger)
 		{
-			if (swagger == true)
+			if (swagger == false)
 			{
-				services.AddSwaggerGen(
+				return services;
+			}
+
+			services.AddSwaggerGen(
 					c =>
 					{
 						c.SwaggerDoc("v1", new OpenApiInfo { Title = "OxygenApiPlayground", Version = "v1" });
@@ -160,7 +163,6 @@
 						);
 					}
 				);
-			}
 
 			return services;
 		}
