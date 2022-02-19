@@ -38,7 +38,7 @@
 			return this;
 		}
 
-		public IEmployeeSurveyAnswerFactory WithBoolValue(bool boolVal)
+		public IEmployeeSurveyAnswerFactory WithBoolValue(bool? boolVal)
 		{
 			this.boolValue = boolVal;
 			return this;
@@ -51,17 +51,17 @@
 				throw new InvalidEmployeeSurveyAnswerException("Question must have a value.");
 			}
 
-			if (!this.questionAnswerSet && this.question.QuestionType.Type == GlobalConstants.QuestionType.Radio)
+			if (!this.questionAnswerSet && this.question.QuestionType.Type == GlobalConstants.QuestionType.Radio && this.question.IsRequired)
 			{
 				throw new InvalidEmployeeSurveyAnswerException("Question answer must have a value.");
 			}
 
-			if (!boolValue.HasValue && this.question.QuestionType.Type == GlobalConstants.QuestionType.Checkbox)
+			if (!boolValue.HasValue && this.question.QuestionType.Type == GlobalConstants.QuestionType.Checkbox && this.question.IsRequired)
 			{
 				throw new InvalidEmployeeSurveyAnswerException("Question answer must have a value.");
 			}
 
-			if (String.IsNullOrEmpty(textValue) && this.question.QuestionType.Type == GlobalConstants.QuestionType.Free_text)
+			if (String.IsNullOrEmpty(textValue) && this.question.QuestionType.Type == GlobalConstants.QuestionType.Free_text && this.question.IsRequired)
 			{
 				throw new InvalidEmployeeSurveyAnswerException("Question answer must have a value.");
 			}

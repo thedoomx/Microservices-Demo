@@ -55,7 +55,7 @@
 
 		private void ValidateQuestionAnswer(Question question, QuestionAnswer questionAnswer)
 		{
-			if (question.QuestionType.Type != GlobalConstants.QuestionType.Radio)
+			if (question.QuestionType.Type != GlobalConstants.QuestionType.Radio || !question.IsRequired)
 			{
 				return;
 			}
@@ -68,7 +68,8 @@
 
 		private void ValidateTextValue(Question question, string textValue)
 		{
-			if (question.QuestionType.Type != GlobalConstants.QuestionType.Free_text)
+			if (question.QuestionType.Type != GlobalConstants.QuestionType.Free_text ||
+				(!question.IsRequired && string.IsNullOrEmpty(this.TextValue)))
 			{
 				return;
 			}
@@ -82,7 +83,7 @@
 
 		private void ValidateBoolValue(Question question, bool? boolValue)
 		{
-			if (question.QuestionType.Type != GlobalConstants.QuestionType.Checkbox)
+			if (question.QuestionType.Type != GlobalConstants.QuestionType.Checkbox || !question.IsRequired)
 			{
 				return;
 			}

@@ -45,7 +45,7 @@
 					switch (question.QuestionType.Type)
 					{
 						case (QuestionType.Checkbox):
-							employeeSurveyAnswerFactory.WithBoolValue(questionAnswer.BoolValue.Value);
+							employeeSurveyAnswerFactory.WithBoolValue(questionAnswer.BoolValue);
 							break;
 						case (QuestionType.Free_text):
 							employeeSurveyAnswerFactory.WithTextValue(questionAnswer.TextValue);
